@@ -16,29 +16,33 @@ func init() {
 }
 
 var GlobalConfig Config
-var xmobManagerContractAddress string = "0x147B8eb97fD247D06C4006D269c90C1908Fb5D54"
-var xmobExchangeCoreContractAddress string = "0x147B8eb97fD247D06C4006D269c90C1908Fb5D54"
+var xmobManagerContractAddress string = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
 
-func env(key string) string {
+func getRequired(key string) string {
 	value, ok := viper.Get(key).(string)
 	if !ok {
-		log.Fatalf("Invalid type assertion")
+		log.Fatalf("[env] Invalid type assertion, not a string")
 	}
 	return value
 }
 
+func getOptional(key string) string {
+	value := viper.GetString(key)
+	return value
+}
+
 type Config struct {
-	RpcUrl                          string
-	PrivateKey                      string
-	XmobManagerContractAddress      common.Address
-	XmobExchangeCoreContractAddress common.Address
+	RpcUrl                     string
+	PrivateKey                 string
+	XmobManagerContractAddress common.Address
+	StorePath                  string
 }
 
 func LoadConfig() Config {
 	return Config{
-		RpcUrl:                          env("RPC_URL"),
-		PrivateKey:                      env("PRIVATE_KEY"),
-		XmobManagerContractAddress:      common.HexToAddress(xmobManagerContractAddress),
-		XmobExchangeCoreContractAddress: common.HexToAddress(xmobExchangeCoreContractAddress),
+		RpcUrl:                     getRequired("RPC_URL"),
+		PrivateKey:                 getRequired("PRIVATE_KEY"),
+		XmobManagerContractAddress: common.HexToAddress(xmobManagerContractAddress),
+		StorePath:                  getOptional("STORE_PATH"),
 	}
 }
