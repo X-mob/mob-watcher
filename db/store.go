@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"math/big"
+	"strings"
 
 	"github.com/X-mob/mob-watcher/config"
 	badger "github.com/dgraph-io/badger/v3"
@@ -11,18 +12,42 @@ import (
 var DbClient *badger.DB
 var DefaultStorePath = "/tmp/badger"
 
-const MOB_KEY_PREFIX = "mob:"
-
 func init() {
 	path := config.GlobalConfig.StorePath
 	if path == "" {
 		path = DefaultStorePath
 	}
-	db, err := badger.Open(badger.DefaultOptions(path))
+	options := badger.DefaultOptions(path)
+	options.Logger = nil
+	db, err := badger.Open(options)
 	if err != nil {
 		panic(err)
 	}
 	DbClient = db
+}
+
+func GetKeyWithPrefix(prefix string) []string {
+	var keys []string
+	err := DbClient.View(func(txn *badger.Txn) error {
+		it := txn.NewIterator(badger.DefaultIteratorOptions)
+		defer it.Close()
+		prefix := []byte(prefix)
+
+		for it.Seek(prefix); it.ValidForPrefix(prefix); it.Next() {
+			item := it.Item()
+			k := item.Key()
+			err := item.Value(func(v []byte) error {
+				return nil
+			})
+			if err != nil {
+				return err
+			}
+			keys = append(keys, string(k))
+		}
+		return nil
+	})
+	handle(err)
+	return keys
 }
 
 func SetKV(key string, value string) {
@@ -44,25 +69,49 @@ func GetKVWithBytes(key string) []byte {
 	var valCopy []byte
 	err := DbClient.View(func(txn *badger.Txn) error {
 		item, err := txn.Get([]byte(key))
-		handle(err)
-		// Alternatively, you could also use item.ValueCopy().
+		if err != nil {
+			fmt.Println("get key err", err)
+			return nil
+		}
+
 		valCopy, err = item.ValueCopy(nil)
 		handle(err)
-		fmt.Printf("The answer is: %s\n", valCopy)
 		return nil
 	})
 	handle(err)
 	return valCopy
 }
 
+func GetAllMobAddress() []string {
+	keys := GetKeyWithPrefix(MOB_KEY_PREFIX)
+	var addrs []string
+	for _, key := range keys {
+		addr := strings.Join(strings.Split(key, MOB_KEY_PREFIX), "")
+		addrs = append(addrs, addr)
+	}
+	return addrs
+}
+
+func GetMobsWithStatus(status MobStatus) []Mob {
+	addrs := GetAllMobAddress()
+	var mobs []Mob
+	for _, addr := range addrs {
+		mob := GetMob(addr)
+		if mob.Status == status {
+			mobs = append(mobs, mob)
+		}
+	}
+	return mobs
+}
+
 func SetMob(mob Mob) {
 	value := SerializeMob(mob)
-	key := getMobSaveKey(mob.Address.Hex())
+	key := GetMobSaveKey(mob.Address.Hex())
 	SetKV(key, value)
 }
 
 func GetMob(address string) Mob {
-	key := getMobSaveKey(address)
+	key := GetMobSaveKey(address)
 	data := GetKVWithBytes(key)
 	return DeSerializeMob(data)
 }
@@ -79,12 +128,27 @@ func UpdateMobBalance(address string, newBalance big.Int) {
 	SetMob(mob)
 }
 
+func UpdateMobAmountTotal(address string, amountTotal big.Int) {
+	mob := GetMob(address)
+	mob.AmountTotal = &amountTotal
+	SetMob(mob)
+}
+
+func SetPlayer(playerAddress string, mobAddress string) {
+
+}
+
+func StringToBigInt(num string) *big.Int {
+	n := new(big.Int)
+	n, ok := n.SetString(num, 10)
+	if !ok {
+		panic("convert failed")
+	}
+	return n
+}
+
 func handle(err error) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func getMobSaveKey(address string) string {
-	return MOB_KEY_PREFIX + address
 }

@@ -1,19 +1,35 @@
 package task
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
-func start() {
+func Start() {
 	ticker := time.NewTicker(5 * time.Second)
 	quit := make(chan struct{})
-	go func() {
-		for {
-			select {
-			case <-ticker.C:
-				// do stuff
-			case <-quit:
-				ticker.Stop()
-				return
-			}
+	for {
+		select {
+		case <-ticker.C:
+			fmt.Println("scanning..")
+			ScanNewMob()
+			ScanRaisingMob()
+			ScanRaiseFinishedMob()
+		case <-quit:
+			ticker.Stop()
+			return
 		}
-	}()
+	}
+	// go func() {
+	// 	for {
+	// 		select {
+	// 		case <-ticker.C:
+	// 			fmt.Println("ticking..")
+	// 			ScanNewMob()
+	// 		case <-quit:
+	// 			ticker.Stop()
+	// 			return
+	// 		}
+	// 	}
+	// }()
 }

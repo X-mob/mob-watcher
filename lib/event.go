@@ -13,8 +13,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func GetMobsCreate(creator []common.Address) []XmobManageMobCreate {
-	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
+func GetMobsCreate(start uint64, creator []common.Address) ([]XmobManageMobCreate, *uint64) {
+	nextCursor := GetLatestBlockNum()
+	opts := bind.FilterOpts{Start: start, End: nextCursor, Context: context.Background()}
 	iterator, err := XmobManageInstance.FilterMobCreate(&opts, creator, nil, nil)
 	if err != nil {
 		panic(err)
@@ -28,7 +29,7 @@ func GetMobsCreate(creator []common.Address) []XmobManageMobCreate {
 		}
 		events = append(events, *iterator.Event)
 	}
-	return events
+	return events, nextCursor
 }
 
 func GetLogsByContract() {
@@ -52,20 +53,18 @@ func GetLogsByContract() {
 
 	for _, log := range logs {
 
-		fmt.Println(log.Data)
 		if len(log.Data) > 0 {
-			logInterface, err := contractAbi.Unpack("MobCreate", log.Data)
+			_, err := contractAbi.Unpack("MobCreate", log.Data)
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println(logInterface...)
+			// fmt.Println(logInterface...)
 		}
 
 		//
 		var topics [4]string
 		for i := range log.Topics {
 			topics[i] = log.Topics[i].Hex()
-			fmt.Println(topics[i])
 		}
 
 	}

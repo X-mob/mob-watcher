@@ -47,3 +47,11 @@ var BasicTransactionOpts *bind.TransactOpts
 func GetChainId() (*big.Int, error) {
 	return EthClient.ChainID(context.Background())
 }
+
+func GetLatestBlockNum() *uint64 {
+	latestBlock, err := EthClient.BlockNumber(context.Background())
+	if err != nil {
+		panic(err)
+	}
+	return &latestBlock
+}
