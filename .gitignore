@@ -27,3 +27,5 @@ mob-watcher
 .env
 
 deps
+
+artifacts
