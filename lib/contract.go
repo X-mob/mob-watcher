@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"math/big"
+	"runtime"
 
 	"github.com/X-mob/mob-watcher/config"
 	"github.com/X-mob/mob-watcher/utils"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 )
 
@@ -56,77 +58,20 @@ func CreateMob(
 	deadline := big.NewInt(_deadline)
 	mobName := _name
 
-	tx, err := XmobManageInstance.CreateMob(BasicTransactionOpts, token, tokenId, raisedTotal, takeProfitPrice, stopLossPrice, raisedAmountDeadline, deadline, mobName)
-	if err != nil {
-		log.Fatalf("create mob failed %s", err)
-		panic(err)
-	}
-	fmt.Printf("tx Hash: %s, wait to be mined..\n", tx.Hash())
-	receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("tx mined at %d\n", receipt.BlockNumber.Int64())
+	txOpts := NewTxOpts(nil)
+	tx, err := XmobManageInstance.CreateMob(txOpts, token, tokenId, raisedTotal, takeProfitPrice, stopLossPrice, raisedAmountDeadline, deadline, mobName)
+	CheckAndWaitTx(tx, err)
 }
 
-// only for testing, mainnet we don't have to do this
-func PatchMobWithWethSeaport(mobAddress string) {
+func JoinMob(value string, mobAddress string) {
+	var txOpts *bind.TransactOpts = NewTxOpts(utils.StringToBigInt(value))
 	mob := GetMobByAddress(mobAddress)
-	{
-		tx, err := mob.SetSeaportAddress(BasicTransactionOpts, config.GlobalConfig.SeaportAddress)
-		if err != nil {
-			log.Fatalf("patch mob failed %s", err)
-			panic(err)
-		}
-		fmt.Printf("patch seaport, tx Hash: %s, wait to be mined..\n", tx.Hash())
-	}
-
-	{
-		tx, err := mob.SetWeth9Address(BasicTransactionOpts, config.GlobalConfig.WethAddress)
-		if err != nil {
-			log.Fatalf("patch mob failed %s", err)
-			panic(err)
-		}
-		fmt.Printf("patch weth9, tx Hash: %s, wait to be mined..\n", tx.Hash())
-	}
-}
-
-func JoinMob(value string, address string) {
-	// init BasicKeyTransactor
-	privateKey, err := crypto.HexToECDSA(config.GlobalConfig.PrivateKey)
-	if err != nil {
-		log.Fatal(err)
-	}
-	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
-	txOpts.GasPrice = BasicTransactionOpts.GasPrice
-	txOpts.Value = utils.StringToBigInt(value)
-
-	mob := GetMobByAddress(address)
 	tx, err := mob.JoinPay(txOpts, txOpts.From)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("tx Hash: %s, wait to be mined..", tx.Hash())
-	receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("tx mined!")
-	fmt.Println(receipt)
+	CheckAndWaitTx(tx, err)
 }
 
-func Claim() {
-	// init BasicKeyTransactor
-	privateKey, err := crypto.HexToECDSA(config.GlobalConfig.PrivateKey)
-	if err != nil {
-		log.Fatal(err)
-	}
-	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
-	txOpts.GasPrice = BasicTransactionOpts.GasPrice
-
-	mob := GetMobById(big.NewInt(1))
+func Claim(mobAddress string) {
+	mob := GetMobByAddress(mobAddress)
 
 	// check if claim is allowed
 	canClaim, err := mob.CanClaim(nil)
@@ -138,60 +83,90 @@ func Claim() {
 	}
 
 	// claim
+	txOpts := NewTxOpts(nil)
 	tx, err := mob.Claim(txOpts)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("tx Hash is s%, wait for claim mined", tx.Hash())
+	CheckAndWaitTx(tx, err)
 }
 
-func Settle() {
+func Settle(mobAddress string) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.SettlementAllocation(txOpts, false)
+	CheckAndWaitTx(tx, err)
+}
+
+func BuyNow(mobAddress string, order BasicOrderParameters) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.BuyNow(txOpts, order)
+	CheckAndWaitTx(tx, err)
+}
+
+func Sell(mobAddress string, orders []Order) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.RegisterSellOrder(txOpts, orders)
+	CheckAndWaitTx(tx, err)
+}
+
+// only for testing, mainnet we don't have to do this
+func PatchMobWithWethSeaport(mobAddress string) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	{
+		tx, err := mob.SetSeaportAddress(txOpts, config.GlobalConfig.SeaportAddress)
+		CheckAndWaitTx(tx, err)
+	}
+
+	{
+		tx, err := mob.SetWeth9Address(txOpts, config.GlobalConfig.WethAddress)
+		CheckAndWaitTx(tx, err)
+	}
+}
+
+func CheckAndWaitTx(tx *types.Transaction, txErr error) {
+	// show caller info
+	pc, _, _, ok := runtime.Caller(1)
+	details := runtime.FuncForPC(pc)
+	if ok && details != nil {
+		fmt.Printf("called from %s\n", details.Name())
+	}
+
+	// check
+	if txErr != nil {
+		fmt.Printf("tx failed: %s", txErr.Error())
+		return
+	}
+
+	fmt.Printf("tx Hash: %s, wait to be mined..", tx.Hash())
+	receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
+	if err != nil {
+		fmt.Printf("get tx receipt failed: %s", err.Error())
+		return
+	}
+
+	fmt.Printf("tx mined at block %d\n", receipt.BlockNumber.Int64())
+}
+
+func NewTxOpts(value *big.Int) *bind.TransactOpts {
 	// init BasicKeyTransactor
 	privateKey, err := crypto.HexToECDSA(config.GlobalConfig.PrivateKey)
 	if err != nil {
 		log.Fatal(err)
-	}
-	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
-	txOpts.GasPrice = BasicTransactionOpts.GasPrice
-
-	mob := GetMobById(big.NewInt(1))
-	tx, err := mob.SettlementAllocation(txOpts, false)
-	if err != nil {
 		panic(err)
 	}
-	fmt.Println("tx Hash is s%, wait for Settle mined", tx.Hash())
-}
+	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
 
-func Buy() {
-	// init BasicKeyTransactor
-	privateKey, err := crypto.HexToECDSA(config.GlobalConfig.PrivateKey)
+	gasPrice, err := EthClient.SuggestGasPrice(context.Background())
 	if err != nil {
 		log.Fatal(err)
-	}
-	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
-	txOpts.GasPrice = BasicTransactionOpts.GasPrice
-
-	mob := GetMobById(big.NewInt(1))
-	tx, err := mob.SettlementAllocation(txOpts, false)
-	if err != nil {
 		panic(err)
 	}
-	fmt.Println("tx Hash is s%, wait for Settle mined", tx.Hash())
-}
+	txOpts.GasPrice = gasPrice
 
-func Sell() {
-	// init BasicKeyTransactor
-	privateKey, err := crypto.HexToECDSA(config.GlobalConfig.PrivateKey)
-	if err != nil {
-		log.Fatal(err)
+	if value != nil {
+		txOpts.Value = value
 	}
-	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
-	txOpts.GasPrice = BasicTransactionOpts.GasPrice
 
-	mob := GetMobById(big.NewInt(1))
-	tx, err := mob.SettlementAllocation(txOpts, false)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("tx Hash is s%, wait for Settle mined", tx.Hash())
+	return txOpts
 }

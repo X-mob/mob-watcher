@@ -136,7 +136,7 @@ func GetMobsWithStatus(status MobStatus) []Mob {
 	return mobs
 }
 
-func SetMob(mob Mob) {
+func AddMob(mob Mob) {
 	value := SerializeMob(mob)
 	key := GetMobSaveKey(mob.Address.Hex())
 	SetKV(key, value)
@@ -151,19 +151,19 @@ func GetMob(address string) Mob {
 func UpdateMobStatus(address string, newStatus MobStatus) {
 	mob := GetMob(address)
 	mob.Status = newStatus
-	SetMob(mob)
+	AddMob(mob)
 }
 
 func UpdateMobBalance(address string, newBalance big.Int) {
 	mob := GetMob(address)
 	mob.Balance = &newBalance
-	SetMob(mob)
+	AddMob(mob)
 }
 
 func UpdateMobAmountTotal(address string, amountTotal big.Int) {
 	mob := GetMob(address)
 	mob.AmountTotal = &amountTotal
-	SetMob(mob)
+	AddMob(mob)
 }
 
 func SetPlayer(playerAddress string, mobAddress string) {

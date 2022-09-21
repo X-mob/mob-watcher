@@ -1,6 +1,8 @@
 package utils
 
-import "math/big"
+import (
+	"math/big"
+)
 
 func StringToBigInt(num string) *big.Int {
 	n := new(big.Int)

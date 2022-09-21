@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -11,10 +10,7 @@ func Start() {
 	for {
 		select {
 		case <-ticker.C:
-			fmt.Println("scanning..")
-			ScanNewMob()
-			ScanRaisingMob()
-			ScanRaiseFinishedMob()
+			Scan()
 		case <-quit:
 			ticker.Stop()
 			return

@@ -13,7 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func GetMobsCreate(start uint64, creator []common.Address) ([]XmobManageMobCreate, *uint64) {
+func GetMobsCreateEvents(start uint64, creator []common.Address) ([]XmobManageMobCreate, *uint64) {
 	nextCursor := GetLatestBlockNum()
 	opts := bind.FilterOpts{Start: start, End: nextCursor, Context: context.Background()}
 	iterator, err := XmobManageInstance.FilterMobCreate(&opts, creator, nil, nil)
@@ -32,7 +32,7 @@ func GetMobsCreate(start uint64, creator []common.Address) ([]XmobManageMobCreat
 	return events, nextCursor
 }
 
-func GetBuyNow(mobAddress string) []XmobExchangeCoreExchanged {
+func GetBuyNowEvents(mobAddress string) []XmobExchangeCoreExchanged {
 	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
 	xmobExchangeCoreInstance := GetMobByAddress(mobAddress)
 	iterator, err := xmobExchangeCoreInstance.FilterExchanged(&opts, nil, nil)

@@ -25,8 +25,28 @@ const (
 	NftBought
 	NftSold
 	CanClaim
-	Claimed
+	AllClaimed
 )
+
+func (s MobStatus) String() string {
+	switch s {
+	case Raising:
+		return "Raising"
+	case RaiseFailed:
+		return "RaiseFailed"
+	case RaiseFinished:
+		return "RaiseFinished"
+	case NftBought:
+		return "NftBought"
+	case NftSold:
+		return "NftSold"
+	case CanClaim:
+		return "CanClaim"
+	case AllClaimed:
+		return "AllClaimed"
+	}
+	return "unknown"
+}
 
 type Mob struct {
 	Address              common.Address // primary key
