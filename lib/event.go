@@ -32,6 +32,29 @@ func GetMobsCreate(start uint64, creator []common.Address) ([]XmobManageMobCreat
 	return events, nextCursor
 }
 
+func GetBuyNow(mobAddress string) []XmobExchangeCoreExchanged {
+	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
+	xmobExchangeCoreInstance := GetMobByAddress(mobAddress)
+	iterator, err := xmobExchangeCoreInstance.FilterExchanged(&opts, nil, nil)
+	if err != nil {
+		panic(err)
+	}
+	var events []XmobExchangeCoreExchanged
+	for iterator.Next() {
+		if iterator.Event != nil {
+			fmt.Printf("buyer: %v\n", iterator.Event.Buyer)
+			fmt.Printf("seller: %v\n", iterator.Event.Seller)
+		}
+		events = append(events, *iterator.Event)
+	}
+
+	if len(events) > 1 {
+		panic("buyNow should only be fired once")
+	}
+
+	return events
+}
+
 func GetLogsByContract() {
 	query := ethereum.FilterQuery{
 		FromBlock: big.NewInt(0),

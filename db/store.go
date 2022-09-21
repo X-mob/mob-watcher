@@ -82,6 +82,26 @@ func GetKVWithBytes(key string) []byte {
 	return valCopy
 }
 
+func IsKeyExits(key string) bool {
+	err := DbClient.View(func(txn *badger.Txn) error {
+		_, err := txn.Get([]byte(key))
+		if err != nil {
+			fmt.Println("get key err", err)
+			return err
+		}
+		return nil
+	})
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+func IsMobExits(address string) bool {
+	key := GetMobSaveKey(address)
+	return IsKeyExits(key)
+}
+
 func GetAllMobAddress() []string {
 	keys := GetKeyWithPrefix(MOB_KEY_PREFIX)
 	var addrs []string
@@ -90,6 +110,18 @@ func GetAllMobAddress() []string {
 		addrs = append(addrs, addr)
 	}
 	return addrs
+}
+
+func GetMobAddressByStatus(status MobStatus) []string {
+	addrs := GetAllMobAddress()
+	var target []string
+	for _, addr := range addrs {
+		mob := GetMob(addr)
+		if mob.Status == status {
+			target = append(target, mob.Address.Hex())
+		}
+	}
+	return target
 }
 
 func GetMobsWithStatus(status MobStatus) []Mob {
@@ -136,15 +168,6 @@ func UpdateMobAmountTotal(address string, amountTotal big.Int) {
 
 func SetPlayer(playerAddress string, mobAddress string) {
 
-}
-
-func StringToBigInt(num string) *big.Int {
-	n := new(big.Int)
-	n, ok := n.SetString(num, 10)
-	if !ok {
-		panic("convert failed")
-	}
-	return n
 }
 
 func handle(err error) {

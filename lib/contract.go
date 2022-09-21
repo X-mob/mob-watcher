@@ -1,12 +1,13 @@
 package lib
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"math/big"
-	"time"
 
 	"github.com/X-mob/mob-watcher/config"
+	"github.com/X-mob/mob-watcher/utils"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -25,42 +26,73 @@ func GetMobById(id *big.Int) *XmobExchangeCore {
 	if err != nil {
 		panic(err)
 	}
-	mob, err := NewXmobExchangeCore(mobAddress, EthClient)
+	return GetMobByAddress(mobAddress.Hex())
+}
+
+func GetMobByAddress(address string) *XmobExchangeCore {
+	mob, err := NewXmobExchangeCore(common.HexToAddress(address), EthClient)
 	if err != nil {
 		panic(err)
 	}
 	return mob
 }
 
-func CreateMob() {
-	token := common.HexToAddress("0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9")
-	tokenId := big.NewInt(1)
-	raisedTotal := big.NewInt(100000000)
+func CreateMob(
+	_name string,
+	_token string,
+	_tokenId int64,
+	_raisedTotal string,
+	_takeProfitPrice string,
+	_stopLossPrice string,
+	_raisedAmountDeadline int64,
+	_deadline int64) {
+
+	token := common.HexToAddress(_token)
+	tokenId := big.NewInt(_tokenId)
+	raisedTotal := utils.StringToBigInt(_raisedTotal)
 	takeProfitPrice := big.NewInt(25)
 	stopLossPrice := big.NewInt(1)
-	raisedAmountDeadline := big.NewInt(time.Now().UnixNano())
-	deadline := big.NewInt(time.Now().UnixNano() + 100000)
-	mobName := "test mob"
+	raisedAmountDeadline := big.NewInt(_raisedAmountDeadline)
+	deadline := big.NewInt(_deadline)
+	mobName := _name
 
 	tx, err := XmobManageInstance.CreateMob(BasicTransactionOpts, token, tokenId, raisedTotal, takeProfitPrice, stopLossPrice, raisedAmountDeadline, deadline, mobName)
 	if err != nil {
 		log.Fatalf("create mob failed %s", err)
+		panic(err)
 	}
-	fmt.Println("tx Hash: s%", tx.Hash())
-	// receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
-	// if(err != nil){
-	// 	panic(err)
-	// }
-	// for _, log := range receipt.Logs {
-	// 	logInterface, err := .Unpack("MobCreate", vLog.Data)
-	// 	if err != nil {
-	// 	    panic(err)
-	// 	}
-	// 	fmt.Println(logInterface...);
-	// }
+	fmt.Printf("tx Hash: %s, wait to be mined..\n", tx.Hash())
+	receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("tx mined at %d\n", receipt.BlockNumber.Int64())
 }
 
-func JoinMob() {
+// only for testing, mainnet we don't have to do this
+func PatchMobWithWethSeaport(mobAddress string) {
+	mob := GetMobByAddress(mobAddress)
+	{
+		tx, err := mob.SetSeaportAddress(BasicTransactionOpts, config.GlobalConfig.SeaportAddress)
+		if err != nil {
+			log.Fatalf("patch mob failed %s", err)
+			panic(err)
+		}
+		fmt.Printf("patch seaport, tx Hash: %s, wait to be mined..\n", tx.Hash())
+	}
+
+	{
+		tx, err := mob.SetWeth9Address(BasicTransactionOpts, config.GlobalConfig.WethAddress)
+		if err != nil {
+			log.Fatalf("patch mob failed %s", err)
+			panic(err)
+		}
+		fmt.Printf("patch weth9, tx Hash: %s, wait to be mined..\n", tx.Hash())
+	}
+}
+
+func JoinMob(value string, address string) {
 	// init BasicKeyTransactor
 	privateKey, err := crypto.HexToECDSA(config.GlobalConfig.PrivateKey)
 	if err != nil {
@@ -68,14 +100,21 @@ func JoinMob() {
 	}
 	var txOpts *bind.TransactOpts = bind.NewKeyedTransactor(privateKey)
 	txOpts.GasPrice = BasicTransactionOpts.GasPrice
-	txOpts.Value = big.NewInt(5)
+	txOpts.Value = utils.StringToBigInt(value)
 
-	mob := GetMobById(big.NewInt(1))
+	mob := GetMobByAddress(address)
 	tx, err := mob.JoinPay(txOpts, txOpts.From)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("tx Hash is s%, done.", tx.Hash())
+	fmt.Printf("tx Hash: %s, wait to be mined..", tx.Hash())
+	receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("tx mined!")
+	fmt.Println(receipt)
 }
 
 func Claim() {

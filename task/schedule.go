@@ -20,16 +20,4 @@ func Start() {
 			return
 		}
 	}
-	// go func() {
-	// 	for {
-	// 		select {
-	// 		case <-ticker.C:
-	// 			fmt.Println("ticking..")
-	// 			ScanNewMob()
-	// 		case <-quit:
-	// 			ticker.Stop()
-	// 			return
-	// 		}
-	// 	}
-	// }()
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
+	"github.com/X-mob/mob-watcher/utils"
 )
 
 func ScanNewMob() {
@@ -16,7 +17,7 @@ func ScanNewMob() {
 	if len(cursorByte) == 0 {
 		cursor = 0
 	} else {
-		cursor = db.StringToBigInt(string(cursorByte[:])).Uint64()
+		cursor = utils.StringToBigInt(string(cursorByte[:])).Uint64()
 	}
 
 	events, nextCursor := lib.GetMobsCreate(cursor, nil)
@@ -26,10 +27,15 @@ func ScanNewMob() {
 
 	for _, event := range events {
 		mob := db.MobCreateToMob(event)
-		db.SetMob(mob)
-	}
+		isExit := db.IsMobExits(mob.Address.Hex())
+		if isExit == false {
+			db.SetMob(mob)
+			fmt.Println("save mob total: ", len(events))
 
-	fmt.Println("save mob total: ", len(events))
+			// init patch
+			lib.PatchMobWithWethSeaport(mob.Address.Hex())
+		}
+	}
 }
 
 func ScanRaisingMob() {
@@ -40,7 +46,7 @@ func ScanRaisingMob() {
 
 		amount, _ := mob.AmountTotal(nil)
 		target, _ := mob.RaisedTotal(nil)
-
+		fmt.Println(amount, target, amount.Uint64() == target.Uint64())
 		if amount.Uint64() == target.Uint64() {
 			// update mob status
 			fmt.Println("update mob status", m.Address.Hex(), db.RaiseFailed)
@@ -69,7 +75,17 @@ func ScanRaisingMob() {
 func ScanRaiseFinishedMob() {
 	raiseFinishedMob := db.GetMobsWithStatus(db.RaiseFinished)
 	for _, m := range raiseFinishedMob {
-		// todo: filter logs for buyNow event
+		buyNowEvents := lib.GetBuyNow(m.Address.Hex())
+		if len(buyNowEvents) != 0 {
+			// update status
+			db.UpdateMobStatus(m.Address.Hex(), db.NftBought)
+			return
+		}
+
+		// trigger buy
+		// mob := lib.GetMobByAddress(m.Address.Hex())
+		// mob.BuyNow(lib.BasicTransactionOpts, )
+
 		fmt.Println("no update for raiseFinished mob..", m.Address.Hex())
 	}
 }
