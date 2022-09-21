@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/X-mob/mob-watcher/convert"
+	"github.com/X-mob/mob-watcher/casting"
 	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
 	"github.com/X-mob/mob-watcher/opensea"
@@ -62,7 +62,7 @@ func BuyNow(mobAddress string) {
 			AdditionalRecipients:              []lib.AdditionalRecipient{},
 		}
 	} else {
-		order = convert.OpenSeaToSeaportBasicOrderParameter(res.Orders[0])
+		order = casting.OpenSeaToSeaportBasicOrderParameter(res.Orders[0])
 	}
 
 	lib.BuyNow(mobAddress, order)
