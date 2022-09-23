@@ -21,7 +21,7 @@ type MobStatus int64
 const (
 	Raising     MobStatus = iota
 	RaiseFailed           // the deadline is reached but raise not enough
-	RaiseFinished
+	RaiseSuccess
 	NftBought
 	NftSold
 	CanClaim
@@ -34,8 +34,8 @@ func (s MobStatus) String() string {
 		return "Raising"
 	case RaiseFailed:
 		return "RaiseFailed"
-	case RaiseFinished:
-		return "RaiseFinished"
+	case RaiseSuccess:
+		return "RaiseSuccess"
 	case NftBought:
 		return "NftBought"
 	case NftSold:
@@ -49,21 +49,22 @@ func (s MobStatus) String() string {
 }
 
 type Mob struct {
-	Address              common.Address // primary key
-	Name                 string
-	Creator              common.Address
-	Token                common.Address
-	TokenId              *big.Int
-	RaisedTotal          *big.Int
-	AmountTotal          *big.Int
-	TakeProfitPrice      *big.Int
-	StopLossPrice        *big.Int
-	Fee                  *big.Int
-	Deadline             *big.Int
-	RaisedAmountDeadline *big.Int
-	Balance              *big.Int
-	CreatedTime          int64
-	Status               MobStatus
+	Address         common.Address // primary key
+	Name            string
+	Creator         common.Address
+	Token           common.Address
+	TokenId         *big.Int
+	RaiseTarget     *big.Int
+	RaisedAmount    *big.Int
+	TakeProfitPrice *big.Int
+	StopLossPrice   *big.Int
+	Fee             *big.Int
+	Deadline        *big.Int
+	RaiseDeadline   *big.Int
+	Balance         *big.Int
+	CreatedTime     int64
+	Status          MobStatus
+	TargetMode      uint8
 }
 
 type Player struct {
@@ -182,20 +183,21 @@ func DeSerializeMobMember(data []byte) MobMember {
 // convertor
 func MobCreateToMob(m lib.XmobManageMobCreate) Mob {
 	return Mob{
-		Address:              m.Proxy,
-		Name:                 m.Name,
-		Creator:              m.Creator,
-		Token:                m.Token,
-		TokenId:              m.TokenId,
-		RaisedTotal:          m.RaisedTotal,
-		AmountTotal:          big.NewInt(0),
-		TakeProfitPrice:      m.TakeProfitPrice,
-		StopLossPrice:        m.StopLossPrice,
-		Fee:                  m.Fee,
-		Deadline:             m.Deadline,
-		RaisedAmountDeadline: m.RasiedAmountDeadline,
-		Balance:              big.NewInt(0),
-		CreatedTime:          time.Now().Unix(),
-		Status:               Raising,
+		Address:         m.Proxy,
+		Name:            m.Name,
+		Creator:         m.Creator,
+		Token:           m.Token,
+		TokenId:         m.TokenId,
+		RaiseTarget:     m.RaiseTarget,
+		RaisedAmount:    big.NewInt(0),
+		TakeProfitPrice: m.TakeProfitPrice,
+		StopLossPrice:   m.StopLossPrice,
+		Fee:             m.Fee,
+		Deadline:        m.Deadline,
+		RaiseDeadline:   m.RaiseDeadline,
+		Balance:         big.NewInt(0),
+		CreatedTime:     time.Now().Unix(),
+		Status:          Raising,
+		TargetMode:      m.TargetMode,
 	}
 }

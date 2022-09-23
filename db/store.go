@@ -160,9 +160,9 @@ func UpdateMobBalance(address string, newBalance big.Int) {
 	AddMob(mob)
 }
 
-func UpdateMobAmountTotal(address string, amountTotal big.Int) {
+func UpdateMobRaisedAmount(address string, raisedAmount big.Int) {
 	mob := GetMob(address)
-	mob.AmountTotal = &amountTotal
+	mob.RaisedAmount = &raisedAmount
 	AddMob(mob)
 }
 

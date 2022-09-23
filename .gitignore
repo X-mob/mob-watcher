@@ -29,3 +29,5 @@ mob-watcher
 deps
 
 artifacts
+
+kvstore

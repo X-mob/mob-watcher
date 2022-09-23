@@ -42,7 +42,7 @@ func ScanNewMob() {
 
 			// init patch
 			// todo: remove this in mainnet
-			lib.PatchMobWithWethSeaport(mob.Address.Hex())
+			lib.PatchMobWithSeaport(mob.Address.Hex())
 		}
 	}
 }
@@ -53,19 +53,20 @@ func ScanRaisingMob() {
 		mob, err := lib.NewXmobExchangeCore(m.Address, lib.EthClient)
 		panicErr(err)
 
-		amount, _ := mob.AmountTotal(nil)
-		target, _ := mob.RaisedTotal(nil)
+		metadata, _ := mob.Metadata(nil)
+		amount := metadata.RaisedAmount
+		target := metadata.RaiseTarget
 		if amount.Uint64() == target.Uint64() {
 			// raise finish
-			const status = db.RaiseFinished
+			const status = db.RaiseSuccess
 			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
 			db.UpdateMobStatus(m.Address.Hex(), status)
-			db.UpdateMobAmountTotal(m.Address.Hex(), *amount)
+			db.UpdateMobRaisedAmount(m.Address.Hex(), *amount)
 			db.UpdateMobBalance(m.Address.Hex(), *amount)
 			return
 		}
 
-		if m.RaisedAmountDeadline.Int64() <= time.Now().Unix() {
+		if m.RaiseDeadline.Uint64() <= uint64(time.Now().Unix()) {
 			// over raise deadline
 			const status = db.RaiseFailed
 			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
@@ -73,17 +74,17 @@ func ScanRaisingMob() {
 			return
 		}
 
-		if amount.Uint64() != m.AmountTotal.Uint64() {
+		if amount.Uint64() != m.RaisedAmount.Uint64() {
 			// new fund adding
 			fmt.Printf("update mob amount total: %s, address: %s\n", amount, m.Address.Hex())
-			db.UpdateMobAmountTotal(m.Address.Hex(), *amount)
+			db.UpdateMobRaisedAmount(m.Address.Hex(), *amount)
 			return
 		}
 	}
 }
 
 func ScanRaiseFinishedMob() {
-	raiseFinishedMob := db.GetMobsWithStatus(db.RaiseFinished)
+	raiseFinishedMob := db.GetMobsWithStatus(db.RaiseSuccess)
 	for _, m := range raiseFinishedMob {
 		buyNowEvents := lib.GetBuyNowEvents(m.Address.Hex())
 		if len(buyNowEvents) != 0 {
