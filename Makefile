@@ -1,5 +1,5 @@
-GIT_URL = https://github.com/RetricSu/xmob-contract.git
-BRANCH = refactor-code
+GIT_URL = https://github.com/X-mob/metamob.git
+BRANCH = main
 
 .PHONY: fmt
 
