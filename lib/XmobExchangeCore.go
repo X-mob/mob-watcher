@@ -98,7 +98,7 @@ type OrderParameters struct {
 
 // XmobExchangeCoreMetaData contains all meta data concerning the XmobExchangeCore contract.
 var XmobExchangeCoreMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beacon\",\"type\":\"address\"}],\"name\":\"BeaconUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"Buy\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"Claim\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"DepositEth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"MemberJoin\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"Settlement\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"WithdrawStake\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"MAGIC_SIGNATURE\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SEAPORT_CORE\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"VERSION\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"amountTotal\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"considerationToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"considerationIdentifier\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"considerationAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"offerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"offerIdentifier\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"offerAmount\",\"type\":\"uint256\"},{\"internalType\":\"enumBasicOrderType\",\"name\":\"basicOrderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"offererConduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"fulfillerConduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalAdditionalRecipients\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structAdditionalRecipient[]\",\"name\":\"additionalRecipients\",\"type\":\"tuple[]\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structBasicOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"}],\"name\":\"buyBasicOrder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isFulFilled\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"}],\"internalType\":\"structOfferItem[]\",\"name\":\"offer\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structConsiderationItem[]\",\"name\":\"consideration\",\"type\":\"tuple[]\"},{\"internalType\":\"enumOrderType\",\"name\":\"orderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"conduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalConsiderationItems\",\"type\":\"uint256\"}],\"internalType\":\"structOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structOrder\",\"name\":\"order\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"fulfillerConduitKey\",\"type\":\"bytes32\"}],\"name\":\"buyOrder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isFulFilled\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"canClaim\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cost\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"creator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"deadline\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"fee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_raisedTotal\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_takeProfitPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_stopLossPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_raisedAmountDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_mobName\",\"type\":\"string\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_orderHashDigest\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"_signature\",\"type\":\"bytes\"}],\"name\":\"isValidSignature\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"}],\"name\":\"joinPay\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"memberDetails\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"members\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mobItem\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mobName\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"raisedAmountDeadline\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"raisedTotal\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"registerOrderHashDigest\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"}],\"internalType\":\"structOfferItem[]\",\"name\":\"offer\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structConsiderationItem[]\",\"name\":\"consideration\",\"type\":\"tuple[]\"},{\"internalType\":\"enumOrderType\",\"name\":\"orderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"conduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalConsiderationItems\",\"type\":\"uint256\"}],\"internalType\":\"structOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structOrder[]\",\"name\":\"orders\",\"type\":\"tuple[]\"}],\"name\":\"registerSellOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"seaport\",\"type\":\"address\"}],\"name\":\"setSeaportAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"takeTransferFee\",\"type\":\"bool\"}],\"name\":\"settlementAllocation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"settlements\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stopLossPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"takeProfitPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"}],\"internalType\":\"structOfferItem[]\",\"name\":\"offer\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structConsiderationItem[]\",\"name\":\"consideration\",\"type\":\"tuple[]\"},{\"internalType\":\"enumOrderType\",\"name\":\"orderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"conduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalConsiderationItems\",\"type\":\"uint256\"}],\"internalType\":\"structOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structOrder[]\",\"name\":\"orders\",\"type\":\"tuple[]\"}],\"name\":\"validateSellOrders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isValidated\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawStake\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beacon\",\"type\":\"address\"}],\"name\":\"BeaconUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"Buy\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"Claim\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"DepositEth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"MemberJoin\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"RefundAfterRaiseFailed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"Settlement\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"name\":\"SettlementAfterBuyFailed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"SettlementAfterDeadline\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAGIC_SIGNATURE\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SEAPORT_CORE\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"VERSION\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"considerationToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"considerationIdentifier\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"considerationAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"offerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"offerIdentifier\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"offerAmount\",\"type\":\"uint256\"},{\"internalType\":\"enumBasicOrderType\",\"name\":\"basicOrderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"offererConduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"fulfillerConduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalAdditionalRecipients\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structAdditionalRecipient[]\",\"name\":\"additionalRecipients\",\"type\":\"tuple[]\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structBasicOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"}],\"name\":\"buyBasicOrder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isFulFilled\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"}],\"internalType\":\"structOfferItem[]\",\"name\":\"offer\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structConsiderationItem[]\",\"name\":\"consideration\",\"type\":\"tuple[]\"},{\"internalType\":\"enumOrderType\",\"name\":\"orderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"conduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalConsiderationItems\",\"type\":\"uint256\"}],\"internalType\":\"structOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structOrder\",\"name\":\"order\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"fulfillerConduitKey\",\"type\":\"bytes32\"}],\"name\":\"buyOrder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isFulFilled\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_raiseTarget\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_takeProfitPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_stopLossPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"_raiseDeadline\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"_deadline\",\"type\":\"uint64\"},{\"internalType\":\"uint8\",\"name\":\"_targetMode\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_orderHashDigest\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"_signature\",\"type\":\"bytes\"}],\"name\":\"isValidSignature\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"}],\"name\":\"joinPay\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"memberDetails\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"members\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"metadata\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"raisedAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"raiseTarget\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"takeProfitPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"stopLossPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"raiseDeadline\",\"type\":\"uint64\"},{\"internalType\":\"enumTargetMode\",\"name\":\"targetMode\",\"type\":\"uint8\"},{\"internalType\":\"enumMobStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"refundAfterRaiseFailed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"registerOrderHashDigest\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"}],\"internalType\":\"structOfferItem[]\",\"name\":\"offer\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structConsiderationItem[]\",\"name\":\"consideration\",\"type\":\"tuple[]\"},{\"internalType\":\"enumOrderType\",\"name\":\"orderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"conduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalConsiderationItems\",\"type\":\"uint256\"}],\"internalType\":\"structOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structOrder[]\",\"name\":\"orders\",\"type\":\"tuple[]\"}],\"name\":\"registerSellOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"seaport\",\"type\":\"address\"}],\"name\":\"setSeaportAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"settlementAfterBuyFailed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"settlementAfterDeadline\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"settlementAllocation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"settlements\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"offerer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"zone\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"}],\"internalType\":\"structOfferItem[]\",\"name\":\"offer\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"enumItemType\",\"name\":\"itemType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"identifierOrCriteria\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endAmount\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"structConsiderationItem[]\",\"name\":\"consideration\",\"type\":\"tuple[]\"},{\"internalType\":\"enumOrderType\",\"name\":\"orderType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"zoneHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"salt\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"conduitKey\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"totalOriginalConsiderationItems\",\"type\":\"uint256\"}],\"internalType\":\"structOrderParameters\",\"name\":\"parameters\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"internalType\":\"structOrder[]\",\"name\":\"orders\",\"type\":\"tuple[]\"}],\"name\":\"validateSellOrders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isValidated\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
 }
 
 // XmobExchangeCoreABI is the input ABI used to generate the binding from.
@@ -340,192 +340,6 @@ func (_XmobExchangeCore *XmobExchangeCoreCallerSession) VERSION() (string, error
 	return _XmobExchangeCore.Contract.VERSION(&_XmobExchangeCore.CallOpts)
 }
 
-// AmountTotal is a free data retrieval call binding the contract method 0xa73c7140.
-//
-// Solidity: function amountTotal() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) AmountTotal(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "amountTotal")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// AmountTotal is a free data retrieval call binding the contract method 0xa73c7140.
-//
-// Solidity: function amountTotal() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) AmountTotal() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.AmountTotal(&_XmobExchangeCore.CallOpts)
-}
-
-// AmountTotal is a free data retrieval call binding the contract method 0xa73c7140.
-//
-// Solidity: function amountTotal() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) AmountTotal() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.AmountTotal(&_XmobExchangeCore.CallOpts)
-}
-
-// CanClaim is a free data retrieval call binding the contract method 0x6dc7a627.
-//
-// Solidity: function canClaim() view returns(bool)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) CanClaim(opts *bind.CallOpts) (bool, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "canClaim")
-
-	if err != nil {
-		return *new(bool), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
-
-	return out0, err
-
-}
-
-// CanClaim is a free data retrieval call binding the contract method 0x6dc7a627.
-//
-// Solidity: function canClaim() view returns(bool)
-func (_XmobExchangeCore *XmobExchangeCoreSession) CanClaim() (bool, error) {
-	return _XmobExchangeCore.Contract.CanClaim(&_XmobExchangeCore.CallOpts)
-}
-
-// CanClaim is a free data retrieval call binding the contract method 0x6dc7a627.
-//
-// Solidity: function canClaim() view returns(bool)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) CanClaim() (bool, error) {
-	return _XmobExchangeCore.Contract.CanClaim(&_XmobExchangeCore.CallOpts)
-}
-
-// Cost is a free data retrieval call binding the contract method 0x13faede6.
-//
-// Solidity: function cost() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) Cost(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "cost")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// Cost is a free data retrieval call binding the contract method 0x13faede6.
-//
-// Solidity: function cost() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) Cost() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.Cost(&_XmobExchangeCore.CallOpts)
-}
-
-// Cost is a free data retrieval call binding the contract method 0x13faede6.
-//
-// Solidity: function cost() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Cost() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.Cost(&_XmobExchangeCore.CallOpts)
-}
-
-// Creator is a free data retrieval call binding the contract method 0x02d05d3f.
-//
-// Solidity: function creator() view returns(address)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) Creator(opts *bind.CallOpts) (common.Address, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "creator")
-
-	if err != nil {
-		return *new(common.Address), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-
-	return out0, err
-
-}
-
-// Creator is a free data retrieval call binding the contract method 0x02d05d3f.
-//
-// Solidity: function creator() view returns(address)
-func (_XmobExchangeCore *XmobExchangeCoreSession) Creator() (common.Address, error) {
-	return _XmobExchangeCore.Contract.Creator(&_XmobExchangeCore.CallOpts)
-}
-
-// Creator is a free data retrieval call binding the contract method 0x02d05d3f.
-//
-// Solidity: function creator() view returns(address)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Creator() (common.Address, error) {
-	return _XmobExchangeCore.Contract.Creator(&_XmobExchangeCore.CallOpts)
-}
-
-// Deadline is a free data retrieval call binding the contract method 0x29dcb0cf.
-//
-// Solidity: function deadline() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) Deadline(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "deadline")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// Deadline is a free data retrieval call binding the contract method 0x29dcb0cf.
-//
-// Solidity: function deadline() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) Deadline() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.Deadline(&_XmobExchangeCore.CallOpts)
-}
-
-// Deadline is a free data retrieval call binding the contract method 0x29dcb0cf.
-//
-// Solidity: function deadline() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Deadline() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.Deadline(&_XmobExchangeCore.CallOpts)
-}
-
-// Fee is a free data retrieval call binding the contract method 0xddca3f43.
-//
-// Solidity: function fee() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) Fee(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "fee")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// Fee is a free data retrieval call binding the contract method 0xddca3f43.
-//
-// Solidity: function fee() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) Fee() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.Fee(&_XmobExchangeCore.CallOpts)
-}
-
-// Fee is a free data retrieval call binding the contract method 0xddca3f43.
-//
-// Solidity: function fee() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Fee() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.Fee(&_XmobExchangeCore.CallOpts)
-}
-
 // IsValidSignature is a free data retrieval call binding the contract method 0x1626ba7e.
 //
 // Solidity: function isValidSignature(bytes32 _orderHashDigest, bytes _signature) view returns(bytes4)
@@ -619,71 +433,104 @@ func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Members(arg0 *big.Int) (
 	return _XmobExchangeCore.Contract.Members(&_XmobExchangeCore.CallOpts, arg0)
 }
 
-// MobItem is a free data retrieval call binding the contract method 0xee4fe97a.
+// Metadata is a free data retrieval call binding the contract method 0x392f37e9.
 //
-// Solidity: function mobItem() view returns(uint256, uint256, uint256, uint256, uint256, uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) MobItem(opts *bind.CallOpts) (*big.Int, *big.Int, *big.Int, *big.Int, *big.Int, *big.Int, error) {
+// Solidity: function metadata() view returns(string name, address creator, address token, uint256 tokenId, uint256 raisedAmount, uint256 raiseTarget, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint64 deadline, uint64 raiseDeadline, uint8 targetMode, uint8 status)
+func (_XmobExchangeCore *XmobExchangeCoreCaller) Metadata(opts *bind.CallOpts) (struct {
+	Name            string
+	Creator         common.Address
+	Token           common.Address
+	TokenId         *big.Int
+	RaisedAmount    *big.Int
+	RaiseTarget     *big.Int
+	TakeProfitPrice *big.Int
+	StopLossPrice   *big.Int
+	Fee             *big.Int
+	Deadline        uint64
+	RaiseDeadline   uint64
+	TargetMode      uint8
+	Status          uint8
+}, error) {
 	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "mobItem")
+	err := _XmobExchangeCore.contract.Call(opts, &out, "metadata")
 
+	outstruct := new(struct {
+		Name            string
+		Creator         common.Address
+		Token           common.Address
+		TokenId         *big.Int
+		RaisedAmount    *big.Int
+		RaiseTarget     *big.Int
+		TakeProfitPrice *big.Int
+		StopLossPrice   *big.Int
+		Fee             *big.Int
+		Deadline        uint64
+		RaiseDeadline   uint64
+		TargetMode      uint8
+		Status          uint8
+	})
 	if err != nil {
-		return *new(*big.Int), *new(*big.Int), *new(*big.Int), *new(*big.Int), *new(*big.Int), *new(*big.Int), err
+		return *outstruct, err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-	out1 := *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
-	out2 := *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
-	out3 := *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
-	out4 := *abi.ConvertType(out[4], new(*big.Int)).(**big.Int)
-	out5 := *abi.ConvertType(out[5], new(*big.Int)).(**big.Int)
+	outstruct.Name = *abi.ConvertType(out[0], new(string)).(*string)
+	outstruct.Creator = *abi.ConvertType(out[1], new(common.Address)).(*common.Address)
+	outstruct.Token = *abi.ConvertType(out[2], new(common.Address)).(*common.Address)
+	outstruct.TokenId = *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
+	outstruct.RaisedAmount = *abi.ConvertType(out[4], new(*big.Int)).(**big.Int)
+	outstruct.RaiseTarget = *abi.ConvertType(out[5], new(*big.Int)).(**big.Int)
+	outstruct.TakeProfitPrice = *abi.ConvertType(out[6], new(*big.Int)).(**big.Int)
+	outstruct.StopLossPrice = *abi.ConvertType(out[7], new(*big.Int)).(**big.Int)
+	outstruct.Fee = *abi.ConvertType(out[8], new(*big.Int)).(**big.Int)
+	outstruct.Deadline = *abi.ConvertType(out[9], new(uint64)).(*uint64)
+	outstruct.RaiseDeadline = *abi.ConvertType(out[10], new(uint64)).(*uint64)
+	outstruct.TargetMode = *abi.ConvertType(out[11], new(uint8)).(*uint8)
+	outstruct.Status = *abi.ConvertType(out[12], new(uint8)).(*uint8)
 
-	return out0, out1, out2, out3, out4, out5, err
-
-}
-
-// MobItem is a free data retrieval call binding the contract method 0xee4fe97a.
-//
-// Solidity: function mobItem() view returns(uint256, uint256, uint256, uint256, uint256, uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) MobItem() (*big.Int, *big.Int, *big.Int, *big.Int, *big.Int, *big.Int, error) {
-	return _XmobExchangeCore.Contract.MobItem(&_XmobExchangeCore.CallOpts)
-}
-
-// MobItem is a free data retrieval call binding the contract method 0xee4fe97a.
-//
-// Solidity: function mobItem() view returns(uint256, uint256, uint256, uint256, uint256, uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) MobItem() (*big.Int, *big.Int, *big.Int, *big.Int, *big.Int, *big.Int, error) {
-	return _XmobExchangeCore.Contract.MobItem(&_XmobExchangeCore.CallOpts)
-}
-
-// MobName is a free data retrieval call binding the contract method 0xc335d87a.
-//
-// Solidity: function mobName() view returns(string)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) MobName(opts *bind.CallOpts) (string, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "mobName")
-
-	if err != nil {
-		return *new(string), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(string)).(*string)
-
-	return out0, err
+	return *outstruct, err
 
 }
 
-// MobName is a free data retrieval call binding the contract method 0xc335d87a.
+// Metadata is a free data retrieval call binding the contract method 0x392f37e9.
 //
-// Solidity: function mobName() view returns(string)
-func (_XmobExchangeCore *XmobExchangeCoreSession) MobName() (string, error) {
-	return _XmobExchangeCore.Contract.MobName(&_XmobExchangeCore.CallOpts)
+// Solidity: function metadata() view returns(string name, address creator, address token, uint256 tokenId, uint256 raisedAmount, uint256 raiseTarget, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint64 deadline, uint64 raiseDeadline, uint8 targetMode, uint8 status)
+func (_XmobExchangeCore *XmobExchangeCoreSession) Metadata() (struct {
+	Name            string
+	Creator         common.Address
+	Token           common.Address
+	TokenId         *big.Int
+	RaisedAmount    *big.Int
+	RaiseTarget     *big.Int
+	TakeProfitPrice *big.Int
+	StopLossPrice   *big.Int
+	Fee             *big.Int
+	Deadline        uint64
+	RaiseDeadline   uint64
+	TargetMode      uint8
+	Status          uint8
+}, error) {
+	return _XmobExchangeCore.Contract.Metadata(&_XmobExchangeCore.CallOpts)
 }
 
-// MobName is a free data retrieval call binding the contract method 0xc335d87a.
+// Metadata is a free data retrieval call binding the contract method 0x392f37e9.
 //
-// Solidity: function mobName() view returns(string)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) MobName() (string, error) {
-	return _XmobExchangeCore.Contract.MobName(&_XmobExchangeCore.CallOpts)
+// Solidity: function metadata() view returns(string name, address creator, address token, uint256 tokenId, uint256 raisedAmount, uint256 raiseTarget, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint64 deadline, uint64 raiseDeadline, uint8 targetMode, uint8 status)
+func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Metadata() (struct {
+	Name            string
+	Creator         common.Address
+	Token           common.Address
+	TokenId         *big.Int
+	RaisedAmount    *big.Int
+	RaiseTarget     *big.Int
+	TakeProfitPrice *big.Int
+	StopLossPrice   *big.Int
+	Fee             *big.Int
+	Deadline        uint64
+	RaiseDeadline   uint64
+	TargetMode      uint8
+	Status          uint8
+}, error) {
+	return _XmobExchangeCore.Contract.Metadata(&_XmobExchangeCore.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
@@ -748,68 +595,6 @@ func (_XmobExchangeCore *XmobExchangeCoreCallerSession) ProxiableUUID() ([32]byt
 	return _XmobExchangeCore.Contract.ProxiableUUID(&_XmobExchangeCore.CallOpts)
 }
 
-// RaisedAmountDeadline is a free data retrieval call binding the contract method 0xd205f1de.
-//
-// Solidity: function raisedAmountDeadline() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) RaisedAmountDeadline(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "raisedAmountDeadline")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// RaisedAmountDeadline is a free data retrieval call binding the contract method 0xd205f1de.
-//
-// Solidity: function raisedAmountDeadline() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) RaisedAmountDeadline() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.RaisedAmountDeadline(&_XmobExchangeCore.CallOpts)
-}
-
-// RaisedAmountDeadline is a free data retrieval call binding the contract method 0xd205f1de.
-//
-// Solidity: function raisedAmountDeadline() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) RaisedAmountDeadline() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.RaisedAmountDeadline(&_XmobExchangeCore.CallOpts)
-}
-
-// RaisedTotal is a free data retrieval call binding the contract method 0x0afb2dfd.
-//
-// Solidity: function raisedTotal() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) RaisedTotal(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "raisedTotal")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// RaisedTotal is a free data retrieval call binding the contract method 0x0afb2dfd.
-//
-// Solidity: function raisedTotal() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) RaisedTotal() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.RaisedTotal(&_XmobExchangeCore.CallOpts)
-}
-
-// RaisedTotal is a free data retrieval call binding the contract method 0x0afb2dfd.
-//
-// Solidity: function raisedTotal() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) RaisedTotal() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.RaisedTotal(&_XmobExchangeCore.CallOpts)
-}
-
 // RegisterOrderHashDigest is a free data retrieval call binding the contract method 0xfbae1d18.
 //
 // Solidity: function registerOrderHashDigest(bytes32 ) view returns(bool)
@@ -870,99 +655,6 @@ func (_XmobExchangeCore *XmobExchangeCoreSession) Settlements(arg0 common.Addres
 // Solidity: function settlements(address ) view returns(uint256)
 func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Settlements(arg0 common.Address) (*big.Int, error) {
 	return _XmobExchangeCore.Contract.Settlements(&_XmobExchangeCore.CallOpts, arg0)
-}
-
-// StopLossPrice is a free data retrieval call binding the contract method 0xe0efb1fd.
-//
-// Solidity: function stopLossPrice() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) StopLossPrice(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "stopLossPrice")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// StopLossPrice is a free data retrieval call binding the contract method 0xe0efb1fd.
-//
-// Solidity: function stopLossPrice() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) StopLossPrice() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.StopLossPrice(&_XmobExchangeCore.CallOpts)
-}
-
-// StopLossPrice is a free data retrieval call binding the contract method 0xe0efb1fd.
-//
-// Solidity: function stopLossPrice() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) StopLossPrice() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.StopLossPrice(&_XmobExchangeCore.CallOpts)
-}
-
-// TakeProfitPrice is a free data retrieval call binding the contract method 0x0cb479d8.
-//
-// Solidity: function takeProfitPrice() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) TakeProfitPrice(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "takeProfitPrice")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// TakeProfitPrice is a free data retrieval call binding the contract method 0x0cb479d8.
-//
-// Solidity: function takeProfitPrice() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreSession) TakeProfitPrice() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.TakeProfitPrice(&_XmobExchangeCore.CallOpts)
-}
-
-// TakeProfitPrice is a free data retrieval call binding the contract method 0x0cb479d8.
-//
-// Solidity: function takeProfitPrice() view returns(uint256)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) TakeProfitPrice() (*big.Int, error) {
-	return _XmobExchangeCore.Contract.TakeProfitPrice(&_XmobExchangeCore.CallOpts)
-}
-
-// Token is a free data retrieval call binding the contract method 0xfc0c546a.
-//
-// Solidity: function token() view returns(address)
-func (_XmobExchangeCore *XmobExchangeCoreCaller) Token(opts *bind.CallOpts) (common.Address, error) {
-	var out []interface{}
-	err := _XmobExchangeCore.contract.Call(opts, &out, "token")
-
-	if err != nil {
-		return *new(common.Address), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-
-	return out0, err
-
-}
-
-// Token is a free data retrieval call binding the contract method 0xfc0c546a.
-//
-// Solidity: function token() view returns(address)
-func (_XmobExchangeCore *XmobExchangeCoreSession) Token() (common.Address, error) {
-	return _XmobExchangeCore.Contract.Token(&_XmobExchangeCore.CallOpts)
-}
-
-// Token is a free data retrieval call binding the contract method 0xfc0c546a.
-//
-// Solidity: function token() view returns(address)
-func (_XmobExchangeCore *XmobExchangeCoreCallerSession) Token() (common.Address, error) {
-	return _XmobExchangeCore.Contract.Token(&_XmobExchangeCore.CallOpts)
 }
 
 // BuyBasicOrder is a paid mutator transaction binding the contract method 0xa9254861.
@@ -1028,25 +720,25 @@ func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) Claim() (*types.Tran
 	return _XmobExchangeCore.Contract.Claim(&_XmobExchangeCore.TransactOpts)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x84b77472.
+// Initialize is a paid mutator transaction binding the contract method 0xf658cd3e.
 //
-// Solidity: function initialize(address _creator, address _token, uint256 _fee, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _raisedAmountDeadline, uint256 _deadline, string _mobName) payable returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactor) Initialize(opts *bind.TransactOpts, _creator common.Address, _token common.Address, _fee *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raisedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
-	return _XmobExchangeCore.contract.Transact(opts, "initialize", _creator, _token, _fee, _raisedTotal, _takeProfitPrice, _stopLossPrice, _raisedAmountDeadline, _deadline, _mobName)
+// Solidity: function initialize(address _creator, address _token, uint256 _tokenId, uint256 _fee, uint256 _raiseTarget, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint64 _raiseDeadline, uint64 _deadline, uint8 _targetMode, string _name) payable returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactor) Initialize(opts *bind.TransactOpts, _creator common.Address, _token common.Address, _tokenId *big.Int, _fee *big.Int, _raiseTarget *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raiseDeadline uint64, _deadline uint64, _targetMode uint8, _name string) (*types.Transaction, error) {
+	return _XmobExchangeCore.contract.Transact(opts, "initialize", _creator, _token, _tokenId, _fee, _raiseTarget, _takeProfitPrice, _stopLossPrice, _raiseDeadline, _deadline, _targetMode, _name)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x84b77472.
+// Initialize is a paid mutator transaction binding the contract method 0xf658cd3e.
 //
-// Solidity: function initialize(address _creator, address _token, uint256 _fee, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _raisedAmountDeadline, uint256 _deadline, string _mobName) payable returns()
-func (_XmobExchangeCore *XmobExchangeCoreSession) Initialize(_creator common.Address, _token common.Address, _fee *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raisedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.Initialize(&_XmobExchangeCore.TransactOpts, _creator, _token, _fee, _raisedTotal, _takeProfitPrice, _stopLossPrice, _raisedAmountDeadline, _deadline, _mobName)
+// Solidity: function initialize(address _creator, address _token, uint256 _tokenId, uint256 _fee, uint256 _raiseTarget, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint64 _raiseDeadline, uint64 _deadline, uint8 _targetMode, string _name) payable returns()
+func (_XmobExchangeCore *XmobExchangeCoreSession) Initialize(_creator common.Address, _token common.Address, _tokenId *big.Int, _fee *big.Int, _raiseTarget *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raiseDeadline uint64, _deadline uint64, _targetMode uint8, _name string) (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.Initialize(&_XmobExchangeCore.TransactOpts, _creator, _token, _tokenId, _fee, _raiseTarget, _takeProfitPrice, _stopLossPrice, _raiseDeadline, _deadline, _targetMode, _name)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x84b77472.
+// Initialize is a paid mutator transaction binding the contract method 0xf658cd3e.
 //
-// Solidity: function initialize(address _creator, address _token, uint256 _fee, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _raisedAmountDeadline, uint256 _deadline, string _mobName) payable returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) Initialize(_creator common.Address, _token common.Address, _fee *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raisedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.Initialize(&_XmobExchangeCore.TransactOpts, _creator, _token, _fee, _raisedTotal, _takeProfitPrice, _stopLossPrice, _raisedAmountDeadline, _deadline, _mobName)
+// Solidity: function initialize(address _creator, address _token, uint256 _tokenId, uint256 _fee, uint256 _raiseTarget, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint64 _raiseDeadline, uint64 _deadline, uint8 _targetMode, string _name) payable returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) Initialize(_creator common.Address, _token common.Address, _tokenId *big.Int, _fee *big.Int, _raiseTarget *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raiseDeadline uint64, _deadline uint64, _targetMode uint8, _name string) (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.Initialize(&_XmobExchangeCore.TransactOpts, _creator, _token, _tokenId, _fee, _raiseTarget, _takeProfitPrice, _stopLossPrice, _raiseDeadline, _deadline, _targetMode, _name)
 }
 
 // JoinPay is a paid mutator transaction binding the contract method 0x69369fa1.
@@ -1068,6 +760,27 @@ func (_XmobExchangeCore *XmobExchangeCoreSession) JoinPay(member common.Address)
 // Solidity: function joinPay(address member) payable returns()
 func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) JoinPay(member common.Address) (*types.Transaction, error) {
 	return _XmobExchangeCore.Contract.JoinPay(&_XmobExchangeCore.TransactOpts, member)
+}
+
+// RefundAfterRaiseFailed is a paid mutator transaction binding the contract method 0x22807158.
+//
+// Solidity: function refundAfterRaiseFailed() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactor) RefundAfterRaiseFailed(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _XmobExchangeCore.contract.Transact(opts, "refundAfterRaiseFailed")
+}
+
+// RefundAfterRaiseFailed is a paid mutator transaction binding the contract method 0x22807158.
+//
+// Solidity: function refundAfterRaiseFailed() returns()
+func (_XmobExchangeCore *XmobExchangeCoreSession) RefundAfterRaiseFailed() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.RefundAfterRaiseFailed(&_XmobExchangeCore.TransactOpts)
+}
+
+// RefundAfterRaiseFailed is a paid mutator transaction binding the contract method 0x22807158.
+//
+// Solidity: function refundAfterRaiseFailed() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) RefundAfterRaiseFailed() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.RefundAfterRaiseFailed(&_XmobExchangeCore.TransactOpts)
 }
 
 // RegisterSellOrder is a paid mutator transaction binding the contract method 0x8073dfb6.
@@ -1133,25 +846,67 @@ func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) SetSeaportAddress(se
 	return _XmobExchangeCore.Contract.SetSeaportAddress(&_XmobExchangeCore.TransactOpts, seaport)
 }
 
-// SettlementAllocation is a paid mutator transaction binding the contract method 0xea409f88.
+// SettlementAfterBuyFailed is a paid mutator transaction binding the contract method 0x424a453f.
 //
-// Solidity: function settlementAllocation(bool takeTransferFee) returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactor) SettlementAllocation(opts *bind.TransactOpts, takeTransferFee bool) (*types.Transaction, error) {
-	return _XmobExchangeCore.contract.Transact(opts, "settlementAllocation", takeTransferFee)
+// Solidity: function settlementAfterBuyFailed() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactor) SettlementAfterBuyFailed(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _XmobExchangeCore.contract.Transact(opts, "settlementAfterBuyFailed")
 }
 
-// SettlementAllocation is a paid mutator transaction binding the contract method 0xea409f88.
+// SettlementAfterBuyFailed is a paid mutator transaction binding the contract method 0x424a453f.
 //
-// Solidity: function settlementAllocation(bool takeTransferFee) returns()
-func (_XmobExchangeCore *XmobExchangeCoreSession) SettlementAllocation(takeTransferFee bool) (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.SettlementAllocation(&_XmobExchangeCore.TransactOpts, takeTransferFee)
+// Solidity: function settlementAfterBuyFailed() returns()
+func (_XmobExchangeCore *XmobExchangeCoreSession) SettlementAfterBuyFailed() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.SettlementAfterBuyFailed(&_XmobExchangeCore.TransactOpts)
 }
 
-// SettlementAllocation is a paid mutator transaction binding the contract method 0xea409f88.
+// SettlementAfterBuyFailed is a paid mutator transaction binding the contract method 0x424a453f.
 //
-// Solidity: function settlementAllocation(bool takeTransferFee) returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) SettlementAllocation(takeTransferFee bool) (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.SettlementAllocation(&_XmobExchangeCore.TransactOpts, takeTransferFee)
+// Solidity: function settlementAfterBuyFailed() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) SettlementAfterBuyFailed() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.SettlementAfterBuyFailed(&_XmobExchangeCore.TransactOpts)
+}
+
+// SettlementAfterDeadline is a paid mutator transaction binding the contract method 0x80d0a440.
+//
+// Solidity: function settlementAfterDeadline() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactor) SettlementAfterDeadline(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _XmobExchangeCore.contract.Transact(opts, "settlementAfterDeadline")
+}
+
+// SettlementAfterDeadline is a paid mutator transaction binding the contract method 0x80d0a440.
+//
+// Solidity: function settlementAfterDeadline() returns()
+func (_XmobExchangeCore *XmobExchangeCoreSession) SettlementAfterDeadline() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.SettlementAfterDeadline(&_XmobExchangeCore.TransactOpts)
+}
+
+// SettlementAfterDeadline is a paid mutator transaction binding the contract method 0x80d0a440.
+//
+// Solidity: function settlementAfterDeadline() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) SettlementAfterDeadline() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.SettlementAfterDeadline(&_XmobExchangeCore.TransactOpts)
+}
+
+// SettlementAllocation is a paid mutator transaction binding the contract method 0x48609c17.
+//
+// Solidity: function settlementAllocation() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactor) SettlementAllocation(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _XmobExchangeCore.contract.Transact(opts, "settlementAllocation")
+}
+
+// SettlementAllocation is a paid mutator transaction binding the contract method 0x48609c17.
+//
+// Solidity: function settlementAllocation() returns()
+func (_XmobExchangeCore *XmobExchangeCoreSession) SettlementAllocation() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.SettlementAllocation(&_XmobExchangeCore.TransactOpts)
+}
+
+// SettlementAllocation is a paid mutator transaction binding the contract method 0x48609c17.
+//
+// Solidity: function settlementAllocation() returns()
+func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) SettlementAllocation() (*types.Transaction, error) {
+	return _XmobExchangeCore.Contract.SettlementAllocation(&_XmobExchangeCore.TransactOpts)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
@@ -1236,48 +991,6 @@ func (_XmobExchangeCore *XmobExchangeCoreSession) ValidateSellOrders(orders []Or
 // Solidity: function validateSellOrders(((address,address,(uint8,address,uint256,uint256,uint256)[],(uint8,address,uint256,uint256,uint256,address)[],uint8,uint256,uint256,bytes32,uint256,bytes32,uint256),bytes)[] orders) returns(bool isValidated)
 func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) ValidateSellOrders(orders []Order) (*types.Transaction, error) {
 	return _XmobExchangeCore.Contract.ValidateSellOrders(&_XmobExchangeCore.TransactOpts, orders)
-}
-
-// WithdrawStake is a paid mutator transaction binding the contract method 0xbed9d861.
-//
-// Solidity: function withdrawStake() returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactor) WithdrawStake(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _XmobExchangeCore.contract.Transact(opts, "withdrawStake")
-}
-
-// WithdrawStake is a paid mutator transaction binding the contract method 0xbed9d861.
-//
-// Solidity: function withdrawStake() returns()
-func (_XmobExchangeCore *XmobExchangeCoreSession) WithdrawStake() (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.WithdrawStake(&_XmobExchangeCore.TransactOpts)
-}
-
-// WithdrawStake is a paid mutator transaction binding the contract method 0xbed9d861.
-//
-// Solidity: function withdrawStake() returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) WithdrawStake() (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.WithdrawStake(&_XmobExchangeCore.TransactOpts)
-}
-
-// Fallback is a paid mutator transaction binding the contract fallback function.
-//
-// Solidity: fallback() payable returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactor) Fallback(opts *bind.TransactOpts, calldata []byte) (*types.Transaction, error) {
-	return _XmobExchangeCore.contract.RawTransact(opts, calldata)
-}
-
-// Fallback is a paid mutator transaction binding the contract fallback function.
-//
-// Solidity: fallback() payable returns()
-func (_XmobExchangeCore *XmobExchangeCoreSession) Fallback(calldata []byte) (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.Fallback(&_XmobExchangeCore.TransactOpts, calldata)
-}
-
-// Fallback is a paid mutator transaction binding the contract fallback function.
-//
-// Solidity: fallback() payable returns()
-func (_XmobExchangeCore *XmobExchangeCoreTransactorSession) Fallback(calldata []byte) (*types.Transaction, error) {
-	return _XmobExchangeCore.Contract.Fallback(&_XmobExchangeCore.TransactOpts, calldata)
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
@@ -2417,6 +2130,141 @@ func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseOwnershipTransferred(log
 	return event, nil
 }
 
+// XmobExchangeCoreRefundAfterRaiseFailedIterator is returned from FilterRefundAfterRaiseFailed and is used to iterate over the raw logs and unpacked data for RefundAfterRaiseFailed events raised by the XmobExchangeCore contract.
+type XmobExchangeCoreRefundAfterRaiseFailedIterator struct {
+	Event *XmobExchangeCoreRefundAfterRaiseFailed // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *XmobExchangeCoreRefundAfterRaiseFailedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(XmobExchangeCoreRefundAfterRaiseFailed)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(XmobExchangeCoreRefundAfterRaiseFailed)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *XmobExchangeCoreRefundAfterRaiseFailedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *XmobExchangeCoreRefundAfterRaiseFailedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// XmobExchangeCoreRefundAfterRaiseFailed represents a RefundAfterRaiseFailed event raised by the XmobExchangeCore contract.
+type XmobExchangeCoreRefundAfterRaiseFailed struct {
+	Member common.Address
+	Amt    *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterRefundAfterRaiseFailed is a free log retrieval operation binding the contract event 0x8bdfcbdc3b493ffcf31a5c4811b40cdc74b9d3f60aaf1708bb921dce8193fa91.
+//
+// Solidity: event RefundAfterRaiseFailed(address member, uint256 amt)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) FilterRefundAfterRaiseFailed(opts *bind.FilterOpts) (*XmobExchangeCoreRefundAfterRaiseFailedIterator, error) {
+
+	logs, sub, err := _XmobExchangeCore.contract.FilterLogs(opts, "RefundAfterRaiseFailed")
+	if err != nil {
+		return nil, err
+	}
+	return &XmobExchangeCoreRefundAfterRaiseFailedIterator{contract: _XmobExchangeCore.contract, event: "RefundAfterRaiseFailed", logs: logs, sub: sub}, nil
+}
+
+// WatchRefundAfterRaiseFailed is a free log subscription operation binding the contract event 0x8bdfcbdc3b493ffcf31a5c4811b40cdc74b9d3f60aaf1708bb921dce8193fa91.
+//
+// Solidity: event RefundAfterRaiseFailed(address member, uint256 amt)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) WatchRefundAfterRaiseFailed(opts *bind.WatchOpts, sink chan<- *XmobExchangeCoreRefundAfterRaiseFailed) (event.Subscription, error) {
+
+	logs, sub, err := _XmobExchangeCore.contract.WatchLogs(opts, "RefundAfterRaiseFailed")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(XmobExchangeCoreRefundAfterRaiseFailed)
+				if err := _XmobExchangeCore.contract.UnpackLog(event, "RefundAfterRaiseFailed", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseRefundAfterRaiseFailed is a log parse operation binding the contract event 0x8bdfcbdc3b493ffcf31a5c4811b40cdc74b9d3f60aaf1708bb921dce8193fa91.
+//
+// Solidity: event RefundAfterRaiseFailed(address member, uint256 amt)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseRefundAfterRaiseFailed(log types.Log) (*XmobExchangeCoreRefundAfterRaiseFailed, error) {
+	event := new(XmobExchangeCoreRefundAfterRaiseFailed)
+	if err := _XmobExchangeCore.contract.UnpackLog(event, "RefundAfterRaiseFailed", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // XmobExchangeCoreSettlementIterator is returned from FilterSettlement and is used to iterate over the raw logs and unpacked data for Settlement events raised by the XmobExchangeCore contract.
 type XmobExchangeCoreSettlementIterator struct {
 	Event *XmobExchangeCoreSettlement // Event containing the contract specifics and raw log
@@ -2546,6 +2394,275 @@ func (_XmobExchangeCore *XmobExchangeCoreFilterer) WatchSettlement(opts *bind.Wa
 func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseSettlement(log types.Log) (*XmobExchangeCoreSettlement, error) {
 	event := new(XmobExchangeCoreSettlement)
 	if err := _XmobExchangeCore.contract.UnpackLog(event, "Settlement", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// XmobExchangeCoreSettlementAfterBuyFailedIterator is returned from FilterSettlementAfterBuyFailed and is used to iterate over the raw logs and unpacked data for SettlementAfterBuyFailed events raised by the XmobExchangeCore contract.
+type XmobExchangeCoreSettlementAfterBuyFailedIterator struct {
+	Event *XmobExchangeCoreSettlementAfterBuyFailed // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *XmobExchangeCoreSettlementAfterBuyFailedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(XmobExchangeCoreSettlementAfterBuyFailed)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(XmobExchangeCoreSettlementAfterBuyFailed)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *XmobExchangeCoreSettlementAfterBuyFailedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *XmobExchangeCoreSettlementAfterBuyFailedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// XmobExchangeCoreSettlementAfterBuyFailed represents a SettlementAfterBuyFailed event raised by the XmobExchangeCore contract.
+type XmobExchangeCoreSettlementAfterBuyFailed struct {
+	Total *big.Int
+	Raw   types.Log // Blockchain specific contextual infos
+}
+
+// FilterSettlementAfterBuyFailed is a free log retrieval operation binding the contract event 0x9b4f7f66fff2b2e45d43d2be27b3690b9d32c8a1a80e9dc2e1d77c7def6f8112.
+//
+// Solidity: event SettlementAfterBuyFailed(uint256 total)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) FilterSettlementAfterBuyFailed(opts *bind.FilterOpts) (*XmobExchangeCoreSettlementAfterBuyFailedIterator, error) {
+
+	logs, sub, err := _XmobExchangeCore.contract.FilterLogs(opts, "SettlementAfterBuyFailed")
+	if err != nil {
+		return nil, err
+	}
+	return &XmobExchangeCoreSettlementAfterBuyFailedIterator{contract: _XmobExchangeCore.contract, event: "SettlementAfterBuyFailed", logs: logs, sub: sub}, nil
+}
+
+// WatchSettlementAfterBuyFailed is a free log subscription operation binding the contract event 0x9b4f7f66fff2b2e45d43d2be27b3690b9d32c8a1a80e9dc2e1d77c7def6f8112.
+//
+// Solidity: event SettlementAfterBuyFailed(uint256 total)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) WatchSettlementAfterBuyFailed(opts *bind.WatchOpts, sink chan<- *XmobExchangeCoreSettlementAfterBuyFailed) (event.Subscription, error) {
+
+	logs, sub, err := _XmobExchangeCore.contract.WatchLogs(opts, "SettlementAfterBuyFailed")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(XmobExchangeCoreSettlementAfterBuyFailed)
+				if err := _XmobExchangeCore.contract.UnpackLog(event, "SettlementAfterBuyFailed", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseSettlementAfterBuyFailed is a log parse operation binding the contract event 0x9b4f7f66fff2b2e45d43d2be27b3690b9d32c8a1a80e9dc2e1d77c7def6f8112.
+//
+// Solidity: event SettlementAfterBuyFailed(uint256 total)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseSettlementAfterBuyFailed(log types.Log) (*XmobExchangeCoreSettlementAfterBuyFailed, error) {
+	event := new(XmobExchangeCoreSettlementAfterBuyFailed)
+	if err := _XmobExchangeCore.contract.UnpackLog(event, "SettlementAfterBuyFailed", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// XmobExchangeCoreSettlementAfterDeadlineIterator is returned from FilterSettlementAfterDeadline and is used to iterate over the raw logs and unpacked data for SettlementAfterDeadline events raised by the XmobExchangeCore contract.
+type XmobExchangeCoreSettlementAfterDeadlineIterator struct {
+	Event *XmobExchangeCoreSettlementAfterDeadline // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *XmobExchangeCoreSettlementAfterDeadlineIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(XmobExchangeCoreSettlementAfterDeadline)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(XmobExchangeCoreSettlementAfterDeadline)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *XmobExchangeCoreSettlementAfterDeadlineIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *XmobExchangeCoreSettlementAfterDeadlineIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// XmobExchangeCoreSettlementAfterDeadline represents a SettlementAfterDeadline event raised by the XmobExchangeCore contract.
+type XmobExchangeCoreSettlementAfterDeadline struct {
+	Total *big.Int
+	Time  *big.Int
+	Raw   types.Log // Blockchain specific contextual infos
+}
+
+// FilterSettlementAfterDeadline is a free log retrieval operation binding the contract event 0x334574e9f1d7d1f6283c210b3b12a9b1764055ee6c940328cd46f95c751567ca.
+//
+// Solidity: event SettlementAfterDeadline(uint256 total, uint256 time)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) FilterSettlementAfterDeadline(opts *bind.FilterOpts) (*XmobExchangeCoreSettlementAfterDeadlineIterator, error) {
+
+	logs, sub, err := _XmobExchangeCore.contract.FilterLogs(opts, "SettlementAfterDeadline")
+	if err != nil {
+		return nil, err
+	}
+	return &XmobExchangeCoreSettlementAfterDeadlineIterator{contract: _XmobExchangeCore.contract, event: "SettlementAfterDeadline", logs: logs, sub: sub}, nil
+}
+
+// WatchSettlementAfterDeadline is a free log subscription operation binding the contract event 0x334574e9f1d7d1f6283c210b3b12a9b1764055ee6c940328cd46f95c751567ca.
+//
+// Solidity: event SettlementAfterDeadline(uint256 total, uint256 time)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) WatchSettlementAfterDeadline(opts *bind.WatchOpts, sink chan<- *XmobExchangeCoreSettlementAfterDeadline) (event.Subscription, error) {
+
+	logs, sub, err := _XmobExchangeCore.contract.WatchLogs(opts, "SettlementAfterDeadline")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(XmobExchangeCoreSettlementAfterDeadline)
+				if err := _XmobExchangeCore.contract.UnpackLog(event, "SettlementAfterDeadline", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseSettlementAfterDeadline is a log parse operation binding the contract event 0x334574e9f1d7d1f6283c210b3b12a9b1764055ee6c940328cd46f95c751567ca.
+//
+// Solidity: event SettlementAfterDeadline(uint256 total, uint256 time)
+func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseSettlementAfterDeadline(log types.Log) (*XmobExchangeCoreSettlementAfterDeadline, error) {
+	event := new(XmobExchangeCoreSettlementAfterDeadline)
+	if err := _XmobExchangeCore.contract.UnpackLog(event, "SettlementAfterDeadline", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -2690,141 +2807,6 @@ func (_XmobExchangeCore *XmobExchangeCoreFilterer) WatchUpgraded(opts *bind.Watc
 func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseUpgraded(log types.Log) (*XmobExchangeCoreUpgraded, error) {
 	event := new(XmobExchangeCoreUpgraded)
 	if err := _XmobExchangeCore.contract.UnpackLog(event, "Upgraded", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
-// XmobExchangeCoreWithdrawStakeIterator is returned from FilterWithdrawStake and is used to iterate over the raw logs and unpacked data for WithdrawStake events raised by the XmobExchangeCore contract.
-type XmobExchangeCoreWithdrawStakeIterator struct {
-	Event *XmobExchangeCoreWithdrawStake // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *XmobExchangeCoreWithdrawStakeIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(XmobExchangeCoreWithdrawStake)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(XmobExchangeCoreWithdrawStake)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *XmobExchangeCoreWithdrawStakeIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *XmobExchangeCoreWithdrawStakeIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// XmobExchangeCoreWithdrawStake represents a WithdrawStake event raised by the XmobExchangeCore contract.
-type XmobExchangeCoreWithdrawStake struct {
-	Member common.Address
-	Amt    *big.Int
-	Raw    types.Log // Blockchain specific contextual infos
-}
-
-// FilterWithdrawStake is a free log retrieval operation binding the contract event 0x141ef67c4a6d3ec2adfb2f66d33c2b11de5b4f34344757554d430570b18a92ec.
-//
-// Solidity: event WithdrawStake(address member, uint256 amt)
-func (_XmobExchangeCore *XmobExchangeCoreFilterer) FilterWithdrawStake(opts *bind.FilterOpts) (*XmobExchangeCoreWithdrawStakeIterator, error) {
-
-	logs, sub, err := _XmobExchangeCore.contract.FilterLogs(opts, "WithdrawStake")
-	if err != nil {
-		return nil, err
-	}
-	return &XmobExchangeCoreWithdrawStakeIterator{contract: _XmobExchangeCore.contract, event: "WithdrawStake", logs: logs, sub: sub}, nil
-}
-
-// WatchWithdrawStake is a free log subscription operation binding the contract event 0x141ef67c4a6d3ec2adfb2f66d33c2b11de5b4f34344757554d430570b18a92ec.
-//
-// Solidity: event WithdrawStake(address member, uint256 amt)
-func (_XmobExchangeCore *XmobExchangeCoreFilterer) WatchWithdrawStake(opts *bind.WatchOpts, sink chan<- *XmobExchangeCoreWithdrawStake) (event.Subscription, error) {
-
-	logs, sub, err := _XmobExchangeCore.contract.WatchLogs(opts, "WithdrawStake")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(XmobExchangeCoreWithdrawStake)
-				if err := _XmobExchangeCore.contract.UnpackLog(event, "WithdrawStake", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseWithdrawStake is a log parse operation binding the contract event 0x141ef67c4a6d3ec2adfb2f66d33c2b11de5b4f34344757554d430570b18a92ec.
-//
-// Solidity: event WithdrawStake(address member, uint256 amt)
-func (_XmobExchangeCore *XmobExchangeCoreFilterer) ParseWithdrawStake(log types.Log) (*XmobExchangeCoreWithdrawStake, error) {
-	event := new(XmobExchangeCoreWithdrawStake)
-	if err := _XmobExchangeCore.contract.UnpackLog(event, "WithdrawStake", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

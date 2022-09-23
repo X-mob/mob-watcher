@@ -43,23 +43,25 @@ func CreateMob(
 	_name string,
 	_token string,
 	_tokenId int64,
-	_raisedTotal string,
+	_raiseTarget string,
 	_takeProfitPrice string,
 	_stopLossPrice string,
-	_raisedAmountDeadline int64,
-	_deadline int64) {
+	_raiseDeadline uint64,
+	_deadline uint64,
+	_targetMode uint8) {
 
 	token := common.HexToAddress(_token)
 	tokenId := big.NewInt(_tokenId)
-	raisedTotal := utils.StringToBigInt(_raisedTotal)
+	raiseTarget := utils.StringToBigInt(_raiseTarget)
 	takeProfitPrice := big.NewInt(25)
 	stopLossPrice := big.NewInt(1)
-	raisedAmountDeadline := big.NewInt(_raisedAmountDeadline)
-	deadline := big.NewInt(_deadline)
-	mobName := _name
+	raiseDeadline := _raiseDeadline
+	deadline := _deadline
+	targetMode := _targetMode
+	name := _name
 
 	txOpts := NewTxOpts(nil)
-	tx, err := XmobManageInstance.CreateMob(txOpts, token, tokenId, raisedTotal, takeProfitPrice, stopLossPrice, raisedAmountDeadline, deadline, mobName)
+	tx, err := XmobManageInstance.CreateMob(txOpts, token, tokenId, raiseTarget, takeProfitPrice, stopLossPrice, raiseDeadline, deadline, targetMode, name)
 	CheckAndWaitTx(tx, err)
 }
 
@@ -74,10 +76,11 @@ func Claim(mobAddress string) {
 	mob := GetMobByAddress(mobAddress)
 
 	// check if claim is allowed
-	canClaim, err := mob.CanClaim(nil)
+	metadata, err := mob.Metadata(nil)
 	if err != nil {
 		panic(err)
 	}
+	canClaim := metadata.Status == 3 // 3 means can claim MobStatus in xmob contract
 	if canClaim == false {
 		panic("can not claim yet")
 	}
@@ -91,7 +94,7 @@ func Claim(mobAddress string) {
 func Settle(mobAddress string) {
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
-	tx, err := mob.SettlementAllocation(txOpts, false)
+	tx, err := mob.SettlementAllocation(txOpts)
 	CheckAndWaitTx(tx, err)
 }
 

@@ -53,11 +53,12 @@ func ScanRaisingMob() {
 		mob, err := lib.NewXmobExchangeCore(m.Address, lib.EthClient)
 		panicErr(err)
 
-		amount, _ := mob.AmountTotal(nil)
-		target, _ := mob.RaisedTotal(nil)
+		metadata, _ := mob.Metadata(nil)
+		amount := metadata.RaisedAmount
+		target := metadata.RaiseTarget
 		if amount.Uint64() == target.Uint64() {
 			// raise finish
-			const status = db.RaiseFinished
+			const status = db.RaiseSuccess
 			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
 			db.UpdateMobStatus(m.Address.Hex(), status)
 			db.UpdateMobAmountTotal(m.Address.Hex(), *amount)
@@ -65,7 +66,7 @@ func ScanRaisingMob() {
 			return
 		}
 
-		if m.RaisedAmountDeadline.Int64() <= time.Now().Unix() {
+		if m.RaiseDeadline.Uint64() <= uint64(time.Now().Unix()) {
 			// over raise deadline
 			const status = db.RaiseFailed
 			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
@@ -83,7 +84,7 @@ func ScanRaisingMob() {
 }
 
 func ScanRaiseFinishedMob() {
-	raiseFinishedMob := db.GetMobsWithStatus(db.RaiseFinished)
+	raiseFinishedMob := db.GetMobsWithStatus(db.RaiseSuccess)
 	for _, m := range raiseFinishedMob {
 		buyNowEvents := lib.GetBuyNowEvents(m.Address.Hex())
 		if len(buyNowEvents) != 0 {
