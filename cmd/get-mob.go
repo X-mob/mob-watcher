@@ -21,7 +21,7 @@ var getMobCmd = &cobra.Command{
 		fmt.Printf("token: %s\n", mob.Token.Hex())
 		fmt.Printf("tokenId: %s\n", mob.TokenId)
 		fmt.Printf("raisedTotal: %s\n", mob.RaiseTarget)
-		fmt.Printf("amountTotal: %s\n", mob.AmountTotal)
+		fmt.Printf("raisedAmount: %s\n", mob.RaisedAmount)
 		fmt.Printf("takeProfitPrice: %s\n", mob.TakeProfitPrice)
 		fmt.Printf("stopLossPrice: %s\n", mob.StopLossPrice)
 		fmt.Printf("deadline: %s\n", mob.Deadline)

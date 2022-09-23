@@ -55,7 +55,7 @@ type Mob struct {
 	Token           common.Address
 	TokenId         *big.Int
 	RaiseTarget     *big.Int
-	AmountTotal     *big.Int
+	RaisedAmount    *big.Int
 	TakeProfitPrice *big.Int
 	StopLossPrice   *big.Int
 	Fee             *big.Int
@@ -189,7 +189,7 @@ func MobCreateToMob(m lib.XmobManageMobCreate) Mob {
 		Token:           m.Token,
 		TokenId:         m.TokenId,
 		RaiseTarget:     m.RaiseTarget,
-		AmountTotal:     big.NewInt(0),
+		RaisedAmount:    big.NewInt(0),
 		TakeProfitPrice: m.TakeProfitPrice,
 		StopLossPrice:   m.StopLossPrice,
 		Fee:             m.Fee,

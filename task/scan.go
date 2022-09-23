@@ -61,7 +61,7 @@ func ScanRaisingMob() {
 			const status = db.RaiseSuccess
 			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
 			db.UpdateMobStatus(m.Address.Hex(), status)
-			db.UpdateMobAmountTotal(m.Address.Hex(), *amount)
+			db.UpdateMobRaisedAmount(m.Address.Hex(), *amount)
 			db.UpdateMobBalance(m.Address.Hex(), *amount)
 			return
 		}
@@ -74,10 +74,10 @@ func ScanRaisingMob() {
 			return
 		}
 
-		if amount.Uint64() != m.AmountTotal.Uint64() {
+		if amount.Uint64() != m.RaisedAmount.Uint64() {
 			// new fund adding
 			fmt.Printf("update mob amount total: %s, address: %s\n", amount, m.Address.Hex())
-			db.UpdateMobAmountTotal(m.Address.Hex(), *amount)
+			db.UpdateMobRaisedAmount(m.Address.Hex(), *amount)
 			return
 		}
 	}
