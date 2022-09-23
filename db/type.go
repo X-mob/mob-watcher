@@ -193,7 +193,7 @@ func MobCreateToMob(m lib.XmobManageMobCreate) Mob {
 		StopLossPrice:        m.StopLossPrice,
 		Fee:                  m.Fee,
 		Deadline:             m.Deadline,
-		RaisedAmountDeadline: m.RasiedAmountDeadline,
+		RaisedAmountDeadline: m.RaisedAmountDeadline,
 		Balance:              big.NewInt(0),
 		CreatedTime:          time.Now().Unix(),
 		Status:               Raising,

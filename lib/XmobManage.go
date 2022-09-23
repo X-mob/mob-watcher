@@ -30,7 +30,7 @@ var (
 
 // XmobManageMetaData contains all meta data concerning the XmobManage contract.
 var XmobManageMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_exchangeCore\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"DepositEth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"result\",\"type\":\"bytes\"}],\"name\":\"Excuted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"feeRate\",\"type\":\"uint8\"}],\"name\":\"FeeSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proxy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"raisedTotal\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takeProfitPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"stopLossPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rasiedAmountDeadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"MobCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"mob\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"MobDeposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"state\",\"type\":\"bool\"}],\"name\":\"OracleSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proxy\",\"type\":\"address\"}],\"name\":\"ProxySet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_exchangeCore\",\"type\":\"address\"}],\"name\":\"_setProxy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_raisedTotal\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_takeProfitPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_stopLossPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_rasiedAmountDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_mobName\",\"type\":\"string\"}],\"name\":\"createMob\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"exchangeCore\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeRate\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"mob\",\"type\":\"address\"}],\"name\":\"mobDeposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"mobs\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"raisedTotal\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rasiedAmountDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"mobsById\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mobsTotal\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"oracles\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_feeRate\",\"type\":\"uint8\"}],\"name\":\"setFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"oracle\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"state\",\"type\":\"bool\"}],\"name\":\"setOracle\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_exchangeCore\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"DepositEth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"feeRate\",\"type\":\"uint8\"}],\"name\":\"FeeSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proxy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"raisedTotal\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takeProfitPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"stopLossPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"raisedAmountDeadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"MobCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proxy\",\"type\":\"address\"}],\"name\":\"ProxySet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_exchangeCore\",\"type\":\"address\"}],\"name\":\"_setProxy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_raisedTotal\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_takeProfitPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_stopLossPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_raisedAmountDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_mobName\",\"type\":\"string\"}],\"name\":\"createMob\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"exchangeCore\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeRate\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"mobs\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"raisedTotal\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"raisedAmountDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"mobsById\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mobsTotal\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_feeRate\",\"type\":\"uint8\"}],\"name\":\"setFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amt\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
 }
 
 // XmobManageABI is the input ABI used to generate the binding from.
@@ -243,10 +243,10 @@ func (_XmobManage *XmobManageCallerSession) FeeRate() (uint8, error) {
 
 // Mobs is a free data retrieval call binding the contract method 0x1a5f68ff.
 //
-// Solidity: function mobs(address ) view returns(uint256 raisedTotal, uint256 rasiedAmountDeadline, uint256 deadline, uint256 fee, address creator, string name)
+// Solidity: function mobs(address ) view returns(uint256 raisedTotal, uint256 raisedAmountDeadline, uint256 deadline, uint256 fee, address creator, string name)
 func (_XmobManage *XmobManageCaller) Mobs(opts *bind.CallOpts, arg0 common.Address) (struct {
 	RaisedTotal          *big.Int
-	RasiedAmountDeadline *big.Int
+	RaisedAmountDeadline *big.Int
 	Deadline             *big.Int
 	Fee                  *big.Int
 	Creator              common.Address
@@ -257,7 +257,7 @@ func (_XmobManage *XmobManageCaller) Mobs(opts *bind.CallOpts, arg0 common.Addre
 
 	outstruct := new(struct {
 		RaisedTotal          *big.Int
-		RasiedAmountDeadline *big.Int
+		RaisedAmountDeadline *big.Int
 		Deadline             *big.Int
 		Fee                  *big.Int
 		Creator              common.Address
@@ -268,7 +268,7 @@ func (_XmobManage *XmobManageCaller) Mobs(opts *bind.CallOpts, arg0 common.Addre
 	}
 
 	outstruct.RaisedTotal = *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-	outstruct.RasiedAmountDeadline = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
+	outstruct.RaisedAmountDeadline = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
 	outstruct.Deadline = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
 	outstruct.Fee = *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
 	outstruct.Creator = *abi.ConvertType(out[4], new(common.Address)).(*common.Address)
@@ -280,10 +280,10 @@ func (_XmobManage *XmobManageCaller) Mobs(opts *bind.CallOpts, arg0 common.Addre
 
 // Mobs is a free data retrieval call binding the contract method 0x1a5f68ff.
 //
-// Solidity: function mobs(address ) view returns(uint256 raisedTotal, uint256 rasiedAmountDeadline, uint256 deadline, uint256 fee, address creator, string name)
+// Solidity: function mobs(address ) view returns(uint256 raisedTotal, uint256 raisedAmountDeadline, uint256 deadline, uint256 fee, address creator, string name)
 func (_XmobManage *XmobManageSession) Mobs(arg0 common.Address) (struct {
 	RaisedTotal          *big.Int
-	RasiedAmountDeadline *big.Int
+	RaisedAmountDeadline *big.Int
 	Deadline             *big.Int
 	Fee                  *big.Int
 	Creator              common.Address
@@ -294,10 +294,10 @@ func (_XmobManage *XmobManageSession) Mobs(arg0 common.Address) (struct {
 
 // Mobs is a free data retrieval call binding the contract method 0x1a5f68ff.
 //
-// Solidity: function mobs(address ) view returns(uint256 raisedTotal, uint256 rasiedAmountDeadline, uint256 deadline, uint256 fee, address creator, string name)
+// Solidity: function mobs(address ) view returns(uint256 raisedTotal, uint256 raisedAmountDeadline, uint256 deadline, uint256 fee, address creator, string name)
 func (_XmobManage *XmobManageCallerSession) Mobs(arg0 common.Address) (struct {
 	RaisedTotal          *big.Int
-	RasiedAmountDeadline *big.Int
+	RaisedAmountDeadline *big.Int
 	Deadline             *big.Int
 	Fee                  *big.Int
 	Creator              common.Address
@@ -368,37 +368,6 @@ func (_XmobManage *XmobManageCallerSession) MobsTotal() (*big.Int, error) {
 	return _XmobManage.Contract.MobsTotal(&_XmobManage.CallOpts)
 }
 
-// Oracles is a free data retrieval call binding the contract method 0xaddd5099.
-//
-// Solidity: function oracles(address ) view returns(bool)
-func (_XmobManage *XmobManageCaller) Oracles(opts *bind.CallOpts, arg0 common.Address) (bool, error) {
-	var out []interface{}
-	err := _XmobManage.contract.Call(opts, &out, "oracles", arg0)
-
-	if err != nil {
-		return *new(bool), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
-
-	return out0, err
-
-}
-
-// Oracles is a free data retrieval call binding the contract method 0xaddd5099.
-//
-// Solidity: function oracles(address ) view returns(bool)
-func (_XmobManage *XmobManageSession) Oracles(arg0 common.Address) (bool, error) {
-	return _XmobManage.Contract.Oracles(&_XmobManage.CallOpts, arg0)
-}
-
-// Oracles is a free data retrieval call binding the contract method 0xaddd5099.
-//
-// Solidity: function oracles(address ) view returns(bool)
-func (_XmobManage *XmobManageCallerSession) Oracles(arg0 common.Address) (bool, error) {
-	return _XmobManage.Contract.Oracles(&_XmobManage.CallOpts, arg0)
-}
-
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
@@ -453,44 +422,23 @@ func (_XmobManage *XmobManageTransactorSession) SetProxy(_exchangeCore common.Ad
 
 // CreateMob is a paid mutator transaction binding the contract method 0x2e5f71ba.
 //
-// Solidity: function createMob(address _token, uint256 _tokenId, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _rasiedAmountDeadline, uint256 _deadline, string _mobName) payable returns(address)
-func (_XmobManage *XmobManageTransactor) CreateMob(opts *bind.TransactOpts, _token common.Address, _tokenId *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _rasiedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
-	return _XmobManage.contract.Transact(opts, "createMob", _token, _tokenId, _raisedTotal, _takeProfitPrice, _stopLossPrice, _rasiedAmountDeadline, _deadline, _mobName)
+// Solidity: function createMob(address _token, uint256 _tokenId, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _raisedAmountDeadline, uint256 _deadline, string _mobName) payable returns(address)
+func (_XmobManage *XmobManageTransactor) CreateMob(opts *bind.TransactOpts, _token common.Address, _tokenId *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raisedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
+	return _XmobManage.contract.Transact(opts, "createMob", _token, _tokenId, _raisedTotal, _takeProfitPrice, _stopLossPrice, _raisedAmountDeadline, _deadline, _mobName)
 }
 
 // CreateMob is a paid mutator transaction binding the contract method 0x2e5f71ba.
 //
-// Solidity: function createMob(address _token, uint256 _tokenId, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _rasiedAmountDeadline, uint256 _deadline, string _mobName) payable returns(address)
-func (_XmobManage *XmobManageSession) CreateMob(_token common.Address, _tokenId *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _rasiedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
-	return _XmobManage.Contract.CreateMob(&_XmobManage.TransactOpts, _token, _tokenId, _raisedTotal, _takeProfitPrice, _stopLossPrice, _rasiedAmountDeadline, _deadline, _mobName)
+// Solidity: function createMob(address _token, uint256 _tokenId, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _raisedAmountDeadline, uint256 _deadline, string _mobName) payable returns(address)
+func (_XmobManage *XmobManageSession) CreateMob(_token common.Address, _tokenId *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raisedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
+	return _XmobManage.Contract.CreateMob(&_XmobManage.TransactOpts, _token, _tokenId, _raisedTotal, _takeProfitPrice, _stopLossPrice, _raisedAmountDeadline, _deadline, _mobName)
 }
 
 // CreateMob is a paid mutator transaction binding the contract method 0x2e5f71ba.
 //
-// Solidity: function createMob(address _token, uint256 _tokenId, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _rasiedAmountDeadline, uint256 _deadline, string _mobName) payable returns(address)
-func (_XmobManage *XmobManageTransactorSession) CreateMob(_token common.Address, _tokenId *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _rasiedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
-	return _XmobManage.Contract.CreateMob(&_XmobManage.TransactOpts, _token, _tokenId, _raisedTotal, _takeProfitPrice, _stopLossPrice, _rasiedAmountDeadline, _deadline, _mobName)
-}
-
-// MobDeposit is a paid mutator transaction binding the contract method 0x4c1b7b26.
-//
-// Solidity: function mobDeposit(address mob) payable returns()
-func (_XmobManage *XmobManageTransactor) MobDeposit(opts *bind.TransactOpts, mob common.Address) (*types.Transaction, error) {
-	return _XmobManage.contract.Transact(opts, "mobDeposit", mob)
-}
-
-// MobDeposit is a paid mutator transaction binding the contract method 0x4c1b7b26.
-//
-// Solidity: function mobDeposit(address mob) payable returns()
-func (_XmobManage *XmobManageSession) MobDeposit(mob common.Address) (*types.Transaction, error) {
-	return _XmobManage.Contract.MobDeposit(&_XmobManage.TransactOpts, mob)
-}
-
-// MobDeposit is a paid mutator transaction binding the contract method 0x4c1b7b26.
-//
-// Solidity: function mobDeposit(address mob) payable returns()
-func (_XmobManage *XmobManageTransactorSession) MobDeposit(mob common.Address) (*types.Transaction, error) {
-	return _XmobManage.Contract.MobDeposit(&_XmobManage.TransactOpts, mob)
+// Solidity: function createMob(address _token, uint256 _tokenId, uint256 _raisedTotal, uint256 _takeProfitPrice, uint256 _stopLossPrice, uint256 _raisedAmountDeadline, uint256 _deadline, string _mobName) payable returns(address)
+func (_XmobManage *XmobManageTransactorSession) CreateMob(_token common.Address, _tokenId *big.Int, _raisedTotal *big.Int, _takeProfitPrice *big.Int, _stopLossPrice *big.Int, _raisedAmountDeadline *big.Int, _deadline *big.Int, _mobName string) (*types.Transaction, error) {
+	return _XmobManage.Contract.CreateMob(&_XmobManage.TransactOpts, _token, _tokenId, _raisedTotal, _takeProfitPrice, _stopLossPrice, _raisedAmountDeadline, _deadline, _mobName)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
@@ -533,27 +481,6 @@ func (_XmobManage *XmobManageSession) SetFee(_feeRate uint8) (*types.Transaction
 // Solidity: function setFee(uint8 _feeRate) returns()
 func (_XmobManage *XmobManageTransactorSession) SetFee(_feeRate uint8) (*types.Transaction, error) {
 	return _XmobManage.Contract.SetFee(&_XmobManage.TransactOpts, _feeRate)
-}
-
-// SetOracle is a paid mutator transaction binding the contract method 0x65360843.
-//
-// Solidity: function setOracle(address oracle, bool state) returns()
-func (_XmobManage *XmobManageTransactor) SetOracle(opts *bind.TransactOpts, oracle common.Address, state bool) (*types.Transaction, error) {
-	return _XmobManage.contract.Transact(opts, "setOracle", oracle, state)
-}
-
-// SetOracle is a paid mutator transaction binding the contract method 0x65360843.
-//
-// Solidity: function setOracle(address oracle, bool state) returns()
-func (_XmobManage *XmobManageSession) SetOracle(oracle common.Address, state bool) (*types.Transaction, error) {
-	return _XmobManage.Contract.SetOracle(&_XmobManage.TransactOpts, oracle, state)
-}
-
-// SetOracle is a paid mutator transaction binding the contract method 0x65360843.
-//
-// Solidity: function setOracle(address oracle, bool state) returns()
-func (_XmobManage *XmobManageTransactorSession) SetOracle(oracle common.Address, state bool) (*types.Transaction, error) {
-	return _XmobManage.Contract.SetOracle(&_XmobManage.TransactOpts, oracle, state)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
@@ -775,153 +702,6 @@ func (_XmobManage *XmobManageFilterer) ParseDepositEth(log types.Log) (*XmobMana
 	return event, nil
 }
 
-// XmobManageExcutedIterator is returned from FilterExcuted and is used to iterate over the raw logs and unpacked data for Excuted events raised by the XmobManage contract.
-type XmobManageExcutedIterator struct {
-	Event *XmobManageExcuted // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *XmobManageExcutedIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(XmobManageExcuted)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(XmobManageExcuted)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *XmobManageExcutedIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *XmobManageExcutedIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// XmobManageExcuted represents a Excuted event raised by the XmobManage contract.
-type XmobManageExcuted struct {
-	Target common.Address
-	Amt    *big.Int
-	Data   []byte
-	Result []byte
-	Raw    types.Log // Blockchain specific contextual infos
-}
-
-// FilterExcuted is a free log retrieval operation binding the contract event 0x33d321611ae889f758bfb2e7d9d2be81d5985475bd02271b845240e74f7e5413.
-//
-// Solidity: event Excuted(address indexed target, uint256 amt, bytes data, bytes result)
-func (_XmobManage *XmobManageFilterer) FilterExcuted(opts *bind.FilterOpts, target []common.Address) (*XmobManageExcutedIterator, error) {
-
-	var targetRule []interface{}
-	for _, targetItem := range target {
-		targetRule = append(targetRule, targetItem)
-	}
-
-	logs, sub, err := _XmobManage.contract.FilterLogs(opts, "Excuted", targetRule)
-	if err != nil {
-		return nil, err
-	}
-	return &XmobManageExcutedIterator{contract: _XmobManage.contract, event: "Excuted", logs: logs, sub: sub}, nil
-}
-
-// WatchExcuted is a free log subscription operation binding the contract event 0x33d321611ae889f758bfb2e7d9d2be81d5985475bd02271b845240e74f7e5413.
-//
-// Solidity: event Excuted(address indexed target, uint256 amt, bytes data, bytes result)
-func (_XmobManage *XmobManageFilterer) WatchExcuted(opts *bind.WatchOpts, sink chan<- *XmobManageExcuted, target []common.Address) (event.Subscription, error) {
-
-	var targetRule []interface{}
-	for _, targetItem := range target {
-		targetRule = append(targetRule, targetItem)
-	}
-
-	logs, sub, err := _XmobManage.contract.WatchLogs(opts, "Excuted", targetRule)
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(XmobManageExcuted)
-				if err := _XmobManage.contract.UnpackLog(event, "Excuted", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseExcuted is a log parse operation binding the contract event 0x33d321611ae889f758bfb2e7d9d2be81d5985475bd02271b845240e74f7e5413.
-//
-// Solidity: event Excuted(address indexed target, uint256 amt, bytes data, bytes result)
-func (_XmobManage *XmobManageFilterer) ParseExcuted(log types.Log) (*XmobManageExcuted, error) {
-	event := new(XmobManageExcuted)
-	if err := _XmobManage.contract.UnpackLog(event, "Excuted", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 // XmobManageFeeSetIterator is returned from FilterFeeSet and is used to iterate over the raw logs and unpacked data for FeeSet events raised by the XmobManage contract.
 type XmobManageFeeSetIterator struct {
 	Event *XmobManageFeeSet // Event containing the contract specifics and raw log
@@ -1134,14 +914,14 @@ type XmobManageMobCreate struct {
 	StopLossPrice        *big.Int
 	Fee                  *big.Int
 	Deadline             *big.Int
-	RasiedAmountDeadline *big.Int
+	RaisedAmountDeadline *big.Int
 	Name                 string
 	Raw                  types.Log // Blockchain specific contextual infos
 }
 
 // FilterMobCreate is a free log retrieval operation binding the contract event 0x0c0a8fe0938c2ba345503d604d5a54471938ac1a337c5dc8e15e83bd19ae175a.
 //
-// Solidity: event MobCreate(address indexed creator, address indexed token, uint256 indexed tokenId, address proxy, uint256 raisedTotal, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint256 deadline, uint256 rasiedAmountDeadline, string name)
+// Solidity: event MobCreate(address indexed creator, address indexed token, uint256 indexed tokenId, address proxy, uint256 raisedTotal, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint256 deadline, uint256 raisedAmountDeadline, string name)
 func (_XmobManage *XmobManageFilterer) FilterMobCreate(opts *bind.FilterOpts, creator []common.Address, token []common.Address, tokenId []*big.Int) (*XmobManageMobCreateIterator, error) {
 
 	var creatorRule []interface{}
@@ -1166,7 +946,7 @@ func (_XmobManage *XmobManageFilterer) FilterMobCreate(opts *bind.FilterOpts, cr
 
 // WatchMobCreate is a free log subscription operation binding the contract event 0x0c0a8fe0938c2ba345503d604d5a54471938ac1a337c5dc8e15e83bd19ae175a.
 //
-// Solidity: event MobCreate(address indexed creator, address indexed token, uint256 indexed tokenId, address proxy, uint256 raisedTotal, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint256 deadline, uint256 rasiedAmountDeadline, string name)
+// Solidity: event MobCreate(address indexed creator, address indexed token, uint256 indexed tokenId, address proxy, uint256 raisedTotal, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint256 deadline, uint256 raisedAmountDeadline, string name)
 func (_XmobManage *XmobManageFilterer) WatchMobCreate(opts *bind.WatchOpts, sink chan<- *XmobManageMobCreate, creator []common.Address, token []common.Address, tokenId []*big.Int) (event.Subscription, error) {
 
 	var creatorRule []interface{}
@@ -1216,309 +996,10 @@ func (_XmobManage *XmobManageFilterer) WatchMobCreate(opts *bind.WatchOpts, sink
 
 // ParseMobCreate is a log parse operation binding the contract event 0x0c0a8fe0938c2ba345503d604d5a54471938ac1a337c5dc8e15e83bd19ae175a.
 //
-// Solidity: event MobCreate(address indexed creator, address indexed token, uint256 indexed tokenId, address proxy, uint256 raisedTotal, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint256 deadline, uint256 rasiedAmountDeadline, string name)
+// Solidity: event MobCreate(address indexed creator, address indexed token, uint256 indexed tokenId, address proxy, uint256 raisedTotal, uint256 takeProfitPrice, uint256 stopLossPrice, uint256 fee, uint256 deadline, uint256 raisedAmountDeadline, string name)
 func (_XmobManage *XmobManageFilterer) ParseMobCreate(log types.Log) (*XmobManageMobCreate, error) {
 	event := new(XmobManageMobCreate)
 	if err := _XmobManage.contract.UnpackLog(event, "MobCreate", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
-// XmobManageMobDepositIterator is returned from FilterMobDeposit and is used to iterate over the raw logs and unpacked data for MobDeposit events raised by the XmobManage contract.
-type XmobManageMobDepositIterator struct {
-	Event *XmobManageMobDeposit // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *XmobManageMobDepositIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(XmobManageMobDeposit)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(XmobManageMobDeposit)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *XmobManageMobDepositIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *XmobManageMobDepositIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// XmobManageMobDeposit represents a MobDeposit event raised by the XmobManage contract.
-type XmobManageMobDeposit struct {
-	Mob    common.Address
-	Sender common.Address
-	Amt    *big.Int
-	Raw    types.Log // Blockchain specific contextual infos
-}
-
-// FilterMobDeposit is a free log retrieval operation binding the contract event 0x8b81f1bc1f4c3de2fc074a4c778e415df43a6591e1d2b0aa293bfc7cd20e05d3.
-//
-// Solidity: event MobDeposit(address indexed mob, address indexed sender, uint256 amt)
-func (_XmobManage *XmobManageFilterer) FilterMobDeposit(opts *bind.FilterOpts, mob []common.Address, sender []common.Address) (*XmobManageMobDepositIterator, error) {
-
-	var mobRule []interface{}
-	for _, mobItem := range mob {
-		mobRule = append(mobRule, mobItem)
-	}
-	var senderRule []interface{}
-	for _, senderItem := range sender {
-		senderRule = append(senderRule, senderItem)
-	}
-
-	logs, sub, err := _XmobManage.contract.FilterLogs(opts, "MobDeposit", mobRule, senderRule)
-	if err != nil {
-		return nil, err
-	}
-	return &XmobManageMobDepositIterator{contract: _XmobManage.contract, event: "MobDeposit", logs: logs, sub: sub}, nil
-}
-
-// WatchMobDeposit is a free log subscription operation binding the contract event 0x8b81f1bc1f4c3de2fc074a4c778e415df43a6591e1d2b0aa293bfc7cd20e05d3.
-//
-// Solidity: event MobDeposit(address indexed mob, address indexed sender, uint256 amt)
-func (_XmobManage *XmobManageFilterer) WatchMobDeposit(opts *bind.WatchOpts, sink chan<- *XmobManageMobDeposit, mob []common.Address, sender []common.Address) (event.Subscription, error) {
-
-	var mobRule []interface{}
-	for _, mobItem := range mob {
-		mobRule = append(mobRule, mobItem)
-	}
-	var senderRule []interface{}
-	for _, senderItem := range sender {
-		senderRule = append(senderRule, senderItem)
-	}
-
-	logs, sub, err := _XmobManage.contract.WatchLogs(opts, "MobDeposit", mobRule, senderRule)
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(XmobManageMobDeposit)
-				if err := _XmobManage.contract.UnpackLog(event, "MobDeposit", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseMobDeposit is a log parse operation binding the contract event 0x8b81f1bc1f4c3de2fc074a4c778e415df43a6591e1d2b0aa293bfc7cd20e05d3.
-//
-// Solidity: event MobDeposit(address indexed mob, address indexed sender, uint256 amt)
-func (_XmobManage *XmobManageFilterer) ParseMobDeposit(log types.Log) (*XmobManageMobDeposit, error) {
-	event := new(XmobManageMobDeposit)
-	if err := _XmobManage.contract.UnpackLog(event, "MobDeposit", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
-// XmobManageOracleSetIterator is returned from FilterOracleSet and is used to iterate over the raw logs and unpacked data for OracleSet events raised by the XmobManage contract.
-type XmobManageOracleSetIterator struct {
-	Event *XmobManageOracleSet // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *XmobManageOracleSetIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(XmobManageOracleSet)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(XmobManageOracleSet)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *XmobManageOracleSetIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *XmobManageOracleSetIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// XmobManageOracleSet represents a OracleSet event raised by the XmobManage contract.
-type XmobManageOracleSet struct {
-	Admin common.Address
-	State bool
-	Raw   types.Log // Blockchain specific contextual infos
-}
-
-// FilterOracleSet is a free log retrieval operation binding the contract event 0x52934308d2c8dc32de080d8be177ae8a48054436e2f01112e0a04d9a639f1aaa.
-//
-// Solidity: event OracleSet(address indexed admin, bool state)
-func (_XmobManage *XmobManageFilterer) FilterOracleSet(opts *bind.FilterOpts, admin []common.Address) (*XmobManageOracleSetIterator, error) {
-
-	var adminRule []interface{}
-	for _, adminItem := range admin {
-		adminRule = append(adminRule, adminItem)
-	}
-
-	logs, sub, err := _XmobManage.contract.FilterLogs(opts, "OracleSet", adminRule)
-	if err != nil {
-		return nil, err
-	}
-	return &XmobManageOracleSetIterator{contract: _XmobManage.contract, event: "OracleSet", logs: logs, sub: sub}, nil
-}
-
-// WatchOracleSet is a free log subscription operation binding the contract event 0x52934308d2c8dc32de080d8be177ae8a48054436e2f01112e0a04d9a639f1aaa.
-//
-// Solidity: event OracleSet(address indexed admin, bool state)
-func (_XmobManage *XmobManageFilterer) WatchOracleSet(opts *bind.WatchOpts, sink chan<- *XmobManageOracleSet, admin []common.Address) (event.Subscription, error) {
-
-	var adminRule []interface{}
-	for _, adminItem := range admin {
-		adminRule = append(adminRule, adminItem)
-	}
-
-	logs, sub, err := _XmobManage.contract.WatchLogs(opts, "OracleSet", adminRule)
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(XmobManageOracleSet)
-				if err := _XmobManage.contract.UnpackLog(event, "OracleSet", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseOracleSet is a log parse operation binding the contract event 0x52934308d2c8dc32de080d8be177ae8a48054436e2f01112e0a04d9a639f1aaa.
-//
-// Solidity: event OracleSet(address indexed admin, bool state)
-func (_XmobManage *XmobManageFilterer) ParseOracleSet(log types.Log) (*XmobManageOracleSet, error) {
-	event := new(XmobManageOracleSet)
-	if err := _XmobManage.contract.UnpackLog(event, "OracleSet", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

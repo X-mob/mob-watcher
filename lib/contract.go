@@ -98,7 +98,7 @@ func Settle(mobAddress string) {
 func BuyNow(mobAddress string, order BasicOrderParameters) {
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
-	tx, err := mob.BuyNow(txOpts, order)
+	tx, err := mob.BuyBasicOrder(txOpts, order)
 	CheckAndWaitTx(tx, err)
 }
 
@@ -110,16 +110,11 @@ func Sell(mobAddress string, orders []Order) {
 }
 
 // only for testing, mainnet we don't have to do this
-func PatchMobWithWethSeaport(mobAddress string) {
+func PatchMobWithSeaport(mobAddress string) {
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
 	{
 		tx, err := mob.SetSeaportAddress(txOpts, config.GlobalConfig.SeaportAddress)
-		CheckAndWaitTx(tx, err)
-	}
-
-	{
-		tx, err := mob.SetWeth9Address(txOpts, config.GlobalConfig.WethAddress)
 		CheckAndWaitTx(tx, err)
 	}
 }

@@ -32,17 +32,16 @@ func GetMobsCreateEvents(start uint64, creator []common.Address) ([]XmobManageMo
 	return events, nextCursor
 }
 
-func GetBuyNowEvents(mobAddress string) []XmobExchangeCoreExchanged {
+func GetBuyNowEvents(mobAddress string) []XmobExchangeCoreBuy {
 	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
 	xmobExchangeCoreInstance := GetMobByAddress(mobAddress)
-	iterator, err := xmobExchangeCoreInstance.FilterExchanged(&opts, nil, nil)
+	iterator, err := xmobExchangeCoreInstance.FilterBuy(&opts, nil)
 	if err != nil {
 		panic(err)
 	}
-	var events []XmobExchangeCoreExchanged
+	var events []XmobExchangeCoreBuy
 	for iterator.Next() {
 		if iterator.Event != nil {
-			fmt.Printf("buyer: %v\n", iterator.Event.Buyer)
 			fmt.Printf("seller: %v\n", iterator.Event.Seller)
 		}
 		events = append(events, *iterator.Event)

@@ -42,7 +42,7 @@ func ScanNewMob() {
 
 			// init patch
 			// todo: remove this in mainnet
-			lib.PatchMobWithWethSeaport(mob.Address.Hex())
+			lib.PatchMobWithSeaport(mob.Address.Hex())
 		}
 	}
 }
