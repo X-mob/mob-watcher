@@ -148,9 +148,16 @@ func GetMob(address string) Mob {
 	return DeSerializeMob(data)
 }
 
+// todo: use generic to refactor the following method
 func UpdateMobStatus(address string, newStatus MobStatus) {
 	mob := GetMob(address)
 	mob.Status = newStatus
+	AddMob(mob)
+}
+
+func UpdateMobTokenId(address string, newTokenId *big.Int) {
+	mob := GetMob(address)
+	mob.TokenId = newTokenId
 	AddMob(mob)
 }
 

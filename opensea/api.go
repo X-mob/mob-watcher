@@ -3,9 +3,43 @@ package opensea
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"net/url"
 )
 
-func RetrieveOffers(opt RetrieveOffersOption) RetrieveOffersResponse {
+func RetrieveListings(opt RetrieveListingsOption) RetrieveResponse {
+	router := "/orders/ethereum/seaport/listings"
+	var queryParams []HttpUrlQueryParam
+	if opt.Limit != 0 {
+		queryParams = append(queryParams, HttpUrlQueryParam{Key: "limit", Value: fmt.Sprint(opt.Limit)})
+	}
+	if opt.AssetContractAddress != "" {
+		queryParams = append(queryParams, HttpUrlQueryParam{Key: "asset_contract_address", Value: opt.AssetContractAddress})
+	}
+	if len(opt.TokenIds) != 0 {
+		for _, tokenId := range opt.TokenIds {
+			queryParams = append(queryParams, HttpUrlQueryParam{Key: "token_ids", Value: tokenId})
+		}
+	}
+
+	var sendOpt SendRequestOption
+	sendOpt.Router = router
+	sendOpt.QueryParams = queryParams
+	sendOpt.Method = Get
+
+	res := SendRequestV2(sendOpt)
+
+	// parse result
+	var response RetrieveResponse
+	parseErr := json.Unmarshal(res, &response)
+	if parseErr != nil {
+		fmt.Println(parseErr.Error())
+		panic(parseErr)
+	}
+	return response
+}
+
+func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
 	router := "/orders/ethereum/seaport/offers"
 	var queryParams []HttpUrlQueryParam
 	if opt.Limit != 0 {
@@ -52,7 +86,69 @@ func RetrieveOffers(opt RetrieveOffersOption) RetrieveOffersResponse {
 	res := SendRequestV2(sendOpt)
 
 	// parse result
-	var response RetrieveOffersResponse
+	var response RetrieveResponse
+	parseErr := json.Unmarshal(res, &response)
+	if parseErr != nil {
+		fmt.Println(parseErr.Error())
+		panic(parseErr)
+	}
+	return response
+}
+
+func CreateListing(orderParameters OrderParameters, signature string) RetrieveResponse {
+	router := "/orders/ethereum/seaport/listings"
+
+	op, err := json.Marshal(orderParameters)
+	if err != nil {
+		log.Fatalf("json.Marshal(orderParameters), err: %s", err)
+	}
+
+	params := url.Values{}
+	params.Add("order_parameters", string(op))
+	params.Add("signature", signature)
+	payload := params.Encode()
+
+	opt := SendRequestOption{
+		Router:  router,
+		Method:  Post,
+		Payload: payload,
+	}
+
+	res := SendRequestV2(opt)
+
+	// parse result
+	var response RetrieveResponse
+	parseErr := json.Unmarshal(res, &response)
+	if parseErr != nil {
+		fmt.Println(parseErr.Error())
+		panic(parseErr)
+	}
+	return response
+}
+
+func CreateOffer(orderParameters OrderParameters, signature string) RetrieveResponse {
+	router := "/orders/ethereum/seaport/offers"
+
+	op, err := json.Marshal(orderParameters)
+	if err != nil {
+		log.Fatalf("json.Marshal(orderParameters), err: %s", err)
+	}
+
+	params := url.Values{}
+	params.Add("order_parameters", string(op))
+	params.Add("signature", signature)
+	payload := params.Encode()
+
+	opt := SendRequestOption{
+		Router:  router,
+		Method:  Post,
+		Payload: payload,
+	}
+
+	res := SendRequestV2(opt)
+
+	// parse result
+	var response RetrieveResponse
 	parseErr := json.Unmarshal(res, &response)
 	if parseErr != nil {
 		fmt.Println(parseErr.Error())

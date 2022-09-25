@@ -2,7 +2,7 @@ package opensea
 
 import "github.com/ethereum/go-ethereum/common"
 
-type ProtocolDataParameterOfferItem struct {
+type OfferItem struct {
 	ItemType             uint8  `json:"itemType"`
 	Token                string `json:"token"`
 	IdentifierOrCriteria string `json:"identifierOrCriteria"`
@@ -10,7 +10,7 @@ type ProtocolDataParameterOfferItem struct {
 	EndAmount            string `json:"endAmount"`
 }
 
-type ProtocolDataParameterConsiderationItem struct {
+type ConsiderationItem struct {
 	ItemType             uint8  `json:"itemType"`
 	Token                string `json:"token"`
 	IdentifierOrCriteria string `json:"identifierOrCriteria"`
@@ -19,24 +19,24 @@ type ProtocolDataParameterConsiderationItem struct {
 	Recipient            string `json:"recipient"`
 }
 
-type ProtocolDataParameters struct {
-	Offerer                         common.Address                           `json:"offerer"`
-	Zone                            common.Address                           `json:"zone"`
-	Offer                           []ProtocolDataParameterOfferItem         `json:"offer"`
-	Consideration                   []ProtocolDataParameterConsiderationItem `json:"consideration"`
-	OrderType                       uint8                                    `json:"orderType"`
-	StartTime                       string                                   `json:"startTime"`
-	EndTime                         string                                   `json:"endTime"`
-	ZoneHash                        string                                   `json:"zoneHash"`
-	Salt                            string                                   `json:"salt"`
-	ConduitKey                      string                                   `json:"conduitKey"`
-	TotalOriginalConsiderationItems int                                      `json:"totalOriginalConsiderationItems"`
-	Counter                         int                                      `json:"counter"`
+type OrderParameters struct {
+	Offerer                         common.Address      `json:"offerer"`
+	Zone                            common.Address      `json:"zone"`
+	ZoneHash                        string              `json:"zoneHash"`
+	StartTime                       string              `json:"startTime"`
+	EndTime                         string              `json:"endTime"`
+	OrderType                       uint8               `json:"orderType"`
+	Salt                            string              `json:"salt"`
+	ConduitKey                      string              `json:"conduitKey"`
+	Offer                           []OfferItem         `json:"offer"`
+	Consideration                   []ConsiderationItem `json:"consideration"`
+	TotalOriginalConsiderationItems int                 `json:"totalOriginalConsiderationItems"`
+	Counter                         int                 `json:"counter"`
 }
 
 type ProtocolData struct {
-	Parameters ProtocolDataParameters `json:"parameters"`
-	Signature  string                 `json:"signature"`
+	Parameters OrderParameters `json:"parameters"`
+	Signature  string          `json:"signature"`
 }
 
 type AssetCollection struct {
@@ -70,7 +70,7 @@ type Order struct {
 	MakerAssetBundle AssetBundle  `json:"maker_asset_bundle"`
 }
 
-type RetrieveOffersResponse struct {
+type RetrieveResponse struct {
 	Next     string  `json:"next"`
 	Previous string  `json:"previous"`
 	Orders   []Order `json:"orders"`
@@ -86,6 +86,12 @@ type RetrieveOffersOption struct {
 	Taker                string
 	ListedAfter          uint64
 	ListedBefore         uint64
+}
+
+type RetrieveListingsOption struct {
+	Limit                int
+	AssetContractAddress string
+	TokenIds             []string
 }
 
 type CollectionStats struct {

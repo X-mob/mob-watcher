@@ -23,6 +23,7 @@ const (
 	RaiseFailed           // the deadline is reached but raise not enough
 	RaiseSuccess
 	NftBought
+	NftBuyFailed // the deadline is reached but not bought yet
 	NftSold
 	CanClaim
 	AllClaimed

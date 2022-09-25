@@ -8,6 +8,7 @@ require (
 	github.com/coreos/go-etcd v2.0.0+incompatible // indirect
 	github.com/dgraph-io/badger/v3 v3.2103.2 // indirect
 	github.com/ethereum/go-ethereum v1.10.24 // indirect
+	github.com/metachris/eth-go-bindings v0.5.0
 	github.com/spf13/cobra v1.5.0 // indirect
 	github.com/spf13/viper v1.13.0 // indirect
 	github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8 // indirect
