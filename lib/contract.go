@@ -41,12 +41,33 @@ func GetMobByAddress(address string) *XmobExchangeCore {
 }
 
 func GetMobStatus(address string) uint8 {
+	metadata := GetMobMetadata(address)
+	return metadata.Status
+}
+
+type Metadata struct {
+	Name            string
+	Creator         common.Address
+	Token           common.Address
+	TokenId         *big.Int
+	RaisedAmount    *big.Int
+	RaiseTarget     *big.Int
+	TakeProfitPrice *big.Int
+	StopLossPrice   *big.Int
+	Fee             *big.Int
+	Deadline        uint64
+	RaiseDeadline   uint64
+	TargetMode      uint8
+	Status          uint8
+}
+
+func GetMobMetadata(address string) Metadata {
 	mob := GetMobByAddress(address)
 	metadata, err := mob.Metadata(nil)
 	if err != nil {
 		panic(err)
 	}
-	return metadata.Status
+	return metadata
 }
 
 func CreateMob(

@@ -29,7 +29,6 @@ func GetOrderFromOpenSea(token string, tokenId string) *lib.Order {
 	return &order
 }
 
-// todo: update token id after bought under full-open target mode..
 func BuyNow(mobAddress string) {
 	mobInDB := db.GetMob(mobAddress)
 	tokenAddress := mobInDB.Token.Hex()

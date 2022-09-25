@@ -102,6 +102,15 @@ func ScanRaiseSuccessMob() {
 		if len(buyNowEvents) != 0 {
 			// already bought
 			db.UpdateMobStatus(m.Address.Hex(), db.NftBought)
+
+			// check if tokenId needs update
+			// normally this happens when it is under Full-open targetMode
+			metadata := lib.GetMobMetadata(m.Address.Hex())
+			if m.TokenId != metadata.TokenId {
+				fmt.Printf("updating token id after bought events, mob: %s, tokenId: %s", m.Address.Hex(), metadata.TokenId)
+				db.UpdateMobTokenId(m.Address.Hex(), metadata.TokenId)
+			}
+
 			return
 		}
 
