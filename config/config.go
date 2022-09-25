@@ -21,7 +21,7 @@ var GlobalConfig Config
 const OpenseaApiV1BaseUrl = "https://testnets-api.opensea.io/api/v1"
 const OpenseaApiV2BaseUrl = "https://testnets-api.opensea.io/v2"
 
-const xmobManagerAddress string = "0x8626550c122B15F388d31E29E7cEf4Ec61de2a69"
+const xmobManagerAddress string = "0xe71C9Ec4CE47265d10B01C0cc0994617d43b3AeA"
 const seaportAddress string = "0x00000000006c3852cbEf3e08E8dF289169EdE581"
 
 func getRequired(key string) string {
