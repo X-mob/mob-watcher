@@ -13,6 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/metachris/eth-go-bindings/erc721"
 )
 
 func GetFeeRate() {
@@ -37,6 +38,15 @@ func GetMobByAddress(address string) *XmobExchangeCore {
 		panic(err)
 	}
 	return mob
+}
+
+func GetMobStatus(address string) uint8 {
+	mob := GetMobByAddress(address)
+	metadata, err := mob.Metadata(nil)
+	if err != nil {
+		panic(err)
+	}
+	return metadata.Status
 }
 
 func CreateMob(
@@ -98,18 +108,116 @@ func Settle(mobAddress string) {
 	CheckAndWaitTx(tx, err)
 }
 
-func BuyNow(mobAddress string, order BasicOrderParameters) {
+func SettleAfterDeadline(mobAddress string) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.SettlementAfterDeadline(txOpts)
+	CheckAndWaitTx(tx, err)
+}
+
+func SettleAfterBuyFailed(mobAddress string) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.SettlementAfterBuyFailed(txOpts)
+	CheckAndWaitTx(tx, err)
+}
+
+func BuyBasicOrder(mobAddress string, order BasicOrderParameters) {
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
 	tx, err := mob.BuyBasicOrder(txOpts, order)
 	CheckAndWaitTx(tx, err)
 }
 
-func Sell(mobAddress string, orders []Order) {
+func BuyOrder(mobAddress string, order Order) {
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.BuyOrder(txOpts, order, [32]byte{0})
+	CheckAndWaitTx(tx, err)
+}
+
+func RegisterSellOrder(mobAddress string, orders []Order) {
+	isUnowned := IsNFTUnOwned(mobAddress)
+	if isUnowned == true {
+		fmt.Printf("contract has no nft, skip to sell")
+		return
+	}
+
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
 	tx, err := mob.RegisterSellOrder(txOpts, orders)
 	CheckAndWaitTx(tx, err)
+}
+
+func ValidateSellOrder(mobAddress string, orders []Order) {
+	isUnowned := IsNFTUnOwned(mobAddress)
+	if isUnowned == true {
+		fmt.Printf("contract has no nft, skip to sell")
+		return
+	}
+
+	txOpts := NewTxOpts(nil)
+	mob := GetMobByAddress(mobAddress)
+	tx, err := mob.ValidateSellOrders(txOpts, orders)
+	CheckAndWaitTx(tx, err)
+}
+
+func IsNFTUnOwned(mobAddress string) bool {
+	mob := GetMobByAddress(mobAddress)
+	metadata, err := mob.Metadata(nil)
+	if err != nil {
+	}
+	token := metadata.Token.Hex()
+	tokenId := metadata.TokenId
+	targetMode := metadata.TargetMode
+	if targetMode == 0 { // restrict mode
+		addr := ERC721OwnerOf(mobAddress, tokenId)
+		if addr != mobAddress {
+			// check if still holds some other nft id
+			bal := ERC721BalanceOf(mobAddress, token)
+			if bal.Cmp(big.NewInt(0)) > 0 {
+				log.Fatalf("warn: contract holds no nft id, but contains some other nft id, encounter NFT balance attacking?")
+			}
+		}
+		return addr != mobAddress
+	}
+
+	if targetMode == 1 { // full open mode
+		bal := ERC721BalanceOf(mobAddress, token)
+		if bal.Cmp(big.NewInt(0)) > 1 {
+			// check if still holds some other nft id
+			log.Fatalf("warn: contract holds more than 1 nft id, encounter NFT balance attacking?")
+		}
+		return bal == big.NewInt(0)
+	}
+
+	panic("unknown target mode")
+}
+
+func ERC721BalanceOf(owner string, tokenAddress string) *big.Int {
+	token, err := erc721.NewErc721(common.HexToAddress(tokenAddress), EthClient)
+	if err != nil {
+		log.Fatalf("Failed to instantiate a Token contract: %v", err)
+	}
+
+	bal, err := token.BalanceOf(nil, common.HexToAddress(owner))
+	if err != nil {
+		log.Fatalf("Failed to retrieve balance: %v", err)
+	}
+	return bal
+}
+
+func ERC721OwnerOf(tokenAddress string, tokenId *big.Int) string {
+	token, err := erc721.NewErc721(common.HexToAddress(tokenAddress), EthClient)
+	if err != nil {
+		log.Fatalf("Failed to instantiate a Token contract: %v", err)
+	}
+
+	addr, err := token.OwnerOf(nil, tokenId)
+	if err != nil {
+		log.Fatalf("Failed to retrieve balance: %v", err)
+	}
+	return addr.Hex()
 }
 
 // only for testing, mainnet we don't have to do this

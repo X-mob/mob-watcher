@@ -48,7 +48,65 @@ func GetBuyNowEvents(mobAddress string) []XmobExchangeCoreBuy {
 	}
 
 	if len(events) > 1 {
-		panic("buyNow should only be fired once")
+		panic("buy event should only be fired once")
+	}
+
+	return events
+}
+
+// todo: use generic to refactor after updating go 1.8
+func GetSettlementEvents(mobAddress string) []XmobExchangeCoreSettlement {
+	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
+	xmobExchangeCoreInstance := GetMobByAddress(mobAddress)
+	iterator, err := xmobExchangeCoreInstance.FilterSettlement(&opts)
+	if err != nil {
+		panic(err)
+	}
+	var events []XmobExchangeCoreSettlement
+	for iterator.Next() {
+		events = append(events, *iterator.Event)
+	}
+
+	if len(events) > 1 {
+		panic("settlement event should only be fired once")
+	}
+
+	return events
+}
+
+func GetSettlementAfterBuyFailedEvents(mobAddress string) []XmobExchangeCoreSettlementAfterBuyFailed {
+	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
+	xmobExchangeCoreInstance := GetMobByAddress(mobAddress)
+	iterator, err := xmobExchangeCoreInstance.FilterSettlementAfterBuyFailed(&opts)
+	if err != nil {
+		panic(err)
+	}
+	var events []XmobExchangeCoreSettlementAfterBuyFailed
+	for iterator.Next() {
+		events = append(events, *iterator.Event)
+	}
+
+	if len(events) > 1 {
+		panic("settlementAfterBuyFailed event should only be fired once")
+	}
+
+	return events
+}
+
+func GetSettlementAfterDeadlineEvents(mobAddress string) []XmobExchangeCoreSettlementAfterDeadline {
+	opts := bind.FilterOpts{Start: 0, End: nil, Context: context.Background()}
+	xmobExchangeCoreInstance := GetMobByAddress(mobAddress)
+	iterator, err := xmobExchangeCoreInstance.FilterSettlementAfterDeadline(&opts)
+	if err != nil {
+		panic(err)
+	}
+	var events []XmobExchangeCoreSettlementAfterDeadline
+	for iterator.Next() {
+		events = append(events, *iterator.Event)
+	}
+
+	if len(events) > 1 {
+		panic("settlementAfterDeadline event should only be fired once")
 	}
 
 	return events
@@ -59,7 +117,7 @@ func GetLogsByContract() {
 		FromBlock: big.NewInt(0),
 		ToBlock:   big.NewInt(11),
 		Addresses: []common.Address{
-			config.GlobalConfig.XmobManagerContractAddress,
+			config.GlobalConfig.XmobManagerAddress,
 		},
 	}
 
