@@ -102,3 +102,39 @@ type CollectionStats struct {
 type CollectionStatsResponse struct {
 	Stats CollectionStats `json:"stats"`
 }
+
+type Collection struct {
+	Name           string          `json:"name"`
+	Slug           string          `json:"slug"`
+	ExternalLink   string          `json:"external_link"`
+	ImageUrl       string          `json:"image_url"`
+	BannerImageUrl string          `json:"banner_image_url"`
+	Description    string          `json:"description"`
+	Stats          CollectionStats `json:"stats"`
+}
+
+type AssetContract struct {
+	Name              string     `json:"name"`
+	CreatedDate       string     `json:"created_date"`
+	Address           string     `json:"address"`
+	Collection        Collection `json:"collection"`
+	ImageUrl          string     `json:"image_url"`
+	SchemaName        string     `json:"schema_name"`
+	Symbol            string     `json:"symbol"`
+	TotalSupply       string     `json:"total_supply"`
+	ExternalLink      string     `json:"external_link"`
+	Description       string     `json:"description"`
+	AssetContractType string     `json:"asset_contract_type"`
+}
+type GetAssetsResponse struct {
+	Id                   int           `json:"id"`
+	Name                 string        `json:"name"`
+	Description          string        `json:"description"`
+	BackgroundColor      string        `json:"background_color"`
+	ImageUrl             string        `json:"image_url"`
+	ImagePreviewUrl      string        `json:"image_preview_url"`
+	ImageThumbnailUrl    string        `json:"image_thumbnail_url"`
+	AnimationUrl         string        `json:"animation_url"`
+	AnimationOriginalUrl string        `json:"animation_original_url"`
+	AssetContract        AssetContract `json:"asset_contract"`
+}

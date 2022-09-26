@@ -7,6 +7,7 @@ import (
 	"github.com/X-mob/mob-watcher/casting"
 	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
+	"github.com/X-mob/mob-watcher/opensea"
 	"github.com/X-mob/mob-watcher/utils"
 )
 
@@ -49,12 +50,12 @@ func ScanNewMob() {
 		mob := db.MobCreateToMob(event)
 		isExit := db.IsMobExits(mob.Address.Hex())
 		if isExit == false {
+			// update mob asset
+			mob.Asset = GetMobAsset(mob.Token.Hex(), mob.TokenId.String(), mob.TargetMode)
+
+			// save in db
 			db.AddMob(mob)
 			fmt.Println("save mob total: ", len(mobCreateEvents))
-
-			// init patch
-			// todo: remove this in mainnet
-			// lib.PatchMobWithSeaport(mob.Address.Hex())
 		}
 	}
 }
@@ -205,6 +206,24 @@ func ScanNewJoin() {
 
 func ScanNftBalanceAttacking() {
 	// todo
+}
+
+/** helper */
+
+func GetMobAsset(token string, tokenId string, targetMode uint8) db.MobAsset {
+	var mobAsset db.MobAsset
+
+	if targetMode == 0 { // restrict
+		a := opensea.GetAssets(token, tokenId, false)
+		mobAsset = casting.OpenSeaToDBMobAsset(a)
+	}
+
+	if targetMode == 1 { // full open, may not have token id yet
+		a := opensea.GetAssetContract(token)
+		mobAsset = casting.OpenSeaToDBMobAssetByAssetContract(a)
+	}
+
+	return mobAsset
 }
 
 func panicErr(err error) {

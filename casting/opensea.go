@@ -3,6 +3,7 @@ package casting
 import (
 	"math/big"
 
+	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
 	"github.com/X-mob/mob-watcher/opensea"
 	"github.com/ethereum/go-ethereum/common"
@@ -108,4 +109,53 @@ func ConsiderationsToAdditionalReceipts(_considerations []opensea.ConsiderationI
 		additionalReceipt = append(additionalReceipt, receipt)
 	}
 	return additionalReceipt
+}
+
+func OpenSeaToDBMobAsset(a opensea.GetAssetsResponse) db.MobAsset {
+	assetContract := db.MobAssetContract{
+		Name:              a.AssetContract.Name,
+		CreatedDate:       a.AssetContract.CreatedDate,
+		Address:           a.AssetContract.Address,
+		CollectionSlug:    a.AssetContract.Collection.Slug,
+		ImageUrl:          a.AssetContract.ImageUrl,
+		SchemaName:        a.AssetContract.SchemaName,
+		Symbol:            a.AssetContract.Symbol,
+		TotalSupply:       a.AssetContract.TotalSupply,
+		ExternalLink:      a.AssetContract.ExternalLink,
+		Description:       a.AssetContract.Description,
+		AssetContractType: a.AssetContract.AssetContractType,
+	}
+
+	mobAsset := db.MobAsset{
+		BackgroundColor:      a.BackgroundColor,
+		ImageUrl:             a.ImageUrl,
+		ImagePreviewUrl:      a.ImagePreviewUrl,
+		ImageThumbnailUrl:    a.ImageThumbnailUrl,
+		AnimationUrl:         a.AnimationUrl,
+		AnimationOriginalUrl: a.AnimationOriginalUrl,
+		AssetContract:        assetContract,
+	}
+	return mobAsset
+}
+
+func OpenSeaToDBMobAssetByAssetContract(a opensea.AssetContract) db.MobAsset {
+	assetContract := db.MobAssetContract{
+		Name:              a.Name,
+		CreatedDate:       a.CreatedDate,
+		Address:           a.Address,
+		CollectionSlug:    a.Collection.Slug,
+		ImageUrl:          a.ImageUrl,
+		SchemaName:        a.SchemaName,
+		Symbol:            a.Symbol,
+		TotalSupply:       a.TotalSupply,
+		ExternalLink:      a.ExternalLink,
+		Description:       a.Description,
+		AssetContractType: a.AssetContractType,
+	}
+
+	mobAsset := db.MobAsset{
+		ImageUrl:      a.ImageUrl,
+		AssetContract: assetContract,
+	}
+	return mobAsset
 }

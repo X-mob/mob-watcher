@@ -44,6 +44,7 @@ type Config struct {
 	SeaportAddress     common.Address
 	StorePath          string
 	OpenSeaApiKey      string
+	ListenPort         string
 }
 
 func LoadConfig() Config {
@@ -54,5 +55,6 @@ func LoadConfig() Config {
 		XmobManagerAddress: common.HexToAddress(xmobManagerAddress),
 		SeaportAddress:     common.HexToAddress(seaportAddress),
 		StorePath:          getOptional("STORE_PATH"),
+		ListenPort:         getOptional("LISTEN_PORT"),
 	}
 }
