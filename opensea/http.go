@@ -69,9 +69,9 @@ func SendRequest(opt SendRequestOption, baseUrl string) []byte {
 }
 
 func SendRequestV1(opt SendRequestOption) []byte {
-	return SendRequest(opt, config.OpenseaApiV1BaseUrl)
+	return SendRequest(opt, config.GlobalConfig.OpenseaApiV1BaseUrl)
 }
 
 func SendRequestV2(opt SendRequestOption) []byte {
-	return SendRequest(opt, config.OpenseaApiV2BaseUrl)
+	return SendRequest(opt, config.GlobalConfig.OpenseaApiV2BaseUrl)
 }
