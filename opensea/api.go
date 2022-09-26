@@ -157,6 +157,47 @@ func CreateOffer(orderParameters OrderParameters, signature string) RetrieveResp
 	return response
 }
 
+func GetAssetContract(address string) AssetContract {
+	urlPath := "/asset/" + address
+	var sendOpt SendRequestOption
+	sendOpt.Path = urlPath
+	res := SendRequestV1(sendOpt)
+
+	// parse result
+	var response AssetContract
+	parseErr := json.Unmarshal(res, &response)
+	if parseErr != nil {
+		fmt.Println(parseErr.Error())
+		panic(parseErr)
+	}
+	return response
+
+}
+
+func GetAssets(token string, tokenId string, includeOrders bool) GetAssetsResponse {
+	urlPath := "/asset/" + token + "/" + tokenId + "/"
+	var sendOpt SendRequestOption
+	sendOpt.Path = urlPath
+
+	if includeOrders == true {
+		sendOpt.QueryParams = append(sendOpt.QueryParams, HttpUrlQueryParam{Key: "include_orders", Value: "true"})
+	} else {
+		sendOpt.QueryParams = append(sendOpt.QueryParams, HttpUrlQueryParam{Key: "include_orders", Value: "false"})
+	}
+
+	res := SendRequestV1(sendOpt)
+
+	// parse result
+	var response GetAssetsResponse
+	parseErr := json.Unmarshal(res, &response)
+	if parseErr != nil {
+		fmt.Println(parseErr.Error())
+		panic(parseErr)
+	}
+	return response
+
+}
+
 func GetCollectionStats(slug string) CollectionStatsResponse {
 	urlPath := "/collection/" + slug + "/stats"
 	var sendOpt SendRequestOption

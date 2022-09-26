@@ -26,9 +26,7 @@ func MobItem(w http.ResponseWriter, r *http.Request) {
 	}
 
 	address := r.URL.Query().Get("address")
-	m := db.GetMob(address)
-	mob := DBToAPIMob(m)
-
+	mob := db.GetMob(address)
 	json.NewEncoder(w).Encode(mob)
 }
 

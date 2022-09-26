@@ -50,22 +50,47 @@ func (s MobStatus) String() string {
 }
 
 type Mob struct {
-	Address         common.Address // primary key
-	Name            string
-	Creator         common.Address
-	Token           common.Address
-	TokenId         *big.Int
-	RaiseTarget     *big.Int
-	RaisedAmount    *big.Int
-	TakeProfitPrice *big.Int
-	StopLossPrice   *big.Int
-	Fee             *big.Int
-	Deadline        *big.Int
-	RaiseDeadline   *big.Int
-	Balance         *big.Int
-	CreatedTime     int64
-	Status          MobStatus
-	TargetMode      uint8
+	Address         common.Address `json:"address"` // primary key
+	Name            string         `json:"name"`
+	Creator         common.Address `json:"creator"`
+	Token           common.Address `json:"token"`
+	TokenId         *big.Int       `json:"token_id"`
+	RaiseTarget     *big.Int       `json:"raise_target"`
+	RaisedAmount    *big.Int       `json:"raise_amount"`
+	TakeProfitPrice *big.Int       `json:"take_profit_price"`
+	StopLossPrice   *big.Int       `json:"stop_loss_price"`
+	Fee             *big.Int       `json:"fee"`
+	Deadline        *big.Int       `json:"deadline"`
+	RaiseDeadline   *big.Int       `json:"raise_deadline"`
+	Balance         *big.Int       `json:"balance"`
+	CreatedTime     int64          `json:"created_time"`
+	Status          MobStatus      `json:"status"`
+	TargetMode      uint8          `json:"target_mob"`
+	Asset           MobAsset       `json:"asset"`
+}
+
+type MobAsset struct {
+	BackgroundColor      string           `json:"background_color"`
+	ImageUrl             string           `json:"image_url"`
+	ImagePreviewUrl      string           `json:"image_preview_url"`
+	ImageThumbnailUrl    string           `json:"image_thumbnail_url"`
+	AnimationUrl         string           `json:"animation_url"`
+	AnimationOriginalUrl string           `json:"animation_original_url"`
+	AssetContract        MobAssetContract `json:"asset_contract"`
+}
+
+type MobAssetContract struct {
+	Name              string `json:"name"`
+	CreatedDate       string `json:"created_date"`
+	Address           string `json:"address"`
+	CollectionSlug    string `json:"collection_slug"`
+	ImageUrl          string `json:"image_url"`
+	SchemaName        string `json:"schema_name"`
+	Symbol            string `json:"symbol"`
+	TotalSupply       string `json:"total_supply"`
+	ExternalLink      string `json:"external_link"`
+	Description       string `json:"description"`
+	AssetContractType string `json:"asset_contract_type"`
 }
 
 type Player struct {
