@@ -51,7 +51,10 @@ func SendRequest(opt SendRequestOption, baseUrl string) []byte {
 	req.URL.RawQuery = q.Encode()
 
 	req.Header.Add("accept", "application/json")
-	req.Header.Add("X-API-KEY", config.GlobalConfig.OpenSeaApiKey)
+
+	if config.GlobalConfig.Network == config.Ethereum { // mainnet require api key
+		req.Header.Add("X-API-KEY", config.GlobalConfig.OpenSeaApiKey)
+	}
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {

@@ -53,11 +53,15 @@ func ScanNewMob() {
 			// update mob asset
 			mob.Asset = GetMobAsset(mob.Token.Hex(), mob.TokenId.String(), mob.TargetMode)
 
+			// wait 1 sec to avoid rate limit
+			time.Sleep(1000 * time.Millisecond)
+
 			// save in db
 			db.AddMob(mob)
-			fmt.Println("save mob total: ", len(mobCreateEvents))
+			fmt.Println("save one mob")
 		}
 	}
+	fmt.Println("new mob total: ", len(mobCreateEvents))
 }
 
 func ScanRaisingMob() {
@@ -215,12 +219,17 @@ func GetMobAsset(token string, tokenId string, targetMode uint8) db.MobAsset {
 
 	if targetMode == 0 { // restrict
 		a := opensea.GetAssets(token, tokenId, false)
+		fmt.Printf("%+v\n", a)
 		mobAsset = casting.OpenSeaToDBMobAsset(a)
 	}
 
 	if targetMode == 1 { // full open, may not have token id yet
 		a := opensea.GetAssetContract(token)
 		mobAsset = casting.OpenSeaToDBMobAssetByAssetContract(a)
+	}
+
+	if targetMode > 1 {
+		panic("invalid targetMode > 1")
 	}
 
 	return mobAsset

@@ -116,7 +116,7 @@ func OpenSeaToDBMobAsset(a opensea.GetAssetsResponse) db.MobAsset {
 		Name:              a.AssetContract.Name,
 		CreatedDate:       a.AssetContract.CreatedDate,
 		Address:           a.AssetContract.Address,
-		CollectionSlug:    a.AssetContract.Collection.Slug,
+		CollectionSlug:    a.Collection.Slug,
 		ImageUrl:          a.AssetContract.ImageUrl,
 		SchemaName:        a.AssetContract.SchemaName,
 		Symbol:            a.AssetContract.Symbol,
@@ -126,9 +126,16 @@ func OpenSeaToDBMobAsset(a opensea.GetAssetsResponse) db.MobAsset {
 		AssetContractType: a.AssetContract.AssetContractType,
 	}
 
+	var imageUrl string
+	if a.ImageUrl == "" {
+		imageUrl = assetContract.ImageUrl
+	} else {
+		imageUrl = a.ImageUrl
+	}
+
 	mobAsset := db.MobAsset{
 		BackgroundColor:      a.BackgroundColor,
-		ImageUrl:             a.ImageUrl,
+		ImageUrl:             imageUrl,
 		ImagePreviewUrl:      a.ImagePreviewUrl,
 		ImageThumbnailUrl:    a.ImageThumbnailUrl,
 		AnimationUrl:         a.AnimationUrl,

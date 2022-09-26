@@ -5,10 +5,18 @@ import (
 	"fmt"
 	"log"
 	"net/url"
+
+	"github.com/X-mob/mob-watcher/config"
 )
 
+func init() {
+	networkSymbol = config.GlobalConfig.Network.String()
+}
+
+var networkSymbol string
+
 func RetrieveListings(opt RetrieveListingsOption) RetrieveResponse {
-	urlPath := "/orders/ethereum/seaport/listings"
+	urlPath := "/orders/" + networkSymbol + "/seaport/listings"
 	var queryParams []HttpUrlQueryParam
 	if opt.Limit != 0 {
 		queryParams = append(queryParams, HttpUrlQueryParam{Key: "limit", Value: fmt.Sprint(opt.Limit)})
@@ -40,7 +48,7 @@ func RetrieveListings(opt RetrieveListingsOption) RetrieveResponse {
 }
 
 func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
-	urlPath := "/orders/ethereum/seaport/offers"
+	urlPath := "/orders/" + networkSymbol + "/seaport/offers"
 	var queryParams []HttpUrlQueryParam
 	if opt.Limit != 0 {
 		queryParams = append(queryParams, HttpUrlQueryParam{Key: "limit", Value: fmt.Sprint(opt.Limit)})
@@ -96,7 +104,7 @@ func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
 }
 
 func CreateListing(orderParameters OrderParameters, signature string) RetrieveResponse {
-	urlPath := "/orders/ethereum/seaport/listings"
+	urlPath := "/orders/" + networkSymbol + "/seaport/listings"
 
 	op, err := json.Marshal(orderParameters)
 	if err != nil {
@@ -127,7 +135,7 @@ func CreateListing(orderParameters OrderParameters, signature string) RetrieveRe
 }
 
 func CreateOffer(orderParameters OrderParameters, signature string) RetrieveResponse {
-	urlPath := "/orders/ethereum/seaport/offers"
+	urlPath := "/orders/" + networkSymbol + "/seaport/offers"
 
 	op, err := json.Marshal(orderParameters)
 	if err != nil {

@@ -8,7 +8,7 @@ type Network int64
 
 const (
 	Ethereum Network = iota
-	Goerli
+	Goerli           // note: only goerli is supported on Opensea testnet api
 	Kovan
 	Rinkeby
 )

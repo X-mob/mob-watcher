@@ -1,7 +1,7 @@
 GIT_URL = https://github.com/X-mob/metamob.git
 BRANCH = main
 
-.PHONY: fmt
+.PHONY: fmt clean
 
 fmt:
 	go fmt ./...
@@ -20,3 +20,6 @@ abi-binding:
 	abigen --abi artifacts/XmobManage.abi --pkg lib --type XmobManage --out lib/XmobManage.go
 	abigen --abi artifacts/XmobExchangeCore.abi --pkg lib --type XmobExchangeCore --out lib/XmobExchangeCore.go
 	abigen --abi artifacts/Seaport.abi --pkg seaport --type Seaport --out seaport/Seaport.go
+
+clean-db:
+	rm -rf kvstore

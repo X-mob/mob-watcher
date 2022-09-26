@@ -39,20 +39,17 @@ type ProtocolData struct {
 	Signature  string          `json:"signature"`
 }
 
-type AssetCollection struct {
-	Slug string `json:"slug"`
-}
 type Asset struct {
-	Id                   string          `json:"id"`
-	ImageUrl             string          `json:"image_url"`
-	ImagePreviewUrl      string          `json:"image_preview_url"`
-	ImageThumbnailUrl    string          `json:"image_thumbnail_url"`
-	ImageOriginalUrl     string          `json:"image_original_url"`
-	AnimationUrl         string          `json:"animation_url"`
-	AnimationOriginalUrl string          `json:"animation_original_url"`
-	Name                 string          `json:"name"`
-	Description          string          `json:"description"`
-	Collection           AssetCollection `json:"collection"`
+	Id                   string     `json:"id"`
+	ImageUrl             string     `json:"image_url"`
+	ImagePreviewUrl      string     `json:"image_preview_url"`
+	ImageThumbnailUrl    string     `json:"image_thumbnail_url"`
+	ImageOriginalUrl     string     `json:"image_original_url"`
+	AnimationUrl         string     `json:"animation_url"`
+	AnimationOriginalUrl string     `json:"animation_original_url"`
+	Name                 string     `json:"name"`
+	Description          string     `json:"description"`
+	Collection           Collection `json:"collection"`
 }
 
 type AssetBundle struct {
@@ -137,4 +134,5 @@ type GetAssetsResponse struct {
 	AnimationUrl         string        `json:"animation_url"`
 	AnimationOriginalUrl string        `json:"animation_original_url"`
 	AssetContract        AssetContract `json:"asset_contract"`
+	Collection           Collection    `json:"collection"`
 }

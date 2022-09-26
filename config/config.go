@@ -33,17 +33,20 @@ type Config struct {
 }
 
 func LoadConfig() Config {
+	rpc := GetRequired("RPC_URL")
 	network := GetNetwork(GetOptional("NETWORK"))
-	fmt.Printf("using network %s..\n", network.String())
+	xmobAddr := GetContractAddress(network).XmobManagerAddress
+	seaportAddr := GetContractAddress(network).SeaportAddress
+	fmt.Printf("using network %s\nrpc: %s\nxmobManage: %s\n----\n", network.String(), rpc, xmobAddr)
 	return Config{
-		RpcUrl:              GetRequired("RPC_URL"),
+		RpcUrl:              rpc,
 		PrivateKey:          GetRequired("PRIVATE_KEY"),
 		Network:             network,
 		OpenSeaApiKey:       GetRequired("OPENSEA_API_KEY"),
 		OpenseaApiV1BaseUrl: GetOpenSeaV1BaseUrl(network),
 		OpenseaApiV2BaseUrl: GetOpenSeaV2BaseUrl(network),
-		XmobManagerAddress:  common.HexToAddress(GetContractAddress(network).XmobManagerAddress),
-		SeaportAddress:      common.HexToAddress(GetContractAddress(network).SeaportAddress),
+		XmobManagerAddress:  common.HexToAddress(xmobAddr),
+		SeaportAddress:      common.HexToAddress(seaportAddr),
 		StorePath:           GetOptional("STORE_PATH"),
 		ListenPort:          GetOptional("LISTEN_PORT"),
 	}
