@@ -21,7 +21,7 @@ func init() {
 			SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
 		},
 		Rinkeby: {
-			XmobManagerAddress: "0xe71C9Ec4CE47265d10B01C0cc0994617d43b3AeA",
+			XmobManagerAddress: "0xA9d8C7848F9b390425CF5DD9DfA5BA1Bb2e447de",
 			SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
 		},
 	}

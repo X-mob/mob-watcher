@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -32,15 +33,17 @@ type Config struct {
 }
 
 func LoadConfig() Config {
+	network := GetNetwork(GetOptional("NETWORK"))
+	fmt.Printf("using network %s..\n", network.String())
 	return Config{
 		RpcUrl:              GetRequired("RPC_URL"),
 		PrivateKey:          GetRequired("PRIVATE_KEY"),
-		Network:             GetNetwork(GetOptional("NETWORK")),
+		Network:             network,
 		OpenSeaApiKey:       GetRequired("OPENSEA_API_KEY"),
-		OpenseaApiV1BaseUrl: GetOpenSeaV1BaseUrl(GetNetwork(GetOptional("NETWORK"))),
-		OpenseaApiV2BaseUrl: GetOpenSeaV2BaseUrl(GetNetwork(GetOptional("NETWORK"))),
-		XmobManagerAddress:  common.HexToAddress(GetContractAddress(GetNetwork(GetOptional("NETWORK"))).XmobManagerAddress),
-		SeaportAddress:      common.HexToAddress(GetContractAddress(GetNetwork(GetOptional("NETWORK"))).SeaportAddress),
+		OpenseaApiV1BaseUrl: GetOpenSeaV1BaseUrl(network),
+		OpenseaApiV2BaseUrl: GetOpenSeaV2BaseUrl(network),
+		XmobManagerAddress:  common.HexToAddress(GetContractAddress(network).XmobManagerAddress),
+		SeaportAddress:      common.HexToAddress(GetContractAddress(network).SeaportAddress),
 		StorePath:           GetOptional("STORE_PATH"),
 		ListenPort:          GetOptional("LISTEN_PORT"),
 	}
