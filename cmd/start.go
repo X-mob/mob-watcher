@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/X-mob/mob-watcher/api"
 	"github.com/X-mob/mob-watcher/task"
 	"github.com/spf13/cobra"
 )
@@ -11,6 +12,11 @@ var startCmd = &cobra.Command{
 	Short: "start watcher running",
 	Long:  `start watcher to scan mob activities and doing stuff`,
 	Run: func(cmd *cobra.Command, args []string) {
+		// start api server
+		go func() {
+			api.Run()
+		}()
+
 		task.Start()
 	},
 }
