@@ -34,14 +34,14 @@ type HttpUrlQueryParam struct {
 	Value string
 }
 type SendRequestOption struct {
-	Router      string // start with slash
+	Path        string // start with slash
 	Method      ReqMethod
 	QueryParams []HttpUrlQueryParam
 	Payload     string
 }
 
 func SendRequest(opt SendRequestOption, baseUrl string) []byte {
-	url := baseUrl + opt.Router
+	url := baseUrl + opt.Path
 	req, _ := http.NewRequest(opt.Method.String(), url, strings.NewReader(opt.Payload))
 
 	q := req.URL.Query()

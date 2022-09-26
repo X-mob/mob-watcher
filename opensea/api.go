@@ -8,7 +8,7 @@ import (
 )
 
 func RetrieveListings(opt RetrieveListingsOption) RetrieveResponse {
-	router := "/orders/ethereum/seaport/listings"
+	urlPath := "/orders/ethereum/seaport/listings"
 	var queryParams []HttpUrlQueryParam
 	if opt.Limit != 0 {
 		queryParams = append(queryParams, HttpUrlQueryParam{Key: "limit", Value: fmt.Sprint(opt.Limit)})
@@ -23,7 +23,7 @@ func RetrieveListings(opt RetrieveListingsOption) RetrieveResponse {
 	}
 
 	var sendOpt SendRequestOption
-	sendOpt.Router = router
+	sendOpt.Path = urlPath
 	sendOpt.QueryParams = queryParams
 	sendOpt.Method = Get
 
@@ -40,7 +40,7 @@ func RetrieveListings(opt RetrieveListingsOption) RetrieveResponse {
 }
 
 func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
-	router := "/orders/ethereum/seaport/offers"
+	urlPath := "/orders/ethereum/seaport/offers"
 	var queryParams []HttpUrlQueryParam
 	if opt.Limit != 0 {
 		queryParams = append(queryParams, HttpUrlQueryParam{Key: "limit", Value: fmt.Sprint(opt.Limit)})
@@ -79,7 +79,7 @@ func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
 	}
 
 	var sendOpt SendRequestOption
-	sendOpt.Router = router
+	sendOpt.Path = urlPath
 	sendOpt.QueryParams = queryParams
 	sendOpt.Method = Get
 
@@ -96,7 +96,7 @@ func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
 }
 
 func CreateListing(orderParameters OrderParameters, signature string) RetrieveResponse {
-	router := "/orders/ethereum/seaport/listings"
+	urlPath := "/orders/ethereum/seaport/listings"
 
 	op, err := json.Marshal(orderParameters)
 	if err != nil {
@@ -109,7 +109,7 @@ func CreateListing(orderParameters OrderParameters, signature string) RetrieveRe
 	payload := params.Encode()
 
 	opt := SendRequestOption{
-		Router:  router,
+		Path:    urlPath,
 		Method:  Post,
 		Payload: payload,
 	}
@@ -127,7 +127,7 @@ func CreateListing(orderParameters OrderParameters, signature string) RetrieveRe
 }
 
 func CreateOffer(orderParameters OrderParameters, signature string) RetrieveResponse {
-	router := "/orders/ethereum/seaport/offers"
+	urlPath := "/orders/ethereum/seaport/offers"
 
 	op, err := json.Marshal(orderParameters)
 	if err != nil {
@@ -140,7 +140,7 @@ func CreateOffer(orderParameters OrderParameters, signature string) RetrieveResp
 	payload := params.Encode()
 
 	opt := SendRequestOption{
-		Router:  router,
+		Path:    urlPath,
 		Method:  Post,
 		Payload: payload,
 	}
@@ -158,9 +158,9 @@ func CreateOffer(orderParameters OrderParameters, signature string) RetrieveResp
 }
 
 func GetCollectionStats(slug string) CollectionStatsResponse {
-	router := "/collection/" + slug + "/stats"
+	urlPath := "/collection/" + slug + "/stats"
 	var sendOpt SendRequestOption
-	sendOpt.Router = router
+	sendOpt.Path = urlPath
 	res := SendRequestV1(sendOpt)
 
 	// parse result
