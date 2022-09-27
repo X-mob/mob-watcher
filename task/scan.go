@@ -43,9 +43,6 @@ func ScanNewMob() {
 
 	mobCreateEvents, nextCursor := lib.GetMobsCreateEvents(cursor, nil)
 
-	// save new cursor
-	db.SetKV(db.SCAN_MOB_CURSOR_KEY, fmt.Sprint(*nextCursor))
-
 	for _, event := range mobCreateEvents {
 		mob := db.MobCreateToMob(event)
 		isExit := db.IsMobExits(mob.Address.Hex())
@@ -62,6 +59,9 @@ func ScanNewMob() {
 		}
 	}
 	fmt.Println("new mob total: ", len(mobCreateEvents))
+
+	// save new cursor
+	db.SetKV(db.SCAN_MOB_CURSOR_KEY, fmt.Sprint(*nextCursor))
 }
 
 func ScanRaisingMob() {
