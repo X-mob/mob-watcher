@@ -59,7 +59,7 @@ type Mob struct {
 	Balance         *big.Int       `json:"balance"`
 	CreatedTime     int64          `json:"created_time"`
 	Status          MobStatus      `json:"status"`
-	TargetMode      uint8          `json:"target_mob"`
+	TargetMode      uint8          `json:"target_mode"`
 	Asset           MobAsset       `json:"asset"`
 }
 

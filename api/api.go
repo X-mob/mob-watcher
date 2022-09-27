@@ -8,9 +8,16 @@ import (
 
 	"github.com/X-mob/mob-watcher/config"
 	"github.com/X-mob/mob-watcher/db"
+	"github.com/X-mob/mob-watcher/opensea"
 )
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func helloHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	if r.Method != "GET" {
 		http.Error(w, "Method is not supported.", http.StatusNotFound)
 		return
@@ -19,18 +26,54 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello From XMob Watcher!")
 }
 
+func OpenSeaOrder(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	if r.Method != "GET" {
+		http.Error(w, "Method is not supported.", http.StatusNotFound)
+		return
+	}
+
+	tokenAddress := r.URL.Query().Get("asset_contract")
+	tokenId := r.URL.Query().Get("token_id")
+
+	if tokenAddress == "" {
+		http.Error(w, "token address is null", http.StatusBadRequest)
+		return
+	}
+
+	var opt opensea.RetrieveListingsOption
+	opt.AssetContractAddress = tokenAddress
+	opt.Limit = 1
+	if tokenId != "" {
+		opt.TokenIds = []string{tokenId}
+	}
+
+	orders := opensea.RetrieveListings(opt)
+
+	json.NewEncoder(w).Encode(orders)
+}
+
 func MobItem(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	if r.Method != "GET" {
 		http.Error(w, "Method is not supported.", http.StatusNotFound)
 		return
 	}
 
 	address := r.URL.Query().Get("address")
+	if address == "" {
+		http.Error(w, "query address is null", http.StatusBadRequest)
+		return
+	}
 	mob := db.GetMob(address)
 	json.NewEncoder(w).Encode(mob)
 }
 
 func Mobs(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	if r.Method != "GET" {
 		http.Error(w, "Method is not supported.", http.StatusNotFound)
 		return
@@ -50,9 +93,9 @@ func Mobs(w http.ResponseWriter, r *http.Request) {
 func Run() {
 	// api
 	http.HandleFunc("/", helloHandler)
-
 	http.HandleFunc("/mobs", Mobs)
 	http.HandleFunc("/mob", MobItem)
+	http.HandleFunc("/opensea/order", OpenSeaOrder)
 
 	// get port
 	const defaultListenPort = "8080"
