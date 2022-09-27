@@ -64,6 +64,8 @@ func OpenSeaToSeaportOrder(order opensea.ProtocolData) lib.Order {
 		ZoneHash:      StringToByte32(order.Parameters.ZoneHash),
 		Salt:          StringToBigInt(order.Parameters.Salt, 10),
 		ConduitKey:    StringToByte32(order.Parameters.ConduitKey),
+		// todo: refactor int to bigInt
+		TotalOriginalConsiderationItems: StringToBigInt(string(rune(order.Parameters.TotalOriginalConsiderationItems)), 10),
 	}
 
 	contractOrder := lib.Order{

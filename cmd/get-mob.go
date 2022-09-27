@@ -28,7 +28,7 @@ var getMobCmd = &cobra.Command{
 		fmt.Printf("raisedAmountDeadLine: %s\n", mob.RaiseDeadline)
 		fmt.Printf("Balance: %s\n", mob.Balance)
 		fmt.Printf("CreatedTime: %d\n", mob.CreatedTime)
-		fmt.Printf("CreatedTime: %d\n", mob.Status)
+		fmt.Printf("Status: %d\n", mob.Status)
 	},
 }
 

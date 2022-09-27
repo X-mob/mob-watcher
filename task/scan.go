@@ -74,7 +74,7 @@ func ScanRaisingMob() {
 		amount := metadata.RaisedAmount
 		target := metadata.RaiseTarget
 		if amount.Uint64() == target.Uint64() {
-			// raise finish
+			// raise success
 			const status = db.RaiseSuccess
 			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
 			db.UpdateMobStatus(m.Address.Hex(), status)
@@ -119,9 +119,11 @@ func ScanRaiseSuccessMob() {
 			return
 		}
 
-		if m.Deadline.Int64() > time.Now().Unix() {
+		if m.Deadline.Int64() < time.Now().Unix() {
 			// buy failed
-			db.UpdateMobStatus(m.Address.Hex(), db.NftBuyFailed)
+			const status = db.NftBuyFailed
+			fmt.Printf("update mob status: %s, address: %s\n", status.String(), m.Address.Hex())
+			db.UpdateMobStatus(m.Address.Hex(), status)
 			return
 		}
 
