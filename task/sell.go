@@ -1,11 +1,11 @@
 package task
 
 import (
-	"fmt"
 	"math/big"
 	"time"
 
 	"github.com/X-mob/mob-watcher/casting"
+	"github.com/X-mob/mob-watcher/config"
 	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
 	"github.com/X-mob/mob-watcher/opensea"
@@ -32,8 +32,8 @@ func (s SellType) String() string {
 
 func Sell(mobAddress string, sellType SellType) {
 	_order := BuildSellOrder(mobAddress, sellType)
-	fmt.Printf("%+v\n", _order)
 	order := casting.OpenSeaToSeaportOrder(_order)
+	// todo: check orderSignDigest is register already
 	lib.RegisterSellOrder(mobAddress, []lib.Order{order})
 	PostOrderToOpenSea(_order)
 }
@@ -57,7 +57,8 @@ func BuildSellOrder(mobAddress string, sellType SellType) opensea.ProtocolData {
 		StartAmount:          "1",
 		EndAmount:            "1",
 	}
-	consideration := opensea.ConsiderationItem{
+
+	consideration1 := opensea.ConsiderationItem{
 		ItemType:             0, // NATIVE
 		Token:                utils.ZeroAddress().Hex(),
 		IdentifierOrCriteria: "0",
@@ -70,23 +71,23 @@ func BuildSellOrder(mobAddress string, sellType SellType) opensea.ProtocolData {
 		ItemType:             0, // NATIVE
 		Token:                utils.ZeroAddress().Hex(),
 		IdentifierOrCriteria: "0",
-		StartAmount:          ethPrice.String(),
-		EndAmount:            ethPrice.String(),
-		Recipient:            "0x0000a26b00c1F0DF003000390027140000fAa719",
+		StartAmount:          utils.CalcOpenSeaFeeByFixedPrice(ethPrice),
+		EndAmount:            utils.CalcOpenSeaFeeByFixedPrice(ethPrice),
+		Recipient:            config.OPENSEA_FEE_RECEIPT_ADDRESS,
 	}
 
 	parameters := opensea.OrderParameters{
 		Offerer:                         offerer,
 		Zone:                            utils.ZeroAddress(),
 		Offer:                           []opensea.OfferItem{offer},
-		Consideration:                   []opensea.ConsiderationItem{consideration, consideration2},
+		Consideration:                   []opensea.ConsiderationItem{consideration1, consideration2},
 		OrderType:                       0, // FULL_OPEN
 		StartTime:                       startTime.String(),
 		EndTime:                         endTime.String(),
 		ZoneHash:                        utils.Zero32BytesHexString(),
-		Salt:                            utils.GenRandomSalt(32).String(),
-		ConduitKey:                      "0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000",
-		TotalOriginalConsiderationItems: 1,
+		Salt:                            utils.FixedSalt32BytesHexNumber,
+		ConduitKey:                      config.SEAPORT_CONDUIT_KEY,
+		TotalOriginalConsiderationItems: 2,
 		Counter:                         int(counter.Int64()),
 	}
 	order = opensea.ProtocolData{

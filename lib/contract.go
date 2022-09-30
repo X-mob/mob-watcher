@@ -70,6 +70,25 @@ func GetMobMetadata(address string) Metadata {
 	return metadata
 }
 
+// todo: should no need for this as in mainnet
+func SetUp(mobAddress string) {
+	mob := GetMobByAddress(mobAddress)
+
+	txOpts := NewTxOpts(nil)
+
+	{
+		// set seaport address
+		tx, err := mob.SetSeaportAddress(txOpts, config.GlobalConfig.SeaportAddress)
+		CheckAndWaitTx(tx, err)
+	}
+
+	{
+		// set seaport address
+		tx, err := mob.SetAllowConduitKey(txOpts, config.GlobalConfig.SeaportConduitKey, config.GlobalConfig.SeaportConduitAddress)
+		CheckAndWaitTx(tx, err)
+	}
+}
+
 func CreateMob(
 	_name string,
 	_token string,

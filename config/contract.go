@@ -4,22 +4,26 @@ package config
 //const SeaportAddress string = "0x00000000006c3852cbEf3e08E8dF289169EdE581"
 
 type ContractAddress struct {
-	XmobManagerAddress string
-	SeaportAddress     string
+	XmobManagerAddress    string
+	SeaportAddress        string
+	SeaportConduitAddress string
 }
 
 var AddressConfig = map[Network]ContractAddress{
 	Ethereum: {
-		XmobManagerAddress: "",
-		SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
+		XmobManagerAddress:    "",
+		SeaportAddress:        "0x00000000006c3852cbEf3e08E8dF289169EdE581",
+		SeaportConduitAddress: "0x1E0049783F008A0085193E00003D00cd54003c71",
 	},
 	Goerli: {
-		XmobManagerAddress: "0x218561E0885b836C7FB51C6CDF89a3C9Ab5cD62e",
-		SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
+		XmobManagerAddress:    "0xABD3097a286327F14188271104AF4383Bc1a723F",
+		SeaportAddress:        "0x00000000006c3852cbEf3e08E8dF289169EdE581",
+		SeaportConduitAddress: "0x1E0049783F008A0085193E00003D00cd54003c71",
 	},
 	Rinkeby: {
-		XmobManagerAddress: "0xA9d8C7848F9b390425CF5DD9DfA5BA1Bb2e447de",
-		SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
+		XmobManagerAddress:    "0xA9d8C7848F9b390425CF5DD9DfA5BA1Bb2e447de",
+		SeaportAddress:        "0x00000000006c3852cbEf3e08E8dF289169EdE581",
+		SeaportConduitAddress: "0x1E0049783F008A0085193E00003D00cd54003c71",
 	},
 }
 

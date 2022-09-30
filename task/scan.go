@@ -47,14 +47,18 @@ func ScanNewMob() {
 		mob := db.MobCreateToMob(event)
 		isExit := db.IsMobExits(mob.Address.Hex())
 		if isExit == false {
-			// update mob asset
-			mob.Asset = GetMobAsset(mob.Token.Hex(), mob.TokenId.String(), mob.TargetMode)
-
 			// wait 1 sec to avoid rate limit
 			time.Sleep(1000 * time.Millisecond)
 
+			// update mob asset
+			mob.Asset = GetMobAsset(mob.Token.Hex(), mob.TokenId.String(), mob.TargetMode)
+
 			// save in db
 			db.AddMob(mob)
+
+			// do setup for mob, no need for mainnet?
+			lib.SetUp(mob.Address.Hex())
+
 			fmt.Println("save one mob")
 		}
 	}
@@ -154,6 +158,9 @@ func ScanBuyFailedMob() {
 func ScanNftBoughtMob() {
 	nftBoughtMob := db.GetMobsWithStatus(db.NftBought)
 	for _, m := range nftBoughtMob {
+		// wait 2 secs to avoid rate limit
+		time.Sleep(2000 * time.Millisecond)
+
 		if lib.IsNFTUnOwned(m.Address.Hex()) == true {
 			fmt.Printf("mob %s has no nft, already sold?", m.Address.Hex())
 			// already sold?

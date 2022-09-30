@@ -19,3 +19,13 @@ then
 go build
 ./mob-watcher help
 ```
+
+
+## Development
+
+update abi bindings
+
+```sh
+make abi
+make abi-binding
+```
