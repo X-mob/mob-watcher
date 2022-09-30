@@ -2,6 +2,7 @@ package casting
 
 import (
 	"math/big"
+	"strconv"
 
 	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
@@ -61,17 +62,18 @@ func OpenSeaToSeaportOrder(order opensea.ProtocolData) lib.Order {
 		Consideration: consideration,
 		StartTime:     StringToBigInt(order.Parameters.StartTime, 10),
 		EndTime:       StringToBigInt(order.Parameters.EndTime, 10),
-		ZoneHash:      StringToByte32(order.Parameters.ZoneHash),
-		Salt:          StringToBigInt(order.Parameters.Salt, 10),
-		ConduitKey:    StringToByte32(order.Parameters.ConduitKey),
+		ZoneHash:      HexStringToByte32(order.Parameters.ZoneHash),
+		Salt:          StringToBigInt(order.Parameters.Salt, 16),
+		ConduitKey:    HexStringToByte32(order.Parameters.ConduitKey),
 		// todo: refactor int to bigInt
-		TotalOriginalConsiderationItems: StringToBigInt(string(rune(order.Parameters.TotalOriginalConsiderationItems)), 10),
+		TotalOriginalConsiderationItems: StringToBigInt(strconv.Itoa(order.Parameters.TotalOriginalConsiderationItems), 10),
 	}
 
 	contractOrder := lib.Order{
 		Parameters: orderParameters,
-		Signature:  []byte(order.Signature),
+		Signature:  HexStringToBytes(order.Signature),
 	}
+
 	return contractOrder
 }
 
@@ -91,13 +93,13 @@ func OpenSeaToSeaportBasicOrderParameter(order opensea.Order) lib.BasicOrderPara
 		BasicOrderType:                    0, // todo: fix this
 		StartTime:                         StringToBigInt(order.ProtocolData.Parameters.StartTime, 10),
 		EndTime:                           StringToBigInt(order.ProtocolData.Parameters.EndTime, 10),
-		ZoneHash:                          StringToByte32(order.ProtocolData.Parameters.ZoneHash),
-		Salt:                              StringToBigInt(order.ProtocolData.Parameters.Salt, 10),
-		OffererConduitKey:                 StringToByte32(order.ProtocolData.Parameters.ConduitKey),
+		ZoneHash:                          HexStringToByte32(order.ProtocolData.Parameters.ZoneHash),
+		Salt:                              StringToBigInt(order.ProtocolData.Parameters.Salt, 16),
+		OffererConduitKey:                 HexStringToByte32(order.ProtocolData.Parameters.ConduitKey),
 		FulfillerConduitKey:               [32]byte{0},
 		TotalOriginalAdditionalRecipients: big.NewInt(int64(len(additionalReceipts))),
 		AdditionalRecipients:              additionalReceipts,
-		Signature:                         []byte(order.ProtocolData.Signature),
+		Signature:                         HexStringToByte65(order.ProtocolData.Signature),
 	}
 }
 

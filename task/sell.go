@@ -1,6 +1,7 @@
 package task
 
 import (
+	"fmt"
 	"math/big"
 	"time"
 
@@ -31,6 +32,7 @@ func (s SellType) String() string {
 
 func Sell(mobAddress string, sellType SellType) {
 	_order := BuildSellOrder(mobAddress, sellType)
+	fmt.Printf("%+v\n", _order)
 	order := casting.OpenSeaToSeaportOrder(_order)
 	lib.RegisterSellOrder(mobAddress, []lib.Order{order})
 	PostOrderToOpenSea(_order)
@@ -42,6 +44,7 @@ func BuildSellOrder(mobAddress string, sellType SellType) opensea.ProtocolData {
 
 	mobInDB := db.GetMob(mobAddress)
 
+	startTime := big.NewInt(time.Now().Unix())
 	endTime := big.NewInt(time.Now().AddDate(0, 6, 0).Unix())
 	offerer := common.HexToAddress(mobAddress)
 	counter := GetCounter(offerer)
@@ -63,23 +66,32 @@ func BuildSellOrder(mobAddress string, sellType SellType) opensea.ProtocolData {
 		Recipient:            mobAddress,
 	}
 
+	consideration2 := opensea.ConsiderationItem{
+		ItemType:             0, // NATIVE
+		Token:                utils.ZeroAddress().Hex(),
+		IdentifierOrCriteria: "0",
+		StartAmount:          ethPrice.String(),
+		EndAmount:            ethPrice.String(),
+		Recipient:            "0x0000a26b00c1F0DF003000390027140000fAa719",
+	}
+
 	parameters := opensea.OrderParameters{
 		Offerer:                         offerer,
 		Zone:                            utils.ZeroAddress(),
 		Offer:                           []opensea.OfferItem{offer},
-		Consideration:                   []opensea.ConsiderationItem{consideration},
+		Consideration:                   []opensea.ConsiderationItem{consideration, consideration2},
 		OrderType:                       0, // FULL_OPEN
-		StartTime:                       "0",
+		StartTime:                       startTime.String(),
 		EndTime:                         endTime.String(),
-		ZoneHash:                        "0",
+		ZoneHash:                        utils.Zero32BytesHexString(),
 		Salt:                            utils.GenRandomSalt(32).String(),
-		ConduitKey:                      "0",
+		ConduitKey:                      "0x0000007b02230091a7ed01230072f7006a004d60a8d4e71d599b8104250f0000",
 		TotalOriginalConsiderationItems: 1,
 		Counter:                         int(counter.Int64()),
 	}
 	order = opensea.ProtocolData{
 		Parameters: parameters,
-		Signature:  string(utils.MagicSignature()),
+		Signature:  utils.MAGIC_SIG_STR,
 	}
 	return order
 }

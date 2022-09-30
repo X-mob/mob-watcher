@@ -9,15 +9,6 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func StringToBigInt(num string) *big.Int {
-	n := new(big.Int)
-	n, ok := n.SetString(num, 10)
-	if !ok {
-		panic("convert failed")
-	}
-	return n
-}
-
 func GenRandomSalt(length uint8) *big.Int {
 	salt := new(big.Int)
 	randomBytes := make([]byte, length)
@@ -32,8 +23,7 @@ func GenRandomSalt(length uint8) *big.Int {
 }
 
 func MagicSignature() []byte {
-	str := "0x42"
-	sig := common.Hex2Bytes(str)
+	sig := common.Hex2Bytes(MAGIC_SIG_STR)
 	return sig
 }
 
@@ -41,4 +31,8 @@ func ZeroAddress() common.Address {
 	addrBytes := [20]byte{0}
 	addr := common.BytesToAddress(addrBytes[:])
 	return addr
+}
+
+func Zero32BytesHexString() string {
+	return "0x0000000000000000000000000000000000000000000000000000000000000000"
 }

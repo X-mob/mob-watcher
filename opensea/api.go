@@ -105,16 +105,17 @@ func RetrieveOffers(opt RetrieveOffersOption) RetrieveResponse {
 
 func CreateListing(orderParameters OrderParameters, signature string) RetrieveResponse {
 	urlPath := "/orders/" + networkSymbol + "/seaport/listings"
-
-	op, err := json.Marshal(orderParameters)
-	if err != nil {
-		log.Fatalf("json.Marshal(orderParameters), err: %s", err)
+	s := CreateListingPayload{
+		Parameters: orderParameters,
+		Signature:  signature,
 	}
 
-	params := url.Values{}
-	params.Add("order_parameters", string(op))
-	params.Add("signature", signature)
-	payload := params.Encode()
+	pl, err := json.Marshal(s)
+	if err != nil {
+		panic(err)
+	}
+	payload := string(pl[:])
+	fmt.Println(payload)
 
 	opt := SendRequestOption{
 		Path:    urlPath,

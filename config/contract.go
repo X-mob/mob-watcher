@@ -14,7 +14,7 @@ var AddressConfig = map[Network]ContractAddress{
 		SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
 	},
 	Goerli: {
-		XmobManagerAddress: "0x7a0235238d7ead03074a2c7710cfcb0bd392f83d",
+		XmobManagerAddress: "0x218561E0885b836C7FB51C6CDF89a3C9Ab5cD62e",
 		SeaportAddress:     "0x00000000006c3852cbEf3e08E8dF289169EdE581",
 	},
 	Rinkeby: {

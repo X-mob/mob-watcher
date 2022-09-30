@@ -136,3 +136,8 @@ type GetAssetsResponse struct {
 	AssetContract        AssetContract `json:"asset_contract"`
 	Collection           Collection    `json:"collection"`
 }
+
+type CreateListingPayload struct {
+	Parameters OrderParameters `json:"parameters"`
+	Signature  string          `json:"signature"`
+}

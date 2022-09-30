@@ -83,7 +83,7 @@ func CreateMob(
 
 	token := common.HexToAddress(_token)
 	tokenId := big.NewInt(_tokenId)
-	raiseTarget := utils.StringToBigInt(_raiseTarget)
+	raiseTarget := utils.DecimalStringToBigInt(_raiseTarget)
 	takeProfitPrice := big.NewInt(25)
 	stopLossPrice := big.NewInt(1)
 	raiseDeadline := _raiseDeadline
@@ -97,7 +97,7 @@ func CreateMob(
 }
 
 func JoinMob(value string, mobAddress string) {
-	var txOpts *bind.TransactOpts = NewTxOpts(utils.StringToBigInt(value))
+	var txOpts *bind.TransactOpts = NewTxOpts(utils.DecimalStringToBigInt(value))
 	mob := GetMobByAddress(mobAddress)
 	tx, err := mob.JoinPay(txOpts, txOpts.From)
 	CheckAndWaitTx(tx, err)
@@ -192,7 +192,7 @@ func IsNFTUnOwned(mobAddress string) bool {
 	tokenId := metadata.TokenId
 	targetMode := metadata.TargetMode
 	if targetMode == 0 { // restrict mode
-		addr := ERC721OwnerOf(mobAddress, tokenId)
+		addr := ERC721OwnerOf(token, tokenId)
 		if addr != mobAddress {
 			// check if still holds some other nft id
 			bal := ERC721BalanceOf(mobAddress, token)
@@ -218,12 +218,12 @@ func IsNFTUnOwned(mobAddress string) bool {
 func ERC721BalanceOf(owner string, tokenAddress string) *big.Int {
 	token, err := erc721.NewErc721(common.HexToAddress(tokenAddress), EthClient)
 	if err != nil {
-		log.Fatalf("Failed to instantiate a Token contract: %v", err)
+		log.Fatalf("Failed to instantiate a Token contract: %v\n", err)
 	}
 
 	bal, err := token.BalanceOf(nil, common.HexToAddress(owner))
 	if err != nil {
-		log.Fatalf("Failed to retrieve balance: %v", err)
+		log.Fatalf("mob: %s, erc721: %s, Failed to retrieve balance: %v\n", owner, tokenAddress, err)
 	}
 	return bal
 }
@@ -231,12 +231,12 @@ func ERC721BalanceOf(owner string, tokenAddress string) *big.Int {
 func ERC721OwnerOf(tokenAddress string, tokenId *big.Int) string {
 	token, err := erc721.NewErc721(common.HexToAddress(tokenAddress), EthClient)
 	if err != nil {
-		log.Fatalf("Failed to instantiate a Token contract: %v", err)
+		log.Fatalf("Failed to instantiate a Token contract: %v\n", err)
 	}
 
 	addr, err := token.OwnerOf(nil, tokenId)
 	if err != nil {
-		log.Fatalf("Failed to retrieve balance: %v", err)
+		log.Fatalf("erc721: %s, Failed to retrieve ownerOf %s: %v\n", tokenAddress, tokenId, err)
 	}
 	return addr.Hex()
 }
@@ -261,14 +261,14 @@ func CheckAndWaitTx(tx *types.Transaction, txErr error) {
 
 	// check
 	if txErr != nil {
-		fmt.Printf("tx failed: %s", txErr.Error())
+		fmt.Printf("tx failed: %s\n", txErr.Error())
 		return
 	}
 
-	fmt.Printf("tx Hash: %s, wait to be mined..", tx.Hash())
+	fmt.Printf("tx Hash: %s, wait to be mined..\n", tx.Hash())
 	receipt, err := bind.WaitMined(context.Background(), EthClient, tx)
 	if err != nil {
-		fmt.Printf("get tx receipt failed: %s", err.Error())
+		fmt.Printf("get tx receipt failed: %s\n", err.Error())
 		return
 	}
 

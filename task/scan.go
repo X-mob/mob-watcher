@@ -38,7 +38,7 @@ func ScanNewMob() {
 	if len(cursorByte) == 0 {
 		cursor = 0
 	} else {
-		cursor = utils.StringToBigInt(string(cursorByte[:])).Uint64()
+		cursor = utils.DecimalStringToBigInt(string(cursorByte[:])).Uint64()
 	}
 
 	mobCreateEvents, nextCursor := lib.GetMobsCreateEvents(cursor, nil)
@@ -103,6 +103,9 @@ func ScanRaisingMob() {
 func ScanRaiseSuccessMob() {
 	raiseSuccessMob := db.GetMobsWithStatus(db.RaiseSuccess)
 	for _, m := range raiseSuccessMob {
+		// wait 2 sec to avoid rate limit
+		time.Sleep(2000 * time.Millisecond)
+
 		buyNowEvents := lib.GetBuyNowEvents(m.Address.Hex())
 		if len(buyNowEvents) != 0 {
 			// already bought
@@ -112,7 +115,7 @@ func ScanRaiseSuccessMob() {
 			// normally this happens when it is under Full-open targetMode
 			metadata := lib.GetMobMetadata(m.Address.Hex())
 			if m.TokenId != metadata.TokenId {
-				fmt.Printf("updating token id after bought events, mob: %s, tokenId: %s", m.Address.Hex(), metadata.TokenId)
+				fmt.Printf("updating token id after bought events, mob: %s, tokenId: %s\n", m.Address.Hex(), metadata.TokenId)
 				db.UpdateMobTokenId(m.Address.Hex(), metadata.TokenId)
 			}
 
@@ -128,7 +131,7 @@ func ScanRaiseSuccessMob() {
 		}
 
 		// try to buy
-		fmt.Printf("try buying, mob: %s", m.Address.Hex())
+		fmt.Printf("try buying, mob: %s\n", m.Address.Hex())
 		BuyNow(m.Address.Hex())
 	}
 }
@@ -136,6 +139,13 @@ func ScanRaiseSuccessMob() {
 func ScanBuyFailedMob() {
 	nftBuyFailedMob := db.GetMobsWithStatus(db.NftBuyFailed)
 	for _, m := range nftBuyFailedMob {
+		metadata, _ := lib.GetMobByAddress(m.Address.Hex()).Metadata(nil)
+		if metadata.Status == 3 { // can claim
+			fmt.Printf("update mob %s status %s", m.Address.Hex(), db.CanClaim.String())
+			db.UpdateMobStatus(m.Address.Hex(), db.CanClaim)
+			return
+		}
+
 		fmt.Printf("try settling after buy failed, mob: %s", m.Address.Hex())
 		lib.SettleAfterBuyFailed(m.Address.Hex())
 	}
@@ -151,7 +161,7 @@ func ScanNftBoughtMob() {
 			return
 		}
 
-		if m.Deadline.Int64() > time.Now().Unix() {
+		if m.Deadline.Int64() < time.Now().Unix() {
 			// over deadline, try settle to refund for users
 			fmt.Printf("try settling after deadline, mob: %s", m.Address.Hex())
 			lib.SettleAfterDeadline(m.Address.Hex())

@@ -5,7 +5,7 @@ import (
 )
 
 func Start() {
-	ticker := time.NewTicker(5 * time.Second)
+	ticker := time.NewTicker(10 * time.Second)
 	quit := make(chan struct{})
 	for {
 		select {
