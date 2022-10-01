@@ -1,4 +1,4 @@
-GIT_URL = https://github.com/RetricSu/xmob-contract.git
+GIT_URL = https://github.com/X-mob/metamob.git
 BRANCH = main
 
 .PHONY: fmt clean
