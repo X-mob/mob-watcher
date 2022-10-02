@@ -2,6 +2,7 @@ package lib
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"math/big"
@@ -169,24 +170,26 @@ func BuyBasicOrder(mobAddress string, order BasicOrderParameters) {
 	CheckAndWaitTx(tx, err)
 }
 
-func BuyOrder(mobAddress string, order Order) {
+func BuyOrder(mobAddress string, order Order) (*types.Transaction, error) {
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
 	tx, err := mob.BuyOrder(txOpts, order, [32]byte{0})
-	CheckAndWaitTx(tx, err)
+	// CheckAndWaitTx(tx, err)
+	return tx, err
 }
 
-func RegisterSellOrder(mobAddress string, orders []Order) {
+func RegisterSellOrder(mobAddress string, orders []Order) (*types.Transaction, error) {
 	isUnowned := IsNFTUnOwned(mobAddress)
 	if isUnowned == true {
 		fmt.Printf("contract has no nft, skip to sell")
-		return
+		return nil, errors.New("contract has no nft, skip to sell")
 	}
 
 	txOpts := NewTxOpts(nil)
 	mob := GetMobByAddress(mobAddress)
 	tx, err := mob.RegisterSellOrder(txOpts, orders)
-	CheckAndWaitTx(tx, err)
+	// CheckAndWaitTx(tx, err)
+	return tx, err
 }
 
 func ValidateSellOrder(mobAddress string, orders []Order) {

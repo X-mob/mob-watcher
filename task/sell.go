@@ -1,6 +1,7 @@
 package task
 
 import (
+	"fmt"
 	"math/big"
 	"time"
 
@@ -33,8 +34,32 @@ func (s SellType) String() string {
 func Sell(mobAddress string, sellType SellType) {
 	_order := BuildSellOrder(mobAddress, sellType)
 	order := casting.OpenSeaToSeaportOrder(_order)
-	// todo: check orderSignDigest is register already
-	lib.RegisterSellOrder(mobAddress, []lib.Order{order})
+
+	// check if OpenSea already has same price listings
+	listing := order.Parameters.Offer[0]
+	isExits := IsOpenSeaListingExits(listing.Token.Hex(), listing.IdentifierOrCriteria.String(), order.Parameters.Consideration[0].StartAmount)
+	if isExits {
+		fmt.Printf("%s OpenSea already has same price listings, skip..\n", mobAddress)
+		return
+	}
+
+	// check sell order tx is sent
+	data := lib.GenMobCallData("registerSellOrder", []lib.Order{order})
+	// fmt.Println("RegisterSellOrder: ", common.Bytes2Hex(data))
+	txData := TxData{
+		To:    common.HexToAddress(mobAddress),
+		Data:  data,
+		Value: big.NewInt(0),
+	}
+	txStatus := GlobalTxManager.Check(txData.Hash().Hex())
+	if txStatus != NotFound && txStatus != NotSend {
+		// already send resister tx
+		fmt.Println("already send register sell tx, skip.., txStatus: ", txStatus.String())
+		return
+	}
+
+	tx, err := lib.RegisterSellOrder(mobAddress, []lib.Order{order})
+	WaitTx(tx, err)
 	PostOrderToOpenSea(_order)
 }
 
@@ -107,4 +132,17 @@ func GetCounter(address common.Address) *big.Int {
 		panic(err)
 	}
 	return counter
+}
+
+func IsOpenSeaListingExits(token string, tokenId string, price *big.Int) bool {
+	order := GetListingFromOpenSea(token, tokenId)
+	if order == nil {
+		return false
+	}
+
+	// the real selling is at first consideration item
+	if order.Parameters.Consideration[0].StartAmount.String() == price.String() {
+		return true
+	}
+	return false
 }

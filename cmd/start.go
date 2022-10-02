@@ -12,12 +12,13 @@ var startCmd = &cobra.Command{
 	Short: "start watcher running",
 	Long:  `start watcher to scan mob activities and doing stuff`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// start api server
+		// start background scanning task
 		go func() {
-			api.Run()
+			task.Start()
 		}()
 
-		task.Start()
+		// start api server
+		api.Run()
 	},
 }
 

@@ -3,11 +3,13 @@ package task
 import (
 	"encoding/hex"
 	"fmt"
+	"math/big"
 
 	"github.com/X-mob/mob-watcher/casting"
 	"github.com/X-mob/mob-watcher/db"
 	"github.com/X-mob/mob-watcher/lib"
 	"github.com/X-mob/mob-watcher/opensea"
+	"github.com/ethereum/go-ethereum/common"
 )
 
 func GetListingFromOpenSea(token string, tokenId string) *lib.Order {
@@ -65,7 +67,25 @@ func BuyNow(mobAddress string) {
 		return
 	}
 
-	lib.BuyOrder(mobAddress, *order)
+	data := lib.GenMobCallData("buyOrder", order, [32]byte{0})
+	fmt.Println("BuyOrder: ", common.Bytes2Hex(data))
+	txData := TxData{
+		To:    common.HexToAddress(mobAddress),
+		Data:  data,
+		Value: big.NewInt(0),
+	}
+	txStatus := GlobalTxManager.Check(txData.Hash().Hex())
+	if txStatus != NotFound && txStatus != NotSend {
+		// already send buy order tx
+		fmt.Println("already send buy tx, skip.., txStatus: ", txStatus.String())
+		return
+	}
+	if txStatus == NotFound {
+		GlobalTxManager.Add(txData)
+	}
+
+	tx, err := lib.BuyOrder(mobAddress, *order)
+	WaitTx(tx, err)
 }
 
 func AssertOrderCasting(order lib.Order) {

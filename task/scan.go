@@ -12,22 +12,7 @@ import (
 )
 
 func Scan() {
-	fmt.Println("scanning..")
-
 	ScanNewMob()
-
-	go func() {
-		ScanRaisingMob()
-		ScanRaiseSuccessMob()
-		ScanBuyFailedMob()
-		ScanNftBoughtMob()
-		ScanNftSoldMob()
-		ScanCanClaimMob()
-
-		// other process
-		ScanNewJoin()
-		ScanNftBalanceAttacking()
-	}()
 }
 
 func ScanNewMob() {
@@ -57,7 +42,7 @@ func ScanNewMob() {
 			db.AddMob(mob)
 
 			// do setup for mob, no need for mainnet?
-			lib.SetUp(mob.Address.Hex())
+			// lib.SetUp(mob.Address.Hex())
 
 			fmt.Println("save one mob")
 		}
@@ -162,7 +147,7 @@ func ScanNftBoughtMob() {
 		time.Sleep(2000 * time.Millisecond)
 
 		if lib.IsNFTUnOwned(m.Address.Hex()) == true {
-			fmt.Printf("mob %s has no nft, already sold?", m.Address.Hex())
+			fmt.Printf("mob %s has no nft, already sold?\n", m.Address.Hex())
 			// already sold?
 			db.UpdateMobStatus(m.Address.Hex(), db.NftSold)
 			return
