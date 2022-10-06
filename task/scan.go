@@ -13,6 +13,7 @@ import (
 
 func Scan() {
 	ScanNewMob()
+	ScanNewJoin()
 }
 
 func ScanNewMob() {
@@ -51,6 +52,58 @@ func ScanNewMob() {
 
 	// save new cursor
 	db.SetKV(db.SCAN_MOB_CURSOR_KEY, fmt.Sprint(*nextCursor))
+}
+
+func ScanNewJoin() {
+	var cursor uint64
+
+	// get cursor
+	cursorByte := db.GetKVWithBytes(db.SCAN_JOIN_CURSOR_KEY)
+	if len(cursorByte) == 0 {
+		cursor = 0
+	} else {
+		cursor = utils.DecimalStringToBigInt(string(cursorByte[:])).Uint64()
+	}
+
+	memberJoins, nextCursor := lib.GetMemberJoinEvents(cursor)
+	for _, m := range memberJoins {
+		db.AddNewMember(m.MemberAddress.Hex(), m.ContractAddress.Hex(), m.Value)
+	}
+	fmt.Printf("new member joins total: %d\n", len(memberJoins))
+
+	// save new cursor
+	db.SetKV(db.SCAN_JOIN_CURSOR_KEY, fmt.Sprint(*nextCursor))
+}
+
+// we need to scan all mobs until recent blocks before starting single job to update mob status
+func IsScanNewMobInitialized() bool {
+	latestBlockNum := lib.GetLatestBlockNum()
+
+	var cursor uint64
+
+	// get cursor
+	cursorByte := db.GetKVWithBytes(db.SCAN_MOB_CURSOR_KEY)
+	if len(cursorByte) == 0 {
+		cursor = 0
+	} else {
+		cursor = utils.DecimalStringToBigInt(string(cursorByte[:])).Uint64()
+	}
+
+	// if cursor is behind more than 2 block, it is not ready
+	if cursor < *latestBlockNum-2 {
+		return false
+	} else {
+		return true
+	}
+}
+
+func WaitUntilScanNewMobInitialized(doJob func()) {
+	for IsScanNewMobInitialized() == false {
+		fmt.Println("wait 5s for scan new mob initialized..")
+		time.Sleep(5 * time.Second)
+	}
+	fmt.Println("initialized!")
+	doJob()
 }
 
 func ScanRaisingMob() {
@@ -206,10 +259,6 @@ func ScanCanClaimMob() {
 			db.UpdateMobStatus(m.Address.Hex(), status)
 		}
 	}
-}
-
-func ScanNewJoin() {
-	// todo
 }
 
 func ScanNftBalanceAttacking() {

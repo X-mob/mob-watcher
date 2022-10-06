@@ -7,6 +7,7 @@ import (
 
 	"github.com/X-mob/mob-watcher/config"
 	badger "github.com/dgraph-io/badger/v3"
+	"github.com/ethereum/go-ethereum/common"
 )
 
 var DbClient *badger.DB
@@ -173,12 +174,131 @@ func UpdateMobRaisedAmount(address string, raisedAmount big.Int) {
 	AddMob(mob)
 }
 
-func SetPlayer(playerAddress string, mobAddress string) {
-
+func GetMobMember(mobAddress string) MobMember {
+	key := GetMobMemberSaveKey(mobAddress)
+	data := GetKVWithBytes(key)
+	return DeSerializeMobMember(data)
 }
+
+func GetJoinDetail(playerAddress string, mobAddress string) JoinDetail {
+	key := GetJoinDetailSaveKey(playerAddress, mobAddress)
+	data := GetKVWithBytes(key)
+	return DeSerializeJoinDetail(data)
+}
+
+func GetJoinDetailsByMobAddress(mobAddress string) []JoinDetail {
+	mobMembers := GetMobMember(mobAddress)
+	var details = []JoinDetail{}
+	for _, m := range mobMembers.Member {
+		detail := GetJoinDetail(m.Hex(), mobAddress)
+		details = append(details, detail)
+	}
+	return details
+}
+
+// include repeat item settlement
+func AddNewMember(playerAddress string, mobAddress string, value *big.Int) {
+	AddPlayer(playerAddress, mobAddress)
+	AddJoinDetail(playerAddress, mobAddress, value)
+	AddMobMember(playerAddress, mobAddress)
+}
+
+func AddPlayer(playerAddress string, mobAddress string) {
+	key := GetPlayerSaveKey(playerAddress)
+	isExist := IsKeyExits(key)
+	if isExist {
+		player := DeSerializePlayer(GetKVWithBytes(key))
+		mobAddr := common.HexToAddress(mobAddress)
+		if ContainsAddress(player.JoinMobs, mobAddr) {
+			// already contains, do nothing..
+			return
+		}
+
+		player.JoinMobs = append(player.JoinMobs, mobAddr)
+		SetKV(key, SerializePlayer(player))
+	} else {
+		player := Player{
+			Address: common.HexToAddress(playerAddress),
+			JoinMobs: []common.Address{
+				common.HexToAddress(mobAddress),
+			},
+		}
+		SetKV(key, SerializePlayer(player))
+	}
+}
+
+func AddJoinDetail(playerAddress string, mobAddress string, value *big.Int) {
+	key := GetJoinDetailSaveKey(playerAddress, mobAddress)
+	isExist := IsKeyExits(key)
+	if isExist {
+		detail := DeSerializeJoinDetail(GetKVWithBytes(key))
+
+		// add deposit value
+		detail.DepositEth = detail.DepositEth.Add(detail.DepositEth, value)
+	} else {
+		detail := JoinDetail{
+			Player:     common.HexToAddress(playerAddress),
+			Mob:        common.HexToAddress(mobAddress),
+			DepositEth: value,
+		}
+		SetKV(key, SerializeJoinDetail(detail))
+	}
+}
+
+func AddMobMember(playerAddress string, mobAddress string) {
+	key := GetMobMemberSaveKey(mobAddress)
+	isExist := IsKeyExits(key)
+	playerAddr := common.HexToAddress(playerAddress)
+	if isExist {
+		mobMember := DeSerializeMobMember(GetKVWithBytes(key))
+		if ContainsAddress(mobMember.Member, playerAddr) {
+			// already contains, do nothing..
+			return
+		}
+
+		mobMember.Member = append(mobMember.Member, playerAddr)
+		SetKV(key, SerializeMobMember(mobMember))
+	} else {
+		mobMember := MobMember{
+			Address: common.HexToAddress(mobAddress),
+			Member: []common.Address{
+				playerAddr,
+			},
+		}
+		SetKV(key, SerializeMobMember(mobMember))
+	}
+}
+
+/**
+type Player struct {
+	Address  common.Address // primary key
+	JoinMobs []common.Address
+}
+
+type JoinDetail struct {
+	Player     common.Address // combined primary key
+	Mob        common.Address // combined primary key
+	DepositEth big.Int
+}
+
+type MobMember struct {
+	address common.Address // primary key
+	member  []common.Address
+}
+*/
 
 func handle(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+// todo change to generic after go 1.8
+func ContainsAddress(s []common.Address, e common.Address) bool {
+	for _, v := range s {
+		if v == e {
+			return true
+		}
+	}
+	return false
 }

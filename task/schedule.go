@@ -11,17 +11,7 @@ func Start() {
 		TickerJob()
 	}()
 
-	// single isolate job
-	SingeJob(ScanRaisingMob)
-	SingeJob(ScanRaiseSuccessMob)
-	SingeJob(ScanBuyFailedMob)
-	SingeJob(ScanNftBoughtMob)
-	SingeJob(ScanNftSoldMob)
-	SingeJob(ScanCanClaimMob)
-
-	// other process
-	SingeJob(ScanNewJoin)
-	SingeJob(ScanNftBalanceAttacking)
+	WaitUntilScanNewMobInitialized(SingleJobs)
 }
 
 func TickerJob() {
@@ -36,6 +26,20 @@ func TickerJob() {
 			return
 		}
 	}
+}
+
+func SingleJobs() {
+	// single isolate job
+	SingeJob(ScanRaisingMob)
+	SingeJob(ScanRaiseSuccessMob)
+	SingeJob(ScanBuyFailedMob)
+	SingeJob(ScanNftBoughtMob)
+	SingeJob(ScanNftSoldMob)
+	SingeJob(ScanCanClaimMob)
+
+	// other process
+	SingeJob(ScanNewJoin)
+	SingeJob(ScanNftBalanceAttacking)
 }
 
 func SingeJob(f func()) {

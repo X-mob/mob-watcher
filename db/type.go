@@ -93,22 +93,26 @@ type Player struct {
 }
 
 type JoinDetail struct {
-	Player     common.Address // combined primary key
-	Mob        common.Address // combined primary key
-	DepositEth big.Int
+	Player     common.Address `json:"player"` // combined primary key
+	Mob        common.Address `json:"mob"`    // combined primary key
+	DepositEth *big.Int       `json:"deposit_eth"`
 }
 
 type MobMember struct {
-	address common.Address // primary key
-	member  []common.Address
+	Address common.Address // primary key
+	Member  []common.Address
 }
 
 func GetMobSaveKey(address string) string {
 	return MOB_KEY_PREFIX + address
 }
 
-func GetPlayerSaveKey(address string) string {
-	return PLAYER_KEY_PREFIX + address
+func GetPlayerSaveKey(playerAddress string) string {
+	return PLAYER_KEY_PREFIX + playerAddress
+}
+
+func GetMobMemberSaveKey(mobAddress string) string {
+	return MOB_MEMBER_KEY_PREFIX + mobAddress
 }
 
 func GetJoinDetailSaveKey(playerAddress string, mobAddress string) string {

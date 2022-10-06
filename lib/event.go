@@ -6,11 +6,11 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/X-mob/mob-watcher/config"
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 )
 
 func GetMobsCreateEvents(start uint64, creator []common.Address) ([]XmobManageMobCreate, *uint64) {
@@ -23,13 +23,66 @@ func GetMobsCreateEvents(start uint64, creator []common.Address) ([]XmobManageMo
 	var events []XmobManageMobCreate
 	for iterator.Next() {
 		if iterator.Event != nil {
-			fmt.Printf("creator: %v\n", iterator.Event.Creator)
-			fmt.Printf("token: %v\n", iterator.Event.Token)
-			fmt.Printf("token id: %v\n", iterator.Event.TokenId)
+			events = append(events, *iterator.Event)
 		}
-		events = append(events, *iterator.Event)
 	}
 	return events, nextCursor
+}
+
+type MemberJoin struct {
+	MemberAddress   common.Address
+	ContractAddress common.Address
+	Value           *big.Int
+}
+
+type MemberJoinData struct {
+	Member common.Address
+	Value  *big.Int
+}
+
+func GetMemberJoinEvents(start uint64) ([]MemberJoin, *uint64) {
+	nextCursor := GetLatestBlockNum()
+	eventSignature := []byte("MemberJoin(address,uint256)")
+	hash := crypto.Keccak256Hash(eventSignature)
+
+	query := ethereum.FilterQuery{
+		FromBlock: big.NewInt(int64(start)),
+		ToBlock:   big.NewInt(int64(*nextCursor)),
+		Topics: [][]common.Hash{
+			{hash},
+		},
+	}
+
+	logs, err := EthClient.FilterLogs(context.Background(), query)
+	if err != nil {
+		panic(err)
+	}
+	contractAbi, err := abi.JSON(strings.NewReader(string(XmobExchangeCoreABI)))
+	if err != nil {
+		panic(err)
+	}
+
+	var memberJoin []MemberJoin
+
+	for _, log := range logs {
+		data := MemberJoinData{}
+		if len(log.Data) != 64 {
+			continue
+		}
+
+		err := contractAbi.UnpackIntoInterface(&data, "MemberJoin", log.Data)
+		if err != nil {
+			panic(err)
+		}
+
+		memberJoin = append(memberJoin, MemberJoin{
+			MemberAddress:   data.Member,
+			ContractAddress: log.Address,
+			Value:           data.Value,
+		})
+	}
+
+	return memberJoin, nextCursor
 }
 
 func GetBuyNowEvents(mobAddress string) []XmobExchangeCoreBuy {
@@ -112,40 +165,15 @@ func GetSettlementAfterDeadlineEvents(mobAddress string) []XmobExchangeCoreSettl
 	return events
 }
 
-func GetLogsByContract() {
-	query := ethereum.FilterQuery{
-		FromBlock: big.NewInt(0),
-		ToBlock:   big.NewInt(11),
-		Addresses: []common.Address{
-			config.GlobalConfig.XmobManagerAddress,
-		},
-	}
-
+func GetLogsByContract(query ethereum.FilterQuery) {
 	logs, err := EthClient.FilterLogs(context.Background(), query)
 	if err != nil {
 		panic(err)
 	}
-
-	contractAbi, err := abi.JSON(strings.NewReader(string(XmobManageABI)))
-	if err != nil {
-		panic(err)
-	}
-
 	for _, log := range logs {
-
-		if len(log.Data) > 0 {
-			_, err := contractAbi.Unpack("MobCreate", log.Data)
-			if err != nil {
-				panic(err)
-			}
-			// fmt.Println(logInterface...)
-		}
-
-		//
 		var topics [4]string
 		for i := range log.Topics {
 			topics[i] = log.Topics[i].Hex()
 		}
-
 	}
 }
